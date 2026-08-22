@@ -6,181 +6,178 @@
 <title>Crête — carnet d'entraînement trail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#0B1319; --ink2:#101D25; --panel:#132530; --panel2:#162C38;
-  --line:#203A47; --line2:#2C4E5E;
-  --paper:#E6EEEC; --mute:#8FA7B0; --mute2:#647F8B;
-  --ice:#6FB6D8; --moss:#54A98C; --leaf:#8CBF5A; --ochre:#E0A040; --rust:#CE4B33; --violet:#9A86D6;
-  --z1:#6FB6D8; --z2:#54A98C; --z3:#8CBF5A; --z4:#E0A040; --z5:#CE4B33;
-  --ok:#54A98C; --warn:#E0A040; --bad:#CE4B33;
-  --rail:248px; --pad:22px; --r:3px;
-  --f-disp:"Barlow Condensed",Oswald,"Arial Narrow",sans-serif;
-  --f-body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --bg:#F5F5F7; --surface:#FFFFFF; --surface2:#FAFAFC; --tint:#F0F2F5;
+  --ink:#1D1D1F; --ink2:#3F4046; --mute:#6E6E73; --mute2:#98989F; --line:#E5E5EA; --line2:#D8D8DE;
+  --acc:#0B6E4F; --acc-soft:#E7F2EE; --blue:#0A6CCB; --amber:#C4761A; --red:#C6382C; --violet:#6B58B8;
+  --z1:#7FB7D9; --z2:#4EA37F; --z3:#9CB84E; --z4:#E0A03C; --z5:#D0574A;
+  --ok:#0B6E4F; --warn:#C4761A; --bad:#C6382C;
+  --r:14px; --r-sm:9px; --pad:26px;
+  --sh:0 1px 2px rgba(16,24,40,.05), 0 1px 3px rgba(16,24,40,.04);
+  --sh-lg:0 4px 12px rgba(16,24,40,.07), 0 12px 32px rgba(16,24,40,.06);
+  --f:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+  --fd:"Inter Tight","Inter",-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{
-  background:var(--ink); color:var(--paper); font-family:var(--f-body); font-size:14px; line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-  background-image:
-    radial-gradient(1200px 600px at 78% -10%, rgba(111,182,216,.07), transparent 60%),
-    radial-gradient(900px 500px at 5% 105%, rgba(84,169,140,.06), transparent 60%);
-  background-attachment:fixed;
-}
-h1,h2,h3,h4{font-family:var(--f-disp); font-weight:600; letter-spacing:.02em; margin:0}
-.mono{font-family:var(--f-mono)}
-a{color:var(--ice)}
+body{background:var(--bg); color:var(--ink); font-family:var(--f); font-size:14px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; letter-spacing:-.006em;}
+h1,h2,h3,h4{font-family:var(--fd); margin:0; letter-spacing:-.02em; font-weight:600}
+.num,.tnum{font-variant-numeric:tabular-nums}
+a{color:var(--blue); text-decoration:none}
 button,input,select,textarea{font-family:inherit; font-size:inherit; color:inherit}
-::selection{background:var(--ochre); color:#0B1319}
+::selection{background:var(--acc-soft)}
 
-/* ---------- layout ---------- */
+/* ---------------- shell ---------------- */
 .app{display:flex; min-height:100vh}
-.rail{
-  width:var(--rail); flex:0 0 var(--rail); border-right:1px solid var(--line);
-  background:linear-gradient(180deg,#0D171E,#0B1319); position:sticky; top:0; height:100vh;
-  display:flex; flex-direction:column; overflow:hidden;
-}
-.brand{padding:20px var(--pad) 14px; border-bottom:1px solid var(--line); position:relative}
-.brand .contour{position:absolute; inset:0; opacity:.5; pointer-events:none}
-.brand h1{font-size:30px; line-height:.95; letter-spacing:.06em; text-transform:uppercase; position:relative}
-.brand h1 span{color:var(--ochre)}
-.brand p{margin:4px 0 0; font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--mute2); font-family:var(--f-mono); position:relative}
-.nav{padding:10px 10px; flex:1; overflow:auto}
-.nav button{
-  display:flex; align-items:center; gap:10px; width:100%; text-align:left; background:none; border:0;
-  padding:9px 12px; border-radius:var(--r); color:var(--mute); cursor:pointer; letter-spacing:.01em;
-  border-left:2px solid transparent;
-}
-.nav button:hover{background:var(--panel); color:var(--paper)}
-.nav button.on{background:var(--panel2); color:var(--paper); border-left-color:var(--ochre)}
-.nav button .ix{font-family:var(--f-mono); font-size:10px; color:var(--mute2); width:16px}
-.nav button.on .ix{color:var(--ochre)}
-.nav .sep{font-family:var(--f-mono); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--mute2); padding:16px 12px 6px}
-.railfoot{padding:12px var(--pad); border-top:1px solid var(--line); font-size:11px; color:var(--mute2)}
-.railfoot .dot{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--mute2); margin-right:6px}
-.railfoot .dot.live{background:var(--moss); box-shadow:0 0 0 3px rgba(84,169,140,.18)}
+.rail{width:230px; flex:0 0 230px; background:var(--surface); border-right:1px solid var(--line);
+  position:sticky; top:0; height:100vh; display:flex; flex-direction:column}
+.brand{padding:22px 22px 16px; display:flex; align-items:center; gap:11px}
+.brand .mk{width:30px; height:30px; flex:0 0 30px}
+.brand h1{font-size:19px; letter-spacing:-.03em}
+.brand p{margin:1px 0 0; font-size:11px; color:var(--mute2); letter-spacing:0}
+.nav{padding:4px 12px; flex:1; overflow:auto}
+.nav button{display:flex; align-items:center; gap:10px; width:100%; text-align:left; background:none; border:0;
+  padding:8px 11px; border-radius:var(--r-sm); color:var(--ink2); cursor:pointer; font-size:13.5px; font-weight:450;
+  margin-bottom:1px; transition:background .12s}
+.nav button:hover{background:var(--tint)}
+.nav button.on{background:var(--acc-soft); color:var(--acc); font-weight:600}
+.nav button svg{width:16px; height:16px; flex:0 0 16px; opacity:.75}
+.nav button.on svg{opacity:1}
+.nav .sep{font-size:10.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--mute2); padding:16px 11px 6px}
+.railfoot{padding:14px 22px; border-top:1px solid var(--line); font-size:12px; color:var(--mute)}
+.dot{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--mute2); margin-right:7px; vertical-align:middle}
+.dot.live{background:#34C759}
 
-.main{flex:1; min-width:0; display:flex; flex-direction:column}
-.top{
-  display:flex; align-items:center; gap:18px; padding:16px var(--pad); border-bottom:1px solid var(--line);
-  background:rgba(11,19,25,.86); backdrop-filter:blur(8px); position:sticky; top:0; z-index:20; flex-wrap:wrap;
-}
-.top h2{font-size:22px; text-transform:uppercase; letter-spacing:.08em}
-.top .sub{color:var(--mute2); font-size:11.5px; font-family:var(--f-mono)}
+.main{flex:1; min-width:0}
+.top{display:flex; align-items:center; gap:14px; padding:18px var(--pad); background:rgba(245,245,247,.82);
+  backdrop-filter:saturate(180%) blur(20px); position:sticky; top:0; z-index:30; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.top h2{font-size:22px}
+.top .sub{font-size:12.5px; color:var(--mute); margin-top:1px}
 .spacer{flex:1}
-.view{padding:var(--pad); max-width:1320px; width:100%}
-.hide{display:none !important}
+.view{padding:var(--pad); max-width:1240px}
+@media(max-width:900px){
+  .app{flex-direction:column}
+  .rail{width:100%; flex:0 0 auto; height:auto; position:static; border-right:0; border-bottom:1px solid var(--line)}
+  .nav{display:flex; gap:4px; overflow-x:auto; padding:4px 10px 10px}
+  .nav .sep{display:none} .nav button{width:auto; white-space:nowrap}
+  .railfoot{display:none}
+  :root{--pad:16px}
+}
 
-/* ---------- primitives ---------- */
-.card{background:linear-gradient(180deg,var(--panel),var(--ink2)); border:1px solid var(--line); border-radius:var(--r); padding:16px}
-.card > h3{font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute); margin-bottom:2px}
-.card > .hint{font-size:11.5px; color:var(--mute2); margin:0 0 12px}
-.grid{display:grid; gap:14px}
+/* ---------------- primitives ---------------- */
+.card{background:var(--surface); border-radius:var(--r); padding:20px; box-shadow:var(--sh)}
+.card h3{font-size:15.5px; margin-bottom:2px}
+.card .hint{font-size:12.5px; color:var(--mute); margin:0 0 16px; line-height:1.45}
+.grid{display:grid; gap:16px}
 .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.g-2-1{grid-template-columns:2fr 1fr}
-.g-1-2{grid-template-columns:1fr 2fr}
-@media(max-width:1080px){.g4{grid-template-columns:repeat(2,1fr)} .g3,.g-2-1,.g-1-2{grid-template-columns:1fr}}
-@media(max-width:720px){.g2,.g4{grid-template-columns:1fr}}
+.g-2-1{grid-template-columns:1.9fr 1fr}
+.g-1-2{grid-template-columns:1fr 1.9fr}
+@media(max-width:1000px){.g3,.g4{grid-template-columns:repeat(2,1fr)} .g-2-1,.g-1-2{grid-template-columns:1fr}}
+@media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}}
 
-.btn{
-  background:var(--panel2); border:1px solid var(--line2); color:var(--paper); padding:8px 14px; border-radius:var(--r);
-  cursor:pointer; letter-spacing:.02em; transition:.15s;
-}
-.btn:hover{background:#1E3B49; border-color:var(--ice)}
-.btn.pri{background:var(--ochre); border-color:var(--ochre); color:#0B1319; font-weight:600}
-.btn.pri:hover{background:#EFB254}
-.btn.gho{background:transparent}
-.btn.sm{padding:5px 10px; font-size:12px}
-.btn.danger:hover{border-color:var(--rust); color:var(--rust)}
+.btn{background:var(--surface); border:1px solid var(--line2); color:var(--ink); padding:7px 14px; border-radius:980px;
+  cursor:pointer; font-size:13.5px; font-weight:500; transition:.13s; white-space:nowrap}
+.btn:hover{background:var(--tint)}
+.btn.pri{background:var(--acc); border-color:var(--acc); color:#fff}
+.btn.pri:hover{background:#0A5F44}
+.btn.gho{border-color:transparent; background:transparent; color:var(--blue); padding:6px 10px}
+.btn.gho:hover{background:var(--tint)}
+.btn.sm{padding:5px 11px; font-size:12.5px}
+.btn.danger{color:var(--red)}
 .btn:disabled{opacity:.45; cursor:not-allowed}
-.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.nav button:focus-visible{outline:2px solid var(--ice); outline-offset:2px}
+:focus-visible{outline:2px solid var(--blue); outline-offset:2px; border-radius:4px}
 
-label.f{display:block; margin-bottom:12px}
-label.f > span{display:block; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--mute2); margin-bottom:5px; font-family:var(--f-mono)}
-input,select,textarea{
-  width:100%; background:#0B1519; border:1px solid var(--line); color:var(--paper); padding:8px 10px; border-radius:var(--r);
-}
-input[type=checkbox]{width:auto}
-.row{display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end}
-.row > *{flex:1; min-width:120px}
+.seg{display:inline-flex; background:var(--tint); border-radius:9px; padding:2px; gap:2px}
+.seg button{border:0; background:transparent; padding:5px 12px; border-radius:7px; font-size:12.5px; font-weight:500;
+  color:var(--ink2); cursor:pointer}
+.seg button.on{background:var(--surface); box-shadow:0 1px 2px rgba(16,24,40,.09); color:var(--ink)}
 
-table{width:100%; border-collapse:collapse; font-size:13px}
-th{font-family:var(--f-mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute2); text-align:left; padding:8px 10px; border-bottom:1px solid var(--line2); font-weight:500}
-td{padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:middle}
-tr:hover td{background:rgba(111,182,216,.045)}
-td.num,th.num{text-align:right; font-family:var(--f-mono); font-variant-numeric:tabular-nums}
-.tw{overflow-x:auto}
+label.f{display:block; margin-bottom:14px}
+label.f > span{display:block; font-size:12px; color:var(--mute); margin-bottom:5px; font-weight:500}
+input,select,textarea{width:100%; background:var(--surface); border:1px solid var(--line2); color:var(--ink);
+  padding:8px 11px; border-radius:var(--r-sm); transition:.12s}
+input:focus,select:focus,textarea:focus{border-color:var(--blue); outline:none; box-shadow:0 0 0 3px rgba(10,108,203,.12)}
+.row{display:flex; gap:14px; flex-wrap:wrap; align-items:flex-end}
+.row > *{flex:1; min-width:110px}
+.hintf{font-size:11.5px; color:var(--mute2); margin-top:4px; display:block}
 
-.tag{display:inline-block; font-family:var(--f-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:2px 7px; border-radius:2px; border:1px solid var(--line2); color:var(--mute)}
-.tag.ok{color:var(--ok); border-color:rgba(84,169,140,.5); background:rgba(84,169,140,.1)}
-.tag.warn{color:var(--warn); border-color:rgba(224,160,64,.5); background:rgba(224,160,64,.1)}
-.tag.bad{color:var(--bad); border-color:rgba(206,75,51,.5); background:rgba(206,75,51,.1)}
-.tag.info{color:var(--ice); border-color:rgba(111,182,216,.45); background:rgba(111,182,216,.1)}
+table{width:100%; border-collapse:collapse; font-size:13.5px}
+th{font-size:11.5px; font-weight:600; color:var(--mute); text-align:left; padding:8px 12px; border-bottom:1px solid var(--line)}
+td{padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tr.clk{cursor:pointer} tr.clk:hover td{background:var(--surface2)}
+td.num,th.num{text-align:right; font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto; margin:0 -20px; padding:0 20px}
 
-.kpi{position:relative; overflow:hidden}
-.kpi .lab{font-family:var(--f-mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute2)}
-.kpi .val{font-family:var(--f-disp); font-size:42px; line-height:1; margin:6px 0 2px; letter-spacing:.01em}
-.kpi .val small{font-size:15px; color:var(--mute); font-family:var(--f-mono); letter-spacing:0; margin-left:4px}
-.kpi .foot{font-size:11.5px; color:var(--mute)}
-.kpi .spark{position:absolute; right:0; bottom:0; opacity:.5}
+.kpi .lab{font-size:12.5px; color:var(--mute); font-weight:500}
+.kpi .val{font-family:var(--fd); font-size:32px; font-weight:600; letter-spacing:-.035em; margin:5px 0 1px; line-height:1.1}
+.kpi .val small{font-size:14px; color:var(--mute); font-weight:500; letter-spacing:-.01em; margin-left:3px}
+.kpi .foot{font-size:12px; color:var(--mute)}
 
-.zbar{display:flex; height:10px; border-radius:2px; overflow:hidden; background:#0B1519; border:1px solid var(--line)}
+.tag{display:inline-block; font-size:11.5px; font-weight:550; padding:2.5px 9px; border-radius:980px; background:var(--tint); color:var(--mute)}
+.tag.ok{background:var(--acc-soft); color:var(--acc)}
+.tag.warn{background:#FBF0E2; color:var(--amber)}
+.tag.bad{background:#FBE9E7; color:var(--red)}
+.tag.info{background:#E8F1FB; color:var(--blue)}
+
+.zbar{display:flex; height:9px; border-radius:980px; overflow:hidden; background:var(--tint)}
 .zbar i{display:block; height:100%}
-.legend{display:flex; gap:14px; flex-wrap:wrap; font-size:11px; color:var(--mute); margin-top:10px}
-.legend i{display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px}
+.legend{display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--mute); margin-top:12px}
+.legend i{display:inline-block; width:8px; height:8px; border-radius:3px; margin-right:6px}
 
-.rec{display:flex; gap:12px; padding:13px 0; border-bottom:1px solid var(--line)}
+.rec{display:flex; gap:13px; padding:14px 0; border-bottom:1px solid var(--line)}
 .rec:last-child{border-bottom:0}
-.rec .pri{width:4px; border-radius:2px; flex:0 0 4px; background:var(--mute2)}
-.rec.p1 .pri{background:var(--rust)} .rec.p2 .pri{background:var(--ochre)} .rec.p3 .pri{background:var(--moss)}
-.rec h4{font-size:15px; letter-spacing:.03em; margin-bottom:3px}
-.rec p{margin:0; font-size:12.5px; color:var(--mute)}
-.rec .why{margin-top:5px; font-family:var(--f-mono); font-size:10.5px; color:var(--mute2)}
+.rec .ic{width:26px; height:26px; flex:0 0 26px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px}
+.rec.p1 .ic{background:#FBE9E7; color:var(--red)}
+.rec.p2 .ic{background:#FBF0E2; color:var(--amber)}
+.rec.p3 .ic{background:var(--acc-soft); color:var(--acc)}
+.rec h4{font-size:14px; margin-bottom:3px}
+.rec p{margin:0; font-size:13px; color:var(--ink2); line-height:1.5}
+.rec .why{margin-top:5px; font-size:11.5px; color:var(--mute2)}
 
-.bar-line{display:flex; align-items:center; gap:10px; margin:7px 0}
-.bar-line .nm{width:170px; font-size:12px; color:var(--mute)}
-.bar-line .tr{flex:1; height:7px; background:#0B1519; border-radius:4px; overflow:hidden; border:1px solid var(--line)}
-.bar-line .tr i{display:block; height:100%; background:linear-gradient(90deg,var(--moss),var(--ochre))}
-.bar-line .vl{width:52px; text-align:right; font-family:var(--f-mono); font-size:12px}
+.bar-line{display:flex; align-items:center; gap:12px; margin:9px 0}
+.bar-line .nm{width:165px; font-size:12.5px; color:var(--ink2)}
+.bar-line .tr{flex:1; height:6px; background:var(--tint); border-radius:980px; overflow:hidden}
+.bar-line .tr i{display:block; height:100%; background:var(--acc); border-radius:980px}
+.bar-line .vl{width:54px; text-align:right; font-size:12.5px; font-variant-numeric:tabular-nums; color:var(--mute)}
 
-.toast{position:fixed; bottom:20px; right:20px; z-index:99; background:var(--panel2); border:1px solid var(--line2); border-left:3px solid var(--ochre); padding:12px 16px; border-radius:var(--r); max-width:380px; box-shadow:0 12px 40px rgba(0,0,0,.5); animation:sl .25s ease}
-@keyframes sl{from{transform:translateY(8px); opacity:0}}
-.modal{position:fixed; inset:0; background:rgba(6,11,14,.78); z-index:80; display:flex; align-items:flex-start; justify-content:center; padding:40px 16px; overflow:auto; backdrop-filter:blur(3px)}
-.modal .box{background:var(--ink2); border:1px solid var(--line2); border-radius:var(--r); max-width:640px; width:100%; padding:22px}
-.modal h3{font-size:20px; letter-spacing:.06em; text-transform:uppercase; margin-bottom:14px}
+.toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:99; background:rgba(29,29,31,.94);
+  color:#fff; padding:11px 20px; border-radius:980px; font-size:13.5px; box-shadow:var(--sh-lg); animation:up .28s cubic-bezier(.2,.8,.2,1); backdrop-filter:blur(10px)}
+@keyframes up{from{transform:translate(-50%,10px); opacity:0}}
+.modal{position:fixed; inset:0; background:rgba(0,0,0,.28); z-index:80; display:flex; align-items:flex-start;
+  justify-content:center; padding:5vh 16px; overflow:auto; backdrop-filter:blur(3px); animation:fade .18s}
+@keyframes fade{from{opacity:0}}
+.modal .box{background:var(--surface); border-radius:18px; max-width:680px; width:100%; padding:26px; box-shadow:var(--sh-lg)}
+.modal h3{font-size:19px; margin-bottom:4px}
 
+.drop{border:1.5px dashed var(--line2); border-radius:var(--r); padding:34px 20px; text-align:center; transition:.15s; background:var(--surface2)}
+.drop.over{border-color:var(--acc); background:var(--acc-soft)}
+.drop h4{font-size:15px; margin-bottom:4px}
+.drop p{margin:0; font-size:12.5px; color:var(--mute)}
+.fitrow{display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--line); font-size:13px}
+.fitrow:last-child{border-bottom:0}
+.fitrow .nm{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+
+.empty{padding:40px 20px; text-align:center; color:var(--mute)}
+.empty b{display:block; font-family:var(--fd); font-size:15.5px; color:var(--ink); margin-bottom:4px}
+.sc{font-size:12px; color:var(--mute2); line-height:1.5}
 .steps{counter-reset:s; padding:0; margin:0; list-style:none}
-.steps li{position:relative; padding:0 0 14px 34px; margin:0; border-left:1px solid var(--line); margin-left:9px}
-.steps li:last-child{border-left-color:transparent}
-.steps li:before{counter-increment:s; content:counter(s); position:absolute; left:-9px; top:0; width:18px; height:18px; border-radius:50%; background:var(--panel2); border:1px solid var(--line2); font-family:var(--f-mono); font-size:10px; display:flex; align-items:center; justify-content:center; color:var(--ochre)}
-.steps li b{display:block; font-family:var(--f-disp); font-size:15px; letter-spacing:.04em}
-.steps li span{font-size:12.5px; color:var(--mute)}
-.code{font-family:var(--f-mono); font-size:11.5px; background:#081014; border:1px solid var(--line); padding:7px 9px; border-radius:2px; word-break:break-all; color:var(--ice); display:block; margin-top:5px}
-
-svg text{font-family:var(--f-mono); fill:var(--mute2)}
-.axis{stroke:var(--line); stroke-width:1}
-.gridline{stroke:var(--line); stroke-width:1; stroke-dasharray:2 4; opacity:.7}
-.empty{padding:34px 18px; text-align:center; color:var(--mute2); border:1px dashed var(--line2); border-radius:var(--r)}
-.empty b{display:block; font-family:var(--f-disp); font-size:17px; color:var(--mute); letter-spacing:.05em; margin-bottom:5px}
-.sc{font-family:var(--f-mono); font-size:11px; color:var(--mute2)}
-.pill{display:inline-flex; gap:6px; align-items:center; background:var(--panel2); border:1px solid var(--line); padding:4px 9px; border-radius:20px; font-size:11.5px; font-family:var(--f-mono)}
-.tabs{display:flex; gap:2px; border-bottom:1px solid var(--line); margin-bottom:16px; flex-wrap:wrap}
-.tabs button{background:none; border:0; border-bottom:2px solid transparent; padding:8px 14px; color:var(--mute2); cursor:pointer; font-family:var(--f-disp); font-size:15px; letter-spacing:.06em; text-transform:uppercase}
-.tabs button.on{color:var(--paper); border-bottom-color:var(--ochre)}
-@media(max-width:860px){
-  .app{flex-direction:column}
-  .rail{width:100%; height:auto; position:static; flex:0 0 auto}
-  .nav{display:flex; overflow-x:auto; padding:6px}
-  .nav .sep{display:none}
-  .nav button{width:auto; white-space:nowrap; border-left:0; border-bottom:2px solid transparent}
-  .nav button.on{border-left:0; border-bottom-color:var(--ochre)}
-  .railfoot{display:none}
-}
+.steps li{position:relative; padding:0 0 16px 32px}
+.steps li:before{counter-increment:s; content:counter(s); position:absolute; left:0; top:1px; width:20px; height:20px;
+  border-radius:50%; background:var(--acc-soft); color:var(--acc); font-size:11px; font-weight:600;
+  display:flex; align-items:center; justify-content:center}
+.steps li b{display:block; font-size:13.5px} .steps li span{font-size:12.5px; color:var(--mute)}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11.5px; background:var(--tint);
+  padding:6px 9px; border-radius:6px; word-break:break-all; display:block; margin-top:5px; color:var(--ink2)}
+svg text{font-family:var(--f); fill:var(--mute2)}
+.gridline{stroke:var(--line); stroke-width:1}
+.hidden{display:none !important}
+.spark{display:block}
 @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important}}
 </style>
 </head>
@@ -188,32 +185,25 @@ svg text{font-family:var(--f-mono); fill:var(--mute2)}
 <div class="app">
   <aside class="rail">
     <div class="brand">
-      <svg class="contour" viewBox="0 0 248 92" preserveAspectRatio="none" aria-hidden="true">
-        <g fill="none" stroke="#2C4E5E" stroke-width="1">
-          <path d="M-10 78 C 40 70, 62 40, 96 44 S 150 82, 190 58 S 240 24, 262 34"/>
-          <path d="M-10 88 C 40 82, 66 54, 100 57 S 152 92, 192 70 S 242 40, 262 48" opacity=".7"/>
-          <path d="M-10 66 C 44 56, 60 26, 92 31 S 148 70, 188 44 S 238 10, 262 20" opacity=".45"/>
-        </g>
+      <svg class="mk" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#0B6E4F"/>
+        <path d="M5 23l6.5-11 4 6 3-4.5L27 23H5z" fill="#fff" fill-opacity=".95"/>
+        <path d="M18.5 13.5L21 9.5l2.2 3.6-2.2 1.2-2.5-.8z" fill="#fff" fill-opacity=".55"/>
       </svg>
-      <h1>Crê<span>te</span></h1>
-      <p>Carnet trail · v1</p>
+      <div><h1>Crête</h1><p>Carnet trail</p></div>
     </div>
     <nav class="nav" id="nav"></nav>
     <div class="railfoot">
       <div><span class="dot" id="connDot"></span><span id="connTxt">Strava non connecté</span></div>
-      <div style="margin-top:6px" id="storeTxt">Données locales</div>
     </div>
   </aside>
   <div class="main">
     <header class="top">
-      <div>
-        <h2 id="vTitle">Tableau de bord</h2>
-        <div class="sub" id="vSub">—</div>
-      </div>
+      <div><h2 id="vTitle">Tableau de bord</h2><div class="sub" id="vSub"></div></div>
       <div class="spacer"></div>
-      <div class="pill" id="formPill" title="Forme = Fitness − Fatigue">forme —</div>
-      <button class="btn sm" id="btnSync">Synchroniser Strava</button>
-      <button class="btn sm pri" id="btnAdd">Ajouter une sortie</button>
+      <div id="topExtra"></div>
+      <button class="btn" id="btnSync">Strava</button>
+      <button class="btn pri" id="btnAdd">Ajouter une sortie</button>
     </header>
     <main id="views"></main>
   </div>
@@ -221,6 +211,7 @@ svg text{font-family:var(--f-mono); fill:var(--mute2)}
 <div id="modalHost"></div>
 <div id="toastHost"></div>
 <script>
+
 /* ============================================================================
    CRÊTE — carnet d'entraînement trail
    Moteur de calcul : zones, VDOT (Daniels & Gilbert), Riegel, coût énergétique
@@ -247,6 +238,16 @@ const Store = {
     delete this.mem[k];
     try{ if(window.storage) await window.storage.delete(k); }catch(e){}
     try{ localStorage.removeItem('crete:'+k); }catch(e){}
+  },
+  /* Les flux seconde par seconde sont volumineux : une clé par sortie,
+     chargée seulement à l'ouverture de la séance. */
+  async setStream(id, st){ return this.set('stream:'+id, st); },
+  async getStream(id){ return this.get('stream:'+id); },
+  async delStream(id){ return this.del('stream:'+id); },
+  /* Si le stockage sature, on libère les flux des sorties les plus anciennes. */
+  async trimStreams(acts, keep=40){
+    const withStream = acts.filter(a=>a.hasStream).sort((a,b)=> new Date(b.date)-new Date(a.date));
+    for(const a of withStream.slice(keep)){ await this.delStream(a.id); a.hasStream=false; }
   }
 };
 
@@ -290,12 +291,14 @@ const DEFAULTS = {
     {id:'r8', name:'UTMB',                   dist:176,  dp:10000, dm:10000, tech:4, alt:1900},
     {id:'r9', name:'Diagonale des Fous',     dist:165,  dp:9600,  dm:9600,  tech:5, alt:1500}
   ],
-  strava:{clientId:'', clientSecret:'', access:'', refresh:'', expires:0, athlete:null, lastSync:0}
+  strava:{clientId:'', clientSecret:'', access:'', refresh:'', expires:0, athlete:null, lastSync:0},
+  ui:{period:90, actPeriod:0}
 };
 
 let S = JSON.parse(JSON.stringify(DEFAULTS));  // settings
 let ACT = [];                                  // activités
 let VIEW = 'dash';
+let SEL = null;                                // sortie ouverte en analyse détaillée
 
 /* ------------------------------------------------------------------ utils */
 const $ = (s,r)=> (r||document).querySelector(s);
@@ -476,8 +479,11 @@ function computeActivity(a){
     const z = useHR ? zoneOfHR(a.hrAvg) : zoneOfSpeed(gapSpd);
     if(z){ zdist[z-1] = t; trimp = (t/60)*z; }
   }
-  // dépense énergétique : Minetti (J/kg/m) sur la distance équivalente → kcal
-  const kcal = me*1000*FLAT_COST*S.profile.weight/4184;
+  // dépense énergétique : coût net de la course (Minetti, J/kg/m sur la distance
+  // équivalente plat) + métabolisme de repos sur la durée, pour rester comparable
+  // aux valeurs affichées par les montres.
+  const kcalNet = me*1000*FLAT_COST*S.profile.weight/4184;
+  const kcal = kcalNet + S.profile.weight*1.05*(el/3600);
   // nutrition
   const n = a.nutr||{};
   const carbs = num(n.drinkL)*S.nutrition.carbPerLDrink + num(n.gels)*S.nutrition.carbPerGel
@@ -571,6 +577,7 @@ function profileScores(acts){
   const fluidH = fuelled.length? sum(fuelled,a=>a.fluidH)/fuelled.length : 0;
 
   const sc = (v,lo,hi)=> clamp((v-lo)/(hi-lo)*100, 0, 100);
+  const COURT = {vitesse:'Vitesse', endurance:'Endurance', volume:'Volume', grimpeur:'Montée', descente:'Descente', denivele:'Dénivelé', regularite:'Régularité', polarisation:'Intensité', nutrition:'Nutrition'};
   const axes = [
     {k:'vitesse', nom:'Vitesse / VO2max', val:vdot, unit:'VDOT', score:sc(vdot,30,68),
      bar:'VDOT 30 → 0 pts, 68 → 100 pts'},
@@ -592,6 +599,7 @@ function profileScores(acts){
     {k:'nutrition', nom:'Stratégie nutritionnelle', val:carbH, unit:'g/h', score:sc(carbH,20,80),
      bar:'20 g/h → 0, 80 → 100 (sorties > 1 h 30 renseignées)'}
   ];
+  axes.forEach(a=> a.court = COURT[a.k] || a.nom);
   return {axes, vdot, vam, downRatio, easyShare, carbH, fluidH, weeksKm, weeksDp, longest, perWeek,
           bestFrom:bv.from, zt, ztot, nFuelled:fuelled.length};
 }
@@ -777,7 +785,7 @@ const Strava = {
           dp: a.total_elevation_gain||0,
           dm: (a.total_elevation_gain||0),  // Strava ne donne pas le D− : hypothèse boucle
           hrAvg: a.average_heartrate||0, hrMax:a.max_heartrate||0,
-          nutr: ex? ex.nutr : {waterL:0,drinkL:0,gels:0,bars:0,extraCarb:0,extraNa:0},
+          nutr: ex? ex.nutr : {waterL:0,drinkL:0,gels:0,bars:0,extraCarb:0,extraNa:0}, hasStream: ex? ex.hasStream : false,
           rpe: ex? ex.rpe : 0, notes: ex? ex.notes : '', zoneTime: ex? ex.zoneTime : null
         };
         if(ex){ Object.assign(ex, rec); updated++; } else { ACT.push(rec); added++; }
@@ -803,689 +811,1123 @@ const Strava = {
   }
 };
 
+
 /* ==========================================================================
-   9. GRAPHIQUES — SVG maison, sans dépendance
+   9. DÉCODEUR FIT
+   Lit les fichiers .fit des montres (Garmin, Suunto, Coros, Polar, Wahoo).
+   Gère : en-têtes 12 ou 14 octets, définitions little ET big endian (Suunto
+   écrit en big endian), en-têtes à horodatage compressé, champs développeur,
+   valeurs invalides, tableaux. On extrait le résumé (message session), les
+   tours (lap) et le flux seconde par seconde (record).
    ========================================================================== */
-function svgWrap(w,h,inner,cls=''){
-  return `<svg viewBox="0 0 ${w} ${h}" width="100%" preserveAspectRatio="xMidYMid meet" class="${cls}" role="img">${inner}</svg>`;
-}
-function pathFrom(pts){ return pts.map((p,i)=> (i?'L':'M')+round(p[0],1)+' '+round(p[1],1)).join(' '); }
+const FIT_EPOCH = 631065600;            // 31/12/1989 00:00 UTC, en secondes unix
+const BASE_TYPE = {                     // taille, lecture, valeur « invalide »
+  0:[1,'u8',0xFF], 1:[1,'i8',0x7F], 2:[1,'u8',0xFF], 3:[2,'i16',0x7FFF], 4:[2,'u16',0xFFFF],
+  5:[4,'i32',0x7FFFFFFF], 6:[4,'u32',0xFFFFFFFF], 7:[1,'str',0], 8:[4,'f32',null], 9:[8,'f64',null],
+  10:[1,'u8',0], 11:[2,'u16',0], 12:[4,'u32',0], 13:[1,'u8',0xFF],
+  14:[8,'i64',null], 15:[8,'u64',null], 16:[8,'i64',null], 17:[8,'u64',null]
+};
 
-/* Signature : la courbe de condition dessinée comme une ligne de crête */
-function ridgeChart(series){
-  const W=920, H=290, P={l:44,r:16,t:18,b:26};
-  if(series.length<2) return `<div class="empty"><b>Pas encore de relief</b>Il faut au moins deux jours d'activité pour tracer la crête.</div>`;
-  const s = series.slice(-210);
-  const maxY = Math.max(10, ...s.map(d=>Math.max(d.ctl,d.atl)))*1.18;
-  const minT = Math.min(0, ...s.map(d=>d.tsb));
-  const x = i=> P.l + i*(W-P.l-P.r)/(s.length-1);
-  const y = v=> H-P.b - (v/maxY)*(H-P.t-P.b);
+function decodeFit(buffer){
+  const dv = new DataView(buffer), u8 = new Uint8Array(buffer);
+  if(buffer.byteLength < 14) throw new Error('fichier trop court');
+  const headerSize = u8[0];
+  if(String.fromCharCode(u8[8],u8[9],u8[10],u8[11]) !== '.FIT') throw new Error('ce n\'est pas un fichier FIT');
+  const dataSize = dv.getUint32(4, true);
+  let pos = headerSize;
+  const end = Math.min(headerSize + dataSize, buffer.byteLength);
+  const defs = {};
+  const out = {session:null, records:[], laps:[], sport:null, device:null, start:null};
+
+  const readField = (p, size, baseType, big)=>{
+    const bt = BASE_TYPE[baseType & 0x1F];
+    if(!bt) return [null, p+size];
+    const [sz, kind, invalid] = bt;
+    if(kind==='str'){
+      let s=''; for(let i=0;i<size;i++){ const c=u8[p+i]; if(!c) break; s+=String.fromCharCode(c); }
+      return [s, p+size];
+    }
+    const n = Math.max(1, Math.floor(size/sz)), vals=[];
+    for(let i=0;i<n;i++){
+      const o = p + i*sz; let v;
+      switch(kind){
+        case 'u8': v=dv.getUint8(o); break;      case 'i8': v=dv.getInt8(o); break;
+        case 'u16': v=dv.getUint16(o,!big); break; case 'i16': v=dv.getInt16(o,!big); break;
+        case 'u32': v=dv.getUint32(o,!big); break; case 'i32': v=dv.getInt32(o,!big); break;
+        case 'f32': v=dv.getFloat32(o,!big); break; case 'f64': v=dv.getFloat64(o,!big); break;
+        default: v=null;
+      }
+      vals.push((invalid!==null && v===invalid) ? null : v);
+    }
+    return [n===1? vals[0] : vals, p+size];
+  };
+
+  while(pos < end){
+    const h = u8[pos++];
+    if((h & 0x80)===0 && (h & 0x40)){                       // message de définition
+      const local = h & 0x0F;
+      const big = u8[pos+1] === 1;
+      const global = big ? dv.getUint16(pos+2,false) : dv.getUint16(pos+2,true);
+      const nFields = u8[pos+4];
+      let p = pos+5, fields=[], dev=[];
+      for(let i=0;i<nFields;i++){ fields.push([u8[p], u8[p+1], u8[p+2]]); p+=3; }
+      if(h & 0x20){ const nd=u8[p++]; for(let i=0;i<nd;i++){ dev.push([u8[p], u8[p+1], u8[p+2]]); p+=3; } }
+      defs[local] = {global, fields, dev, big};
+      pos = p; continue;
+    }
+    const local = (h & 0x80) ? ((h>>5) & 3) : (h & 0x0F);   // horodatage compressé ou normal
+    const def = defs[local];
+    if(!def) break;                                          // définition manquante : on s'arrête proprement
+    const msg = {};
+    let p = pos;
+    for(const [num,size,bt] of def.fields){ const [v,np] = readField(p,size,bt,def.big); msg[num]=v; p=np; }
+    for(const [,size] of def.dev) p += size;                 // champs développeur ignorés
+    pos = p;
+
+    if(def.global===20) out.records.push(msg);
+    else if(def.global===18) out.session = msg;
+    else if(def.global===19) out.laps.push(msg);
+    else if(def.global===0 && !out.device) out.device = msg[8] || null;
+  }
+  if(!out.records.length && !out.session) throw new Error('aucune donnée d\'activité trouvée');
+  return out;
+}
+
+/* Conversion du contenu FIT vers une sortie Crête, avec flux compressé */
+const semi = v => v==null? null : v*(180/Math.pow(2,31));
+const altOf = v => v==null? null : v/5 - 500;
+
+function fitToActivity(fit, filename){
+  const s = fit.session || {};
+  const rec = fit.records.filter(r=> r[253]!=null);
+  const t0 = s[2] ?? (rec.length? rec[0][253] : null);
+  const date = new Date(((t0 ?? 0) + FIT_EPOCH)*1000);
+
+  // ---- flux seconde par seconde
+  const stream = {t:[], hr:[], alt:[], d:[], v:[], cad:[], pw:[], lat:[], lon:[]};
+  let lastAlt=null;
+  rec.forEach(r=>{
+    stream.t.push(r[253]-t0);
+    stream.hr.push(r[3] ?? null);
+    const a = altOf(r[78] ?? r[2]);       // 78 = enhanced_altitude, 2 = altitude
+    stream.alt.push(a==null? lastAlt : (lastAlt=a));
+    stream.d.push(r[5]!=null? r[5]/100 : null);
+    stream.v.push(r[73]!=null? r[73]/1000 : (r[6]!=null? r[6]/1000 : null));
+    stream.cad.push(r[4] ?? null);
+    stream.pw.push(r[7] ?? null);
+    stream.lat.push(semi(r[0])); stream.lon.push(semi(r[1]));
+  });
+
+  // ---- dénivelé : privilégier la session, sinon intégrer l'altitude lissée
+  let dp = s[22] ?? null, dm = s[23] ?? null;
+  if(dp==null || dm==null){
+    const sm = smooth(stream.alt.filter(x=>x!=null), 15);
+    let up=0, down=0;
+    for(let i=1;i<sm.length;i++){ const d=sm[i]-sm[i-1]; if(d>0) up+=d; else down-=d; }
+    dp = dp ?? Math.round(up); dm = dm ?? Math.round(down);
+  }
+  const moving = (s[8] ?? s[7] ?? 0)/1000 || (stream.t.length? stream.t[stream.t.length-1] : 0);
+  const elapsed = (s[7] ?? s[8] ?? 0)/1000 || moving;
+  const dist = (s[9] ?? 0)/100/1000 || (stream.d.filter(x=>x!=null).pop()||0)/1000;
+
+  return {
+    id: uid(), source:'fit', stravaId:null,
+    date: date.toISOString(),
+    name: guessName(s, date, dist, dp),
+    type: (s[5]===1? 'Run':'Activity'), sub: s[6]===3? 'trail' : (s[6]===0?'route':''),
+    dist: round(dist,3), moving: Math.round(moving), elapsed: Math.round(elapsed),
+    dp: Math.round(dp||0), dm: Math.round(dm||0),
+    hrAvg: s[16] ?? avg(stream.hr), hrMax: s[17] ?? Math.max(0,...stream.hr.filter(x=>x!=null)),
+    hrMin: s[64] ?? null,
+    cadAvg: s[18]? s[18]*2 : (avg(stream.cad)? avg(stream.cad)*2 : null),
+    pwAvg: s[20] ?? avg(stream.pw), pwNorm: s[34] ?? null,
+    kcalDevice: s[11] ?? null, tempAvg: s[57] ?? null,
+    device: fit.device || null, file: filename,
+    laps: fit.laps.map(l=>({
+      t: (l[8] ?? l[7] ?? 0)/1000, dist:(l[9] ?? 0)/100/1000, dp:l[21] ?? 0, dm:l[22] ?? 0,
+      hr:l[15] ?? null, hrMax:l[16] ?? null, alt: altOf(l[42]), start:(l[2] ?? 0)-t0
+    })),
+    stream: packStream(stream),
+    zoneTime: null, rpe:0, notes:'',
+    nutr:{waterL:0, drinkL:0, gels:0, bars:0, extraCarb:0, extraNa:0}
+  };
+}
+function guessName(s, date, dist, dp){
+  const h = date.getHours();
+  const moment = h<11?'Sortie du matin' : (h<15?'Sortie du midi' : (h<19?'Sortie de l\'après-midi':'Sortie du soir'));
+  if(dist>0 && dp/Math.max(dist,1) > 40) return moment.replace('Sortie','Sortie trail');
+  return moment;
+}
+const avg = a=>{ const v=a.filter(x=>x!=null && x>0); return v.length? Math.round(v.reduce((x,y)=>x+y,0)/v.length) : null; };
+function smooth(a, w){
+  if(a.length<w) return a.slice();
+  const out=[]; let s=0;
+  for(let i=0;i<a.length;i++){ s+=a[i]; if(i>=w) s-=a[i-w]; out.push(s/Math.min(i+1,w)); }
+  return out;
+}
+/* Compression du flux : on ne garde que ce qui sert à l'analyse, ré-échantillonné */
+function packStream(st, target=700){
+  const n = st.t.length;
+  if(!n) return null;
+  const step = Math.max(1, Math.ceil(n/target));
+  const pick = arr=>{ const o=[]; for(let i=0;i<n;i+=step) o.push(arr[i]==null?null:round(arr[i],5)); return o; };
+  return {n, step, dur: st.t[n-1], t:pick(st.t), hr:pick(st.hr), alt:pick(st.alt), d:pick(st.d),
+          v:pick(st.v), cad:pick(st.cad), pw:pick(st.pw), lat:pick(st.lat), lon:pick(st.lon)};
+}
+
+/* ==========================================================================
+   10. ANALYSE D'UNE SÉANCE (à partir du flux)
+   ========================================================================== */
+function analyseSession(a){
+  const st = a.stream;
+  const res = {splits:[], zoneTime:null, decoupling:null, best:[], climbs:null, gradeDist:null, hrDrift:null};
+  if(!st || !st.t) return res;
+  const T=st.t, HR=st.hr, ALT=st.alt, D=st.d;
+
+  // ---- temps par zone (échantillonné, donc pondéré par le pas de temps réel)
+  if(HR.some(x=>x)){
+    const zt=[0,0,0,0,0];
+    for(let i=1;i<T.length;i++){
+      const dt = Math.min(120, T[i]-T[i-1]);
+      const z = zoneOfHR(HR[i]);
+      if(z) zt[z-1]+=dt;
+    }
+    res.zoneTime = zt;
+  }
+  // ---- splits kilométriques avec allure ajustée (GAP)
+  if(D.some(x=>x!=null)){
+    let km=1, prev={t:T[0], d:0, alt:ALT[0], i:0};
+    for(let i=1;i<T.length;i++){
+      if(D[i]==null) continue;
+      if(D[i]/1000 >= km || i===T.length-1){
+        const dt = T[i]-prev.t, dd = (D[i]-prev.d)/1000;
+        if(dd>0.05 && dt>0){
+          const up = risePos(ALT, prev.i, i), dn = riseNeg(ALT, prev.i, i);
+          const hrs = HR.slice(prev.i,i+1).filter(x=>x);
+          const eq = minettiEquivKm(dd, up, dn);
+          res.splits.push({km: round(D[i]/1000,2), dist:dd, t:dt, pace:dt/dd, gap: eq>0? dt/eq : dt/dd,
+            dp:Math.round(up), dm:Math.round(dn), hr: hrs.length? Math.round(hrs.reduce((x,y)=>x+y,0)/hrs.length):null});
+        }
+        prev={t:T[i], d:D[i], alt:ALT[i], i}; km = Math.floor(D[i]/1000)+1;
+      }
+    }
+    // ---- meilleurs efforts : deux pointeurs sur les échantillons valides
+    const P=[];
+    for(let i=0;i<T.length;i++) if(D[i]!=null) P.push([T[i], D[i]]);
+    const total = P.length? P[P.length-1][1]/1000 : 0;
+    res.best = [0.4,1,3,5,10,21.0975,42.195].filter(d=> d<=total).map(dkm=>{
+      let best=Infinity, at=0, j=0;
+      for(let i=0;i<P.length;i++){
+        while(j+1<i && (P[i][1]-P[j+1][1])/1000 >= dkm) j++;
+        if((P[i][1]-P[j][1])/1000 >= dkm){
+          const t = P[i][0]-P[j][0];
+          if(t>0 && t<best){ best=t; at=P[j][1]/1000; }
+        }
+      }
+      return best<Infinity? {d:dkm, t:best, at, pace:best/dkm} : null;
+    }).filter(Boolean);
+  }
+  // ---- découplage cardiaque : rendement 1re vs 2e moitié (Friel : > 5 % = fatigue/durabilité limitée)
+  const half = Math.floor(T.length/2);
+  const eff = (i0,i1)=>{
+    const hrs=[], sp=[];
+    for(let i=i0+1;i<i1;i++){
+      if(!HR[i] || D[i]==null || D[i-1]==null) continue;
+      const dt=T[i]-T[i-1]; if(dt<=0||dt>120) continue;
+      const dd=(D[i]-D[i-1])/1000; if(dd<=0) continue;
+      if(ALT[i]!=null && ALT[i-1]!=null && Math.abs((ALT[i]-ALT[i-1])/(dd*1000))>0.05) continue;
+      const up=Math.max(0,(ALT[i]??0)-(ALT[i-1]??0)), dn=Math.max(0,(ALT[i-1]??0)-(ALT[i]??0));
+      const eq=minettiEquivKm(dd,up,dn);
+      sp.push(eq/(dt/3600)); hrs.push(HR[i]);
+    }
+    if(sp.length<20) return null;
+    const m=x=>x.reduce((a,b)=>a+b,0)/x.length;
+    return m(sp)/m(hrs);
+  };
+  const e1=eff(0,half), e2=eff(half,T.length-1);
+  if(e1 && e2) res.decoupling = (e1-e2)/e1*100;
+  // ---- répartition par pente
+  if(ALT.some(x=>x!=null) && D.some(x=>x!=null)){
+    const buckets={down:0, flat:0, up:0, steep:0}, dbk={down:0,flat:0,up:0,steep:0};
+    for(let i=1;i<T.length;i++){
+      if(D[i]==null||D[i-1]==null||ALT[i]==null||ALT[i-1]==null) continue;
+      const dd=D[i]-D[i-1], dt=T[i]-T[i-1]; if(dd<=1||dt<=0||dt>120) continue;
+      const g=(ALT[i]-ALT[i-1])/dd;
+      const k = g<-0.05?'down' : (g<0.05?'flat' : (g<0.15?'up':'steep'));
+      buckets[k]+=dt; dbk[k]+=dd/1000;
+    }
+    res.gradeDist = {t:buckets, d:dbk};
+    const upT = buckets.up+buckets.steep, upD = (a.dp||0);
+    res.climbs = upT>60? {vam: upD/(upT/3600), t:upT} : null;
+  }
+  // ---- dérive cardiaque brute
+  const h1 = HR.slice(0,half).filter(x=>x), h2 = HR.slice(half).filter(x=>x);
+  if(h1.length>20 && h2.length>20){
+    const m=x=>x.reduce((a,b)=>a+b,0)/x.length;
+    res.hrDrift = m(h2)-m(h1);
+  }
+  return res;
+}
+function risePos(alt,i0,i1){ let s=0; for(let i=i0+1;i<=i1;i++){ if(alt[i]==null||alt[i-1]==null) continue; const d=alt[i]-alt[i-1]; if(d>0) s+=d; } return s; }
+function riseNeg(alt,i0,i1){ let s=0; for(let i=i0+1;i<=i1;i++){ if(alt[i]==null||alt[i-1]==null) continue; const d=alt[i-1]-alt[i]; if(d>0) s+=d; } return s; }
+
+/* ==========================================================================
+   11. GRAPHIQUES — SVG, thème clair
+   ========================================================================== */
+const C = {ink:'#1D1D1F', mute:'#6E6E73', mute2:'#98989F', line:'#E5E5EA', acc:'#0B6E4F',
+  blue:'#0A6CCB', amber:'#C4761A', red:'#C6382C', violet:'#6B58B8', z:['#7FB7D9','#4EA37F','#9CB84E','#E0A03C','#D0574A']};
+
+function svg(w,h,inner,style=''){
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block;${style}" role="img">${inner}</svg>`;
+}
+const P_ = pts => pts.map((p,i)=> (i?'L':'M')+round(p[0],1)+' '+round(p[1],1)).join(' ');
+function smoothPath(pts){                       // courbe de Bézier douce (style Apple)
+  if(pts.length<3) return P_(pts);
+  let d = `M ${round(pts[0][0],1)} ${round(pts[0][1],1)}`;
+  for(let i=0;i<pts.length-1;i++){
+    const p0=pts[i], p1=pts[i+1];
+    const cx=(p0[0]+p1[0])/2;
+    d += ` C ${round(cx,1)} ${round(p0[1],1)}, ${round(cx,1)} ${round(p1[1],1)}, ${round(p1[0],1)} ${round(p1[1],1)}`;
+  }
+  return d;
+}
+function yTicks(g, min, max, y, x0, x1, fmt=v=>Math.round(v), n=4){
+  let s='';
+  for(let k=0;k<=n;k++){
+    const v = min + (max-min)*k/n, yy = y(v);
+    s += `<line x1="${x0}" y1="${yy}" x2="${x1}" y2="${yy}" class="gridline"/>`
+      +  `<text x="${x0-9}" y="${yy+3.5}" text-anchor="end" font-size="10.5">${fmt(v)}</text>`;
+  }
+  return s;
+}
+
+/* --- condition / fatigue / forme ------------------------------------------ */
+function fitnessChart(series, days=180){
+  const W=880,H=250,M={l:38,r:14,t:14,b:24};
+  if(series.length<2) return empty('Pas encore assez de données','Deux jours d\'activité suffisent pour tracer la courbe.');
+  const s = series.slice(-days);
+  const maxY = Math.max(10,...s.map(d=>Math.max(d.ctl,d.atl)))*1.15;
+  const x = i=> M.l + i*(W-M.l-M.r)/(s.length-1);
+  const y = v=> H-M.b - (v/maxY)*(H-M.t-M.b);
+  const tsbMax = Math.max(15,...s.map(d=>Math.abs(d.tsb)));
+  const yT = v=> H-M.b - ((v+tsbMax)/(2*tsbMax))*(H-M.t-M.b);
   const ctl = s.map((d,i)=>[x(i), y(d.ctl)]);
-  const atl = s.map((d,i)=>[x(i), y(d.atl)]);
-  const tsbScale = Math.max(20, Math.abs(minT), ...s.map(d=>Math.abs(d.tsb)));
-  const yT = v=> H-P.b - ((v+tsbScale)/(2*tsbScale))*(H-P.t-P.b);
-  let g='';
-  for(let k=0;k<=4;k++){
-    const v = maxY*k/4, yy=y(v);
-    g += `<line class="gridline" x1="${P.l}" y1="${yy}" x2="${W-P.r}" y2="${yy}"/>`
-      +  `<text x="${P.l-8}" y="${yy+4}" text-anchor="end" font-size="10">${Math.round(v)}</text>`;
-  }
-  // repères de mois
-  let ticks='';
-  s.forEach((d,i)=>{ if(d.date.slice(8)==='01'){
-    ticks += `<line class="gridline" x1="${x(i)}" y1="${P.t}" x2="${x(i)}" y2="${H-P.b}" opacity=".5"/>`
-          + `<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="9">${new Date(d.date).toLocaleDateString('fr-FR',{month:'short'})}</text>`;
-  }});
-  const ridge = pathFrom(ctl)+` L ${x(s.length-1)} ${H-P.b} L ${P.l} ${H-P.b} Z`;
-  const last = s[s.length-1];
-  return svgWrap(W,H,`
-    <defs>
-      <linearGradient id="gRidge" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#54A98C" stop-opacity=".55"/>
-        <stop offset="55%" stop-color="#54A98C" stop-opacity=".14"/>
-        <stop offset="100%" stop-color="#54A98C" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="gSnow" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#E6EEEC" stop-opacity=".9"/>
-        <stop offset="100%" stop-color="#E6EEEC" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    ${g}${ticks}
-    <path d="${ridge}" fill="url(#gRidge)"/>
-    <path d="${pathFrom(ctl)}" fill="none" stroke="#54A98C" stroke-width="2"/>
-    <path d="${pathFrom(atl)}" fill="none" stroke="#E0A040" stroke-width="1.5" stroke-dasharray="4 3"/>
-    <path d="${pathFrom(s.map((d,i)=>[x(i), yT(d.tsb)]))}" fill="none" stroke="#9A86D6" stroke-width="1.2" opacity=".85"/>
-    <line class="axis" x1="${P.l}" y1="${H-P.b}" x2="${W-P.r}" y2="${H-P.b}"/>
-    <circle cx="${x(s.length-1)}" cy="${y(last.ctl)}" r="4" fill="#54A98C" stroke="#0B1319" stroke-width="2"/>
-    <circle cx="${x(s.length-1)}" cy="${y(last.atl)}" r="3.5" fill="#E0A040" stroke="#0B1319" stroke-width="2"/>
-  `);
+  let months='';
+  s.forEach((d,i)=>{ if(d.date.slice(8)==='01' && i>4)
+    months += `<text x="${x(i)}" y="${H-6}" text-anchor="middle" font-size="10.5">${new Date(d.date).toLocaleDateString('fr-FR',{month:'short'})}</text>`; });
+  const last=s[s.length-1];
+  return svg(W,H,`
+    <defs><linearGradient id="gCtl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${C.acc}" stop-opacity=".18"/><stop offset="100%" stop-color="${C.acc}" stop-opacity="0"/>
+    </linearGradient></defs>
+    ${yTicks('',0,maxY,y,M.l,W-M.r)}${months}
+    <path d="${smoothPath(ctl)} L ${x(s.length-1)} ${H-M.b} L ${M.l} ${H-M.b} Z" fill="url(#gCtl)"/>
+    <path d="${smoothPath(s.map((d,i)=>[x(i), yT(d.tsb)]))}" fill="none" stroke="${C.violet}" stroke-width="1.25" opacity=".65"/>
+    <path d="${smoothPath(s.map((d,i)=>[x(i), y(d.atl)]))}" fill="none" stroke="${C.amber}" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <path d="${smoothPath(ctl)}" fill="none" stroke="${C.acc}" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="${x(s.length-1)}" cy="${y(last.ctl)}" r="3.5" fill="${C.acc}" stroke="#fff" stroke-width="2"/>`);
 }
 
-function weeklyBars(acts){
-  const W=920,H=230,P={l:44,r:44,t:16,b:28}, N=16;
-  const now = new Date(); const weeks=[];
-  for(let i=N-1;i>=0;i--){
-    const end = new Date(+now - i*7*864e5), start = new Date(+end - 7*864e5);
-    const a = acts.filter(x=> new Date(x.date)>start && new Date(x.date)<=end);
-    weeks.push({label: start.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'}),
-      km:sum(a,x=>x.dist), dp:sum(a,x=>x.dp), n:a.length});
+/* --- volume hebdomadaire -------------------------------------------------- */
+function volumeChart(acts, weeks=16){
+  const W=880,H=210,M={l:38,r:40,t:14,b:26};
+  const now=new Date(), ws=[];
+  for(let i=weeks-1;i>=0;i--){
+    const end=new Date(+now-i*7*864e5), start=new Date(+end-7*864e5);
+    const a=acts.filter(x=> new Date(x.date)>start && new Date(x.date)<=end);
+    ws.push({lab:start.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'}), km:sum(a,x=>x.dist), dp:sum(a,x=>x.dp), n:a.length});
   }
-  const maxKm = Math.max(10,...weeks.map(w=>w.km))*1.15, maxDp=Math.max(200,...weeks.map(w=>w.dp))*1.15;
-  const bw = (W-P.l-P.r)/N;
-  const x = i=> P.l + i*bw;
-  const yk = v=> H-P.b - v/maxKm*(H-P.t-P.b);
-  const yd = v=> H-P.b - v/maxDp*(H-P.t-P.b);
-  let bars='', g='';
-  for(let k=0;k<=3;k++){ const yy=P.t+(H-P.t-P.b)*k/3;
-    g+=`<line class="gridline" x1="${P.l}" y1="${yy}" x2="${W-P.r}" y2="${yy}"/>`
-      +`<text x="${P.l-8}" y="${yy+4}" text-anchor="end" font-size="10">${Math.round(maxKm*(3-k)/3)}</text>`
-      +`<text x="${W-P.r+8}" y="${yy+4}" font-size="10" fill="#E0A040">${Math.round(maxDp*(3-k)/3)}</text>`;
-  }
-  weeks.forEach((w,i)=>{
-    const h = H-P.b-yk(w.km);
-    bars += `<rect x="${x(i)+bw*0.16}" y="${yk(w.km)}" width="${bw*0.68}" height="${Math.max(0,h)}" fill="#2F6B7E" rx="1"><title>${w.label} · ${round(w.km,1)} km · ${Math.round(w.dp)} m D+ · ${w.n} sorties</title></rect>`;
-    if(i%3===0) bars += `<text x="${x(i)+bw/2}" y="${H-8}" text-anchor="middle" font-size="9">${w.label}</text>`;
-  });
-  const dpLine = pathFrom(weeks.map((w,i)=>[x(i)+bw/2, yd(w.dp)]));
-  return svgWrap(W,H,`${g}${bars}
-    <path d="${dpLine}" fill="none" stroke="#E0A040" stroke-width="2"/>
-    ${weeks.map((w,i)=>`<circle cx="${x(i)+bw/2}" cy="${yd(w.dp)}" r="2.5" fill="#E0A040"/>`).join('')}
-    <line class="axis" x1="${P.l}" y1="${H-P.b}" x2="${W-P.r}" y2="${H-P.b}"/>`);
+  const maxKm=Math.max(10,...ws.map(w=>w.km))*1.18, maxDp=Math.max(200,...ws.map(w=>w.dp))*1.18;
+  const bw=(W-M.l-M.r)/weeks;
+  const x=i=>M.l+i*bw, yk=v=>H-M.b-v/maxKm*(H-M.t-M.b), yd=v=>H-M.b-v/maxDp*(H-M.t-M.b);
+  const bars = ws.map((w,i)=>{
+    const h=Math.max(0,H-M.b-yk(w.km));
+    return `<rect x="${round(x(i)+bw*.2,1)}" y="${round(yk(w.km),1)}" width="${round(bw*.6,1)}" height="${round(h,1)}" rx="3" fill="${C.acc}" fill-opacity=".82">
+      <title>${w.lab} — ${round(w.km,1)} km, ${Math.round(w.dp)} m D+, ${w.n} sorties</title></rect>`;
+  }).join('');
+  const labs = ws.map((w,i)=> i%4===0? `<text x="${x(i)+bw/2}" y="${H-7}" text-anchor="middle" font-size="10.5">${w.lab}</text>`:'').join('');
+  return svg(W,H,`${yTicks('',0,maxKm,yk,M.l,W-M.r)}${labs}${bars}
+    <path d="${smoothPath(ws.map((w,i)=>[x(i)+bw/2, yd(w.dp)]))}" fill="none" stroke="${C.amber}" stroke-width="1.75"/>
+    ${ws.map((w,i)=>`<circle cx="${round(x(i)+bw/2,1)}" cy="${round(yd(w.dp),1)}" r="2.4" fill="${C.amber}"/>`).join('')}
+    <text x="${W-M.r+8}" y="${M.t+8}" font-size="10.5" fill="${C.amber}">D+ (m)</text>`);
 }
 
-function zoneStack(zt, total){
-  if(!total) return `<div class="empty"><b>Aucune donnée cardio</b>Ajoute une FC moyenne à tes sorties, ou synchronise les flux Strava.</div>`;
-  const zs = zones();
-  return `<div class="zbar">${zt.map((s,i)=>`<i style="width:${s/total*100}%;background:var(${zs[i].col})" title="Z${i+1} ${hms(s)}"></i>`).join('')}</div>
-  <div class="legend">${zt.map((s,i)=>`<span><i style="background:var(${zs[i].col})"></i>Z${i+1} ${round(s/total*100,1)} % · ${hms(s)}</span>`).join('')}</div>`;
-}
-
-function radar(axes){
-  const W=380,H=380,cx=W/2,cy=H/2,R=126, n=axes.length;
-  const pt=(i,r)=>{ const a=-Math.PI/2 + i*2*Math.PI/n; return [cx+Math.cos(a)*r, cy+Math.sin(a)*r]; };
+/* --- radar profil --------------------------------------------------------- */
+function radarChart(axes){
+  const W=360,H=340,cx=W/2,cy=H/2+4,R=112,n=axes.length;
+  const pt=(i,r)=>{const a=-Math.PI/2+i*2*Math.PI/n; return [cx+Math.cos(a)*r, cy+Math.sin(a)*r];};
   let rings='';
-  [0.25,0.5,0.75,1].forEach(f=>{
-    rings += `<polygon points="${Array.from({length:n},(_,i)=>pt(i,R*f).map(v=>round(v,1)).join(',')).join(' ')}" fill="none" stroke="#203A47" stroke-width="1"/>`;
-  });
-  let spokes='', labels='';
+  [.25,.5,.75,1].forEach(f=> rings+=`<polygon points="${Array.from({length:n},(_,i)=>pt(i,R*f).map(v=>round(v,1)).join(',')).join(' ')}" fill="none" stroke="${C.line}"/>`);
+  let spokes='',labels='';
   axes.forEach((a,i)=>{
-    const [x2,y2]=pt(i,R); spokes+=`<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="#203A47"/>`;
-    const [lx,ly]=pt(i,R+22);
-    const anchor = Math.abs(lx-cx)<6 ? 'middle' : (lx>cx?'start':'end');
-    labels += `<text x="${lx}" y="${ly+3}" text-anchor="${anchor}" font-size="9.5" fill="#8FA7B0">${a.nom.split(' ')[0].slice(0,11)}</text>`
-           +  `<text x="${lx}" y="${ly+15}" text-anchor="${anchor}" font-size="10" fill="#E0A040">${Math.round(a.score)}</text>`;
+    const [x2,y2]=pt(i,R); spokes+=`<line x1="${cx}" y1="${cy}" x2="${round(x2,1)}" y2="${round(y2,1)}" stroke="${C.line}"/>`;
+    const [lx,ly]=pt(i,R+20), anchor=Math.abs(lx-cx)<8?'middle':(lx>cx?'start':'end');
+    labels+=`<text x="${round(lx,1)}" y="${round(ly,1)}" text-anchor="${anchor}" font-size="10.5" fill="${C.mute}">${a.court}</text>
+             <text x="${round(lx,1)}" y="${round(ly+13,1)}" text-anchor="${anchor}" font-size="11.5" font-weight="600" fill="${C.ink}">${Math.round(a.score)}</text>`;
   });
-  const poly = axes.map((a,i)=> pt(i, R*clamp(a.score,0,100)/100).map(v=>round(v,1)).join(',')).join(' ');
-  return svgWrap(W,H,`${rings}${spokes}
-    <polygon points="${poly}" fill="rgba(84,169,140,.28)" stroke="#54A98C" stroke-width="2"/>
-    ${axes.map((a,i)=>{const [x,y]=pt(i,R*clamp(a.score,0,100)/100); return `<circle cx="${x}" cy="${y}" r="3" fill="#54A98C"/>`}).join('')}
+  return svg(W,H,`${rings}${spokes}
+    <polygon points="${axes.map((a,i)=>pt(i,R*clamp(a.score,0,100)/100).map(v=>round(v,1)).join(',')).join(' ')}"
+      fill="${C.acc}" fill-opacity=".14" stroke="${C.acc}" stroke-width="1.75" stroke-linejoin="round"/>
+    ${axes.map((a,i)=>{const [x,y]=pt(i,R*clamp(a.score,0,100)/100); return `<circle cx="${round(x,1)}" cy="${round(y,1)}" r="2.6" fill="${C.acc}"/>`}).join('')}
     ${labels}`);
 }
 
-/* Nuage nutrition : g de glucides/h vs durée, avec la bande recommandée */
-function fuelScatter(acts){
-  const W=920,H=250,P={l:46,r:16,t:16,b:34};
-  const pts = acts.filter(a=>a.hours>0.75);
-  if(!pts.length) return `<div class="empty"><b>Rien à tracer</b>Renseigne l'eau, la boisson et les gels d'au moins une sortie de plus de 45 min.</div>`;
-  const maxH = Math.max(3, ...pts.map(a=>a.hours))*1.1;
-  const maxC = Math.max(100, ...pts.map(a=>a.carbH))*1.1;
-  const x = h=> P.l + h/maxH*(W-P.l-P.r);
-  const y = c=> H-P.b - c/maxC*(H-P.t-P.b);
-  let g='';
-  for(let k=0;k<=4;k++){ const v=maxC*k/4, yy=y(v);
-    g+=`<line class="gridline" x1="${P.l}" y1="${yy}" x2="${W-P.r}" y2="${yy}"/><text x="${P.l-8}" y="${yy+4}" text-anchor="end" font-size="10">${Math.round(v)}</text>`; }
-  for(let k=1;k<=Math.floor(maxH);k++){
-    g+=`<text x="${x(k)}" y="${H-10}" text-anchor="middle" font-size="10">${k} h</text>`; }
-  const band = `<rect x="${x(2.5)}" y="${y(90)}" width="${x(maxH)-x(2.5)}" height="${y(60)-y(90)}" fill="rgba(84,169,140,.14)" stroke="rgba(84,169,140,.4)" stroke-dasharray="3 3"/>
-    <rect x="${P.l}" y="${y(60)}" width="${x(2.5)-P.l}" height="${y(30)-y(60)}" fill="rgba(111,182,216,.12)" stroke="rgba(111,182,216,.35)" stroke-dasharray="3 3"/>
-    <text x="${x(2.5)+8}" y="${y(90)+14}" font-size="10" fill="#54A98C">cible longue distance 60-90 g/h</text>
-    <text x="${P.l+8}" y="${y(60)+14}" font-size="10" fill="#6FB6D8">&lt; 2 h 30 : 30-60 g/h</text>`;
-  const dots = pts.map(a=>{
-    const col = a.carbH >= a.carbTarget*0.85 ? '#54A98C' : (a.carbH>=a.carbTarget*0.5?'#E0A040':'#CE4B33');
-    return `<circle cx="${round(x(a.hours),1)}" cy="${round(y(a.carbH),1)}" r="5" fill="${col}" fill-opacity=".75" stroke="${col}"><title>${esc(a.name)} — ${hms(a.moving)}, ${round(a.carbH,0)} g/h, ${Math.round(a.fluidH)} mL/h</title></circle>`;
-  }).join('');
-  return svgWrap(W,H,`${g}${band}${dots}<line class="axis" x1="${P.l}" y1="${H-P.b}" x2="${W-P.r}" y2="${H-P.b}"/>`);
+/* --- nutrition ------------------------------------------------------------ */
+function fuelChart(acts){
+  const W=880,H=230,M={l:42,r:16,t:14,b:30};
+  const pts=acts.filter(a=>a.hours>.75);
+  if(!pts.length) return empty('Aucune sortie renseignée','Ajoute eau, boisson et gels sur une sortie de plus de 45 minutes.');
+  const maxH=Math.max(3,...pts.map(a=>a.hours))*1.1, maxC=Math.max(100,...pts.map(a=>a.carbH))*1.1;
+  const x=h=>M.l+h/maxH*(W-M.l-M.r), y=c=>H-M.b-c/maxC*(H-M.t-M.b);
+  let xl=''; for(let k=1;k<=Math.floor(maxH);k+=Math.ceil(maxH/8)) xl+=`<text x="${x(k)}" y="${H-8}" text-anchor="middle" font-size="10.5">${k} h</text>`;
+  return svg(W,H,`
+    <rect x="${x(2.5)}" y="${y(90)}" width="${W-M.r-x(2.5)}" height="${y(60)-y(90)}" fill="${C.acc}" fill-opacity=".07"/>
+    <rect x="${M.l}" y="${y(60)}" width="${x(2.5)-M.l}" height="${y(30)-y(60)}" fill="${C.blue}" fill-opacity=".07"/>
+    ${yTicks('',0,maxC,y,M.l,W-M.r)}${xl}
+    <text x="${x(2.5)+10}" y="${y(90)+14}" font-size="10.5" fill="${C.acc}">60–90 g/h au-delà de 2 h 30</text>
+    <text x="${M.l+8}" y="${y(60)+14}" font-size="10.5" fill="${C.blue}">30–60 g/h</text>
+    ${pts.map(a=>{
+      const col = a.carbH>=a.carbTarget*.85? C.acc : (a.carbH>=a.carbTarget*.5? C.amber : C.red);
+      return `<circle cx="${round(x(a.hours),1)}" cy="${round(y(clamp(a.carbH,0,maxC)),1)}" r="4.5" fill="${col}" fill-opacity=".75"><title>${esc(a.name)} — ${hms(a.moving)}, ${round(a.carbH,0)} g/h</title></circle>`;
+    }).join('')}`);
 }
 
-/* Courbe de performance : allure prédite en fonction de la distance */
+/* --- courbe de performance ------------------------------------------------ */
 function perfCurve(acts){
-  const W=920,H=250,P={l:52,r:20,t:16,b:34};
-  const bv = bestVdot(acts);
-  const vdot = Math.max(bv.vdot, vdotFromVMA(S.profile.vma));
+  const W=880,H=220,M={l:48,r:18,t:14,b:28};
+  const bv=bestVdot(acts), vdot=Math.max(bv.vdot, vdotFromVMA(S.profile.vma));
   if(vdot<=0) return '';
-  const ds=[]; for(let d=1; d<=50; d*=1.09) ds.push(d);
-  const pts = ds.map(d=>({d, p: timeFromVdot(vdot, d*1000)/d}));
-  const maxP = Math.max(...pts.map(p=>p.p))*1.05, minP=Math.min(...pts.map(p=>p.p))*0.95;
-  const x = d=> P.l + Math.log(d)/Math.log(50)*(W-P.l-P.r);
-  const y = p=> P.t + (p-minP)/(maxP-minP)*(H-P.t-P.b);
+  const ds=[]; for(let d=1;d<=50;d*=1.08) ds.push(d);
+  const pts=ds.map(d=>({d,p:timeFromVdot(vdot,d*1000)/d}));
+  const maxP=Math.max(...pts.map(p=>p.p))*1.04, minP=Math.min(...pts.map(p=>p.p))*.96;
+  const x=d=>M.l+Math.log(d)/Math.log(50)*(W-M.l-M.r), y=p=>M.t+(p-minP)/(maxP-minP)*(H-M.t-M.b);
   let g='';
-  [3,4,5,6,7,8].forEach(m=>{ const p=m*60; if(p<maxP&&p>minP){
-    g+=`<line class="gridline" x1="${P.l}" y1="${y(p)}" x2="${W-P.r}" y2="${y(p)}"/><text x="${P.l-8}" y="${y(p)+4}" text-anchor="end" font-size="10">${m}:00</text>`;}});
-  [1,5,10,21.1,42.2].forEach(d=>{
-    g+=`<line class="gridline" x1="${x(d)}" y1="${P.t}" x2="${x(d)}" y2="${H-P.b}"/><text x="${x(d)}" y="${H-10}" text-anchor="middle" font-size="10">${d} km</text>`; });
-  const perfDots = inWindow(acts,180).filter(a=>a.me>=3&&a.moving>300).map(a=>{
-    const d=clamp(a.me,1,50);
-    return `<circle cx="${round(x(d),1)}" cy="${round(y(clamp(a.gapPace,minP,maxP)),1)}" r="3" fill="#6FB6D8" fill-opacity=".55"><title>${esc(a.name)} — ${round(a.me,1)} km équiv., ${paceStr(a.gapPace)}/km</title></circle>`;
-  }).join('');
-  return svgWrap(W,H,`${g}
-    <path d="${pathFrom(pts.map(p=>[x(p.d), y(p.p)]))}" fill="none" stroke="#E0A040" stroke-width="2"/>
-    ${perfDots}
-    <line class="axis" x1="${P.l}" y1="${H-P.b}" x2="${W-P.r}" y2="${H-P.b}"/>`);
+  for(let m=3;m<=9;m++){ const p=m*60; if(p<maxP&&p>minP) g+=`<line x1="${M.l}" y1="${y(p)}" x2="${W-M.r}" y2="${y(p)}" class="gridline"/><text x="${M.l-9}" y="${y(p)+3.5}" text-anchor="end" font-size="10.5">${m}:00</text>`; }
+  [1,5,10,21.1,42.2].forEach(d=> g+=`<text x="${x(d)}" y="${H-8}" text-anchor="middle" font-size="10.5">${d}</text>`);
+  const dots=inWindow(acts,180).filter(a=>a.me>=3&&a.moving>300).map(a=>
+    `<circle cx="${round(x(clamp(a.me,1,50)),1)}" cy="${round(y(clamp(a.gapPace,minP,maxP)),1)}" r="3" fill="${C.blue}" fill-opacity=".45"><title>${esc(a.name)} — ${round(a.me,1)} km équiv., ${paceStr(a.gapPace)}/km</title></circle>`).join('');
+  return svg(W,H,`${g}<path d="${P_(pts.map(p=>[x(p.d),y(p.p)]))}" fill="none" stroke="${C.amber}" stroke-width="2" stroke-linecap="round"/>${dots}`);
 }
+
+/* --- SÉANCE : profil altimétrique + fréquence cardiaque -------------------- */
+function sessionProfile(st, opts={}){
+  const W=880,H=230,M={l:40,r:44,t:16,b:24};
+  if(!st) return empty('Pas de flux enregistré','Cette sortie a été saisie à la main ou importée sans détail seconde par seconde.');
+  const useDist = st.d && st.d.some(v=>v!=null);
+  const X = useDist? st.d.map(v=> v==null?null:v/1000) : st.t.map(v=>v/60);
+  const maxX = Math.max(...X.filter(v=>v!=null));
+  const alt = st.alt, hasAlt = alt && alt.some(v=>v!=null);
+  const aMin = hasAlt? Math.min(...alt.filter(v=>v!=null)) : 0;
+  const aMax = hasAlt? Math.max(...alt.filter(v=>v!=null)) : 1;
+  const pad = Math.max(8,(aMax-aMin)*0.25);
+  const x=v=>M.l+v/maxX*(W-M.l-M.r);
+  const yA=v=>H-M.b-((v-(aMin-pad))/((aMax+pad)-(aMin-pad)))*(H-M.t-M.b);
+  const hr=st.hr, hasHr = hr && hr.some(v=>v);
+  const hMin = hasHr? Math.min(...hr.filter(v=>v)) : 0, hMax = hasHr? Math.max(...hr.filter(v=>v)) : 1;
+  const yH=v=>H-M.b-((v-(hMin-6))/((hMax+6)-(hMin-6)))*(H-M.t-M.b);
+  const pairs=(arr,yf)=>{ const o=[]; for(let i=0;i<arr.length;i++){ if(arr[i]==null||X[i]==null) continue; o.push([x(X[i]), yf(arr[i])]); } return o; };
+  const ap=pairs(alt,yA), hp=pairs(hr,yH);
+  let g='';
+  for(let k=0;k<=3;k++){ const v=(aMin-pad)+((aMax+pad)-(aMin-pad))*k/3;
+    g+=`<line x1="${M.l}" y1="${yA(v)}" x2="${W-M.r}" y2="${yA(v)}" class="gridline"/><text x="${M.l-8}" y="${yA(v)+3.5}" text-anchor="end" font-size="10.5">${Math.round(v)}</text>`; }
+  const step = maxX>30? 5 : (maxX>12? 2:1);
+  let xl=''; for(let k=step;k<maxX;k+=step) xl+=`<text x="${x(k)}" y="${H-6}" text-anchor="middle" font-size="10.5">${k}</text>`;
+  return svg(W,H,`
+    <defs><linearGradient id="gAlt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${C.acc}" stop-opacity=".22"/><stop offset="100%" stop-color="${C.acc}" stop-opacity=".02"/></linearGradient></defs>
+    ${g}${xl}
+    ${ap.length? `<path d="${P_(ap)} L ${ap[ap.length-1][0]} ${H-M.b} L ${ap[0][0]} ${H-M.b} Z" fill="url(#gAlt)"/>
+      <path d="${P_(ap)}" fill="none" stroke="${C.acc}" stroke-width="1.5"/>`:''}
+    ${hp.length? `<path d="${P_(hp)}" fill="none" stroke="${C.red}" stroke-width="1.4" opacity=".8"/>
+      <text x="${W-M.r+7}" y="${yH(hMax)+4}" font-size="10.5" fill="${C.red}">${Math.round(hMax)}</text>
+      <text x="${W-M.r+7}" y="${yH(hMin)+4}" font-size="10.5" fill="${C.red}">${Math.round(hMin)}</text>`:''}
+    <text x="${M.l}" y="${H-6}" font-size="10.5">${useDist?'km':'min'}</text>`);
+}
+
+/* --- SÉANCE : tracé GPS --------------------------------------------------- */
+function trackMap(st){
+  if(!st || !st.lat || !st.lat.some(v=>v!=null)) return '';
+  const pts=[]; for(let i=0;i<st.lat.length;i++) if(st.lat[i]!=null && st.lon[i]!=null) pts.push([st.lon[i], st.lat[i]]);
+  if(pts.length<5) return '';
+  const W=320,H=220,M=18;
+  const xs=pts.map(p=>p[0]), ys=pts.map(p=>p[1]);
+  const x0=Math.min(...xs), x1=Math.max(...xs), y0=Math.min(...ys), y1=Math.max(...ys);
+  const midLat=(y0+y1)/2, kx=Math.cos(midLat*Math.PI/180);
+  const dx=(x1-x0)*kx || 1e-6, dy=(y1-y0) || 1e-6;
+  const s=Math.min((W-2*M)/dx,(H-2*M)/dy);
+  const ox=(W-dx*s)/2, oy=(H-dy*s)/2;
+  const P=pts.map(p=>[ox+(p[0]-x0)*kx*s, H-(oy+(p[1]-y0)*s)]);
+  return svg(W,H,`<path d="${P_(P)}" fill="none" stroke="${C.acc}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" opacity=".9"/>
+    <circle cx="${round(P[0][0],1)}" cy="${round(P[0][1],1)}" r="4" fill="#fff" stroke="${C.acc}" stroke-width="2"/>
+    <circle cx="${round(P[P.length-1][0],1)}" cy="${round(P[P.length-1][1],1)}" r="4" fill="${C.acc}" stroke="#fff" stroke-width="2"/>`);
+}
+
+/* --- SÉANCE : splits ------------------------------------------------------ */
+function splitBars(splits){
+  if(!splits || !splits.length) return '';
+  const fastest=Math.min(...splits.map(s=>s.pace)), slowest=Math.max(...splits.map(s=>s.pace));
+  return `<div class="tw"><table><thead><tr><th>Km</th><th class="num">Temps</th><th class="num">Allure</th>
+    <th style="width:34%"></th><th class="num">GAP</th><th class="num">D+</th><th class="num">D−</th><th class="num">FC</th></tr></thead><tbody>
+    ${splits.map((s,i)=>{
+      const w = slowest>fastest? 18+82*(slowest-s.pace)/(slowest-fastest) : 100;
+      return `<tr><td>${i+1}${s.dist<0.9?` <span class="sc">(${round(s.dist,2)} km)</span>`:''}</td>
+        <td class="num">${hmsFull(s.t)}</td><td class="num">${paceStr(s.pace)}</td>
+        <td><div class="tr" style="height:6px;background:var(--tint);border-radius:980px;overflow:hidden"><i style="display:block;height:100%;width:${round(w,1)}%;background:${s.pace<=fastest*1.02?C.acc:C.blue};opacity:.85;border-radius:980px"></i></div></td>
+        <td class="num" style="color:var(--mute)">${paceStr(s.gap)}</td>
+        <td class="num" style="color:var(--mute)">${s.dp}</td><td class="num" style="color:var(--mute)">${s.dm}</td>
+        <td class="num">${s.hr||'—'}</td></tr>`;
+    }).join('')}</tbody></table></div>`;
+}
+
+/* --- anneau de répartition par zone --------------------------------------- */
+function zoneDonut(zt){
+  const total=zt.reduce((a,b)=>a+b,0);
+  if(!total) return '';
+  const W=190,H=190,cx=95,cy=95,r=68,sw=20;
+  let a0=-Math.PI/2, segs='';
+  zt.forEach((v,i)=>{
+    if(v<=0) return;
+    const a1=a0+v/total*2*Math.PI;
+    const large=(a1-a0)>Math.PI?1:0;
+    const p0=[cx+Math.cos(a0)*r, cy+Math.sin(a0)*r], p1=[cx+Math.cos(a1)*r, cy+Math.sin(a1)*r];
+    segs+=`<path d="M ${round(p0[0],1)} ${round(p0[1],1)} A ${r} ${r} 0 ${large} 1 ${round(p1[0],1)} ${round(p1[1],1)}"
+      fill="none" stroke="${C.z[i]}" stroke-width="${sw}" stroke-linecap="butt"><title>Z${i+1} — ${hms(v)}</title></path>`;
+    a0=a1;
+  });
+  const dom=zt.indexOf(Math.max(...zt));
+  return svg(W,H,`${segs}
+    <text x="${cx}" y="${cy-2}" text-anchor="middle" font-size="24" font-weight="600" fill="${C.ink}">Z${dom+1}</text>
+    <text x="${cx}" y="${cy+16}" text-anchor="middle" font-size="11" fill="${C.mute}">${Math.round(zt[dom]/total*100)} % du temps</text>`);
+}
+
+function zoneBar(zt){
+  const total=zt.reduce((a,b)=>a+b,0);
+  if(!total) return empty('Pas de mesure d\'intensité','Importe un fichier FIT ou renseigne la FC moyenne de tes sorties.');
+  const zs=zones();
+  return `<div class="zbar">${zt.map((s,i)=>`<i style="width:${s/total*100}%;background:${C.z[i]}" title="Z${i+1} ${hms(s)}"></i>`).join('')}</div>
+    <div class="legend">${zt.map((s,i)=>`<span><i style="background:${C.z[i]}"></i>Z${i+1} · ${round(s/total*100,1)} % · ${hms(s)}</span>`).join('')}</div>`;
+}
+function empty(title, sub){ return `<div class="empty"><b>${title}</b>${sub||''}</div>`; }
 
 /* ==========================================================================
-   10. VUES
+   12. VUES
    ========================================================================== */
-const NAV = [
-  {k:'dash', ix:'01', nom:'Tableau de bord', sub:'État de forme, charge, priorités du moment', grp:'Suivi'},
-  {k:'acts', ix:'02', nom:'Sorties', sub:'Historique, nutrition et analyse séance par séance', grp:''},
-  {k:'load', ix:'03', nom:'Charge & forme', sub:'Condition, fatigue, fraîcheur — CTL / ATL / TSB', grp:''},
-  {k:'zones', ix:'04', nom:'Zones', sub:'Allures et fréquences cardiaques calculées depuis ton profil', grp:'Analyse'},
-  {k:'profil', ix:'05', nom:'Forces & faiblesses', sub:'Profil de coureur et plan d\'action', grp:''},
-  {k:'nutri', ix:'06', nom:'Nutrition', sub:'Glucides, hydratation et sodium à l\'heure', grp:''},
-  {k:'proj', ix:'07', nom:'Projections', sub:'Chronos estimés sur route et sur trail', grp:''},
-  {k:'params', ix:'08', nom:'Paramètres', sub:'Profil physiologique, produits, modèles de calcul', grp:'Réglages'},
-  {k:'strava', ix:'09', nom:'Connexion Strava', sub:'Importer automatiquement tes activités', grp:''}
+const IC = {
+  dash:'<path d="M3 12l9-8 9 8M5 10v9h14v-9"/>', acts:'<path d="M4 6h16M4 12h16M4 18h10"/>',
+  load:'<path d="M3 17l5-6 4 4 5-8 4 5"/>', zones:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/>',
+  profil:'<path d="M12 3l8 5v8l-8 5-8-5V8z"/>', nutri:'<path d="M12 3c3 4 5 6 5 9a5 5 0 01-10 0c0-3 2-5 5-9z"/>',
+  proj:'<path d="M4 19l6-7 4 3 6-9"/><path d="M20 6v5h-5"/>', params:'<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>',
+  strava:'<path d="M8 14l4-8 4 8h-2.5L12 11l-1.5 3z"/><path d="M12 21l-3-6h6z"/>'
+};
+const NAV=[
+  {k:'dash',nom:'Tableau de bord',sub:'Vue d\'ensemble de ta condition',grp:'Suivi'},
+  {k:'acts',nom:'Sorties',sub:'Historique et analyse par séance',grp:''},
+  {k:'load',nom:'Charge & forme',sub:'Condition, fatigue, fraîcheur',grp:''},
+  {k:'zones',nom:'Zones',sub:'Allures et fréquences cardiaques',grp:'Analyse'},
+  {k:'profil',nom:'Forces & faiblesses',sub:'Profil de coureur et plan d\'action',grp:''},
+  {k:'nutri',nom:'Nutrition',sub:'Glucides, hydratation, sodium',grp:''},
+  {k:'proj',nom:'Projections',sub:'Chronos estimés sur route et trail',grp:''},
+  {k:'params',nom:'Paramètres',sub:'Profil, produits, modèles',grp:'Réglages'},
+  {k:'strava',nom:'Strava',sub:'Import automatique des activités',grp:''}
 ];
+const PERIODS=[{v:7,l:'7 j'},{v:28,l:'28 j'},{v:90,l:'3 mois'},{v:365,l:'1 an'},{v:0,l:'Tout'}];
 
 function renderNav(){
-  let h='', grp='';
+  let h='',grp='';
   NAV.forEach(n=>{
-    if(n.grp && n.grp!==grp){ grp=n.grp; h+=`<div class="sep">${n.grp}</div>`; }
-    h+=`<button data-v="${n.k}" class="${VIEW===n.k?'on':''}"><span class="ix">${n.ix}</span>${n.nom}</button>`;
+    if(n.grp&&n.grp!==grp){grp=n.grp;h+=`<div class="sep">${n.grp}</div>`;}
+    h+=`<button data-v="${n.k}" class="${VIEW===n.k?'on':''}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${IC[n.k]}</svg>${n.nom}</button>`;
   });
   $('#nav').innerHTML=h;
-  $('#nav').querySelectorAll('button').forEach(b=> b.onclick=()=>{ VIEW=b.dataset.v; render(); });
+  $('#nav').querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.v));
 }
-
-function kpi(lab,val,unit,foot,cls=''){
-  return `<div class="card kpi ${cls}"><div class="lab">${lab}</div>
-    <div class="val">${val}${unit?`<small>${unit}</small>`:''}</div>
-    <div class="foot">${foot||''}</div></div>`;
+function go(v, arg){ VIEW=v; SEL=arg??null; render(); }
+function kpi(lab,val,unit,foot){
+  return `<div class="card kpi"><div class="lab">${lab}</div><div class="val">${val}${unit?`<small>${unit}</small>`:''}</div><div class="foot">${foot||''}</div></div>`;
 }
+function periodLabel(p){ return p? (PERIODS.find(x=>x.v===p)||{}).l : 'tout l\'historique'; }
 
+/* ---------------------------------------------------------------- dashboard */
 function viewDash(A,P,series,recs){
-  const last = series[series.length-1]||{ctl:0,atl:0,tsb:0};
-  const w1 = inWindow(A,7), w4=inWindow(A,28);
-  const ratio = acwr(A);
-  const tsbTag = last.tsb>10?'ok':(last.tsb<-25?'bad':(last.tsb<-10?'warn':'info'));
-  const tsbTxt = last.tsb>15?'frais':(last.tsb>5?'affûté':(last.tsb>-10?'équilibré':(last.tsb>-25?'chargé':'surchargé')));
+  const per=S.ui.period;
+  const W=per? inWindow(A,per) : A;
+  const last=series[series.length-1]||{ctl:0,atl:0,tsb:0};
+  const ratio=acwr(A);
+  const zt=[0,0,0,0,0]; W.forEach(a=>a.zdist.forEach((s,i)=>zt[i]+=s));
+  const tot=zt.reduce((a,b)=>a+b,0);
+  const easy=tot?(zt[0]+zt[1])/tot*100:0;
+  const tsbTxt=last.tsb>15?'frais':(last.tsb>5?'affûté':(last.tsb>-10?'équilibré':(last.tsb>-25?'chargé':'surchargé')));
+  const tsbCls=last.tsb>5?'ok':(last.tsb<-25?'bad':(last.tsb<-10?'warn':'info'));
   return `
   <div class="grid g4">
-    ${kpi('Condition (CTL)', round(last.ctl,0), '', `moyenne exponentielle sur ${S.model.ctlDays} j de la charge`)}
-    ${kpi('Fatigue (ATL)', round(last.atl,0), '', `${S.model.atlDays} derniers jours`)}
-    ${kpi('Forme (TSB)', (last.tsb>0?'+':'')+round(last.tsb,0), '', `<span class="tag ${tsbTag}">${tsbTxt}</span>`)}
-    ${kpi('Charge aiguë / chronique', ratio?round(ratio,2):'—', '', ratio? `<span class="tag ${ratio>1.5?'bad':(ratio<0.8?'warn':'ok')}">${ratio>1.5?'risque élevé':(ratio<0.8?'sous-charge':'zone sûre 0,8-1,3')}</span>`:'4 semaines nécessaires')}
+    ${kpi('Distance', round(sum(W,a=>a.dist),W.length&&sum(W,a=>a.dist)<100?1:0),'km',`${W.length} sorties sur ${periodLabel(per)}`)}
+    ${kpi('Dénivelé positif', Math.round(sum(W,a=>a.dp)).toLocaleString('fr-FR'),'m',`${round(sum(W,a=>a.ke),0)} km-effort`)}
+    ${kpi('Temps', hms(sum(W,a=>a.moving)),'',`${Math.round(sum(W,a=>a.kcal)).toLocaleString('fr-FR')} kcal estimées`)}
+    ${kpi('Forme', (last.tsb>0?'+':'')+round(last.tsb,0),'',`<span class="tag ${tsbCls}">${tsbTxt}</span> · condition ${round(last.ctl,0)}`)}
   </div>
-  <div class="grid g4" style="margin-top:14px">
-    ${kpi('7 jours', round(sum(w1,a=>a.dist),1),'km', `${Math.round(sum(w1,a=>a.dp))} m D+ · ${hms(sum(w1,a=>a.moving))} · ${w1.length} sorties`)}
-    ${kpi('28 jours', round(sum(w4,a=>a.dist),0),'km', `${Math.round(sum(w4,a=>a.dp))} m D+ · ${round(sum(w4,a=>a.ke),0)} km-effort`)}
-    ${kpi('VMA', round(S.profile.vma,1),'km/h', `VO2max estimée ≈ ${round(S.profile.vma*3.5,1)} mL/kg/min`)}
-    ${kpi('VDOT actuel', P.vdot?round(P.vdot,1):'—','', P.bestFrom? `d'après « ${esc(P.bestFrom.name)} »` : 'estimé depuis la VMA')}
-  </div>
-
-  <div class="grid g-2-1" style="margin-top:14px">
+  <div class="grid g-2-1" style="margin-top:16px">
     <div class="card">
-      <h3>Ligne de crête</h3>
-      <p class="hint">Condition (vert), fatigue (orange pointillé), forme (violet). La crête monte quand tu construis, se creuse quand tu récupères.</p>
-      ${ridgeChart(series)}
+      <div style="display:flex;align-items:baseline;gap:10px"><h3>Condition et fatigue</h3>
+        <span class="sc">CTL ${round(last.ctl,0)} · ATL ${round(last.atl,0)}</span></div>
+      <p class="hint">La courbe pleine est ta condition (charge moyenne sur ${S.model.ctlDays} jours), la pointillée ta fatigue (${S.model.atlDays} jours), la violette l'écart entre les deux.</p>
+      ${fitnessChart(series, per? Math.max(per,60):400)}
+      <div class="legend"><span><i style="background:${C.acc}"></i>Condition</span><span><i style="background:${C.amber}"></i>Fatigue</span><span><i style="background:${C.violet}"></i>Forme</span></div>
     </div>
     <div class="card">
-      <h3>Priorités</h3>
-      <p class="hint">Classées par urgence, recalculées à chaque sortie.</p>
-      ${recs.length? recs.slice(0,4).map(r=>`<div class="rec p${r.p}"><div class="pri"></div><div><h4>${r.t}</h4><p>${r.d}</p><div class="why">${r.w}</div></div></div>`).join('')
-        : '<div class="empty"><b>Rien à signaler</b>Tout est cohérent.</div>'}
-      <button class="btn sm gho" style="margin-top:12px" data-go="profil">Voir l'analyse complète</button>
+      <h3>À faire maintenant</h3><p class="hint">Recalculé à chaque sortie.</p>
+      ${recs.slice(0,3).map(r=>`<div class="rec p${r.p}"><div class="ic">${r.p===1?'!':(r.p===2?'▲':'✓')}</div>
+        <div><h4>${r.t}</h4><p>${r.d}</p><div class="why">${r.w}</div></div></div>`).join('')||empty('Rien à signaler','')}
+      <button class="btn gho" style="margin-top:10px;padding-left:0" data-go="profil">Analyse complète →</button>
     </div>
   </div>
-
-  <div class="grid g2" style="margin-top:14px">
-    <div class="card"><h3>Volume hebdomadaire</h3>
-      <p class="hint">Barres : kilomètres. Ligne orange : dénivelé positif (axe de droite).</p>${weeklyBars(A)}</div>
-    <div class="card"><h3>Répartition de l'intensité — 28 jours</h3>
-      <p class="hint">Cible polarisée : ≈ 80 % du temps en Z1-Z2, ≈ 20 % en Z4-Z5, peu de Z3.</p>
-      ${zoneStack(P.zt, P.ztot)}
-      ${P.ztot? `<p class="sc" style="margin-top:12px">Facile (Z1+Z2) : <b style="color:${P.easyShare>=75?'var(--ok)':'var(--warn)'}">${round(P.easyShare,1)} %</b> — ${P.easyShare>=75?'distribution cohérente':'trop de temps en zone intermédiaire'}</p>`:''}
-    </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Volume par semaine</h3><p class="hint">Barres : distance. Ligne : dénivelé positif.</p>
+      ${volumeChart(A, per? clamp(Math.ceil(per/7),4,52):26)}</div>
+    <div class="card"><h3>Répartition de l'intensité</h3>
+      <p class="hint">Sur ${periodLabel(per)}. Une distribution polarisée vise environ 80 % du temps en Z1-Z2.</p>
+      ${zoneBar(zt)}
+      ${tot?`<p class="sc" style="margin-top:14px">Facile : <b style="color:${easy>=75?'var(--ok)':'var(--warn)'}">${round(easy,1)} %</b> — ${easy>=75?'cohérent avec le modèle polarisé':'trop de temps en zone intermédiaire'}</p>`:''}</div>
   </div>
-
-  <div class="card" style="margin-top:14px"><h3>Dernières sorties</h3>
-    ${A.length? tableActs(A.slice(0,6), false) : `<div class="empty"><b>Carnet vide</b>Connecte Strava, importe un CSV ou ajoute une sortie à la main.</div>`}
-  </div>`;
+  <div class="card" style="margin-top:16px"><h3>Dernières sorties</h3><p class="hint">Clique une ligne pour ouvrir l'analyse détaillée.</p>
+    ${W.length? actTable(W.slice(0,8)) : empty('Aucune sortie sur cette période','Change de période, importe un fichier FIT ou synchronise Strava.')}</div>`;
 }
 
-function tableActs(A, full=true){
-  return `<div class="tw"><table><thead><tr>
-    <th>Date</th><th>Sortie</th><th class="num">Dist.</th><th class="num">D+</th><th class="num">Temps</th>
-    <th class="num">Allure</th><th class="num">GAP</th><th class="num">FC</th><th class="num">Charge</th>
-    ${full?'<th class="num">Glucides</th><th></th>':''}
-  </tr></thead><tbody>
-  ${A.map(a=>`<tr>
-    <td class="mono" style="color:var(--mute2);font-size:12px">${frDate(a.date)}</td>
-    <td>${esc(a.name||'Sortie')} ${a.source==='strava'?'<span class="tag info">strava</span>':''}</td>
-    <td class="num">${round(a.dist,1)}</td>
-    <td class="num">${Math.round(a.dp)}</td>
-    <td class="num">${hmsFull(a.moving)}</td>
-    <td class="num">${paceStr(a.pace)}</td>
-    <td class="num" style="color:var(--ice)">${paceStr(a.gapPace)}</td>
-    <td class="num">${a.hrAvg?Math.round(a.hrAvg):'—'}</td>
-    <td class="num">${Math.round(a.rtss)}</td>
-    ${full?`<td class="num" style="color:${a.hours>1.5? (a.carbH>=a.carbTarget*0.85?'var(--ok)':(a.carbH>0?'var(--warn)':'var(--mute2)')) :'var(--mute2)'}">${a.carbs?round(a.carbH,0)+' g/h':'—'}</td>
-    <td class="num"><button class="btn sm gho" data-edit="${a.id}">Modifier</button></td>`:''}
-  </tr>`).join('')}
-  </tbody></table></div>`;
+/* ----------------------------------------------------------------- sorties */
+function actTable(A){
+  return `<div class="tw"><table><thead><tr><th>Date</th><th>Sortie</th><th class="num">Dist.</th><th class="num">D+</th>
+    <th class="num">Temps</th><th class="num">Allure</th><th class="num">GAP</th><th class="num">FC</th><th class="num">Charge</th><th class="num">Glucides</th></tr></thead><tbody>
+  ${A.map(a=>`<tr class="clk" data-open="${a.id}">
+    <td style="color:var(--mute);white-space:nowrap">${frDate(a.date)}</td>
+    <td>${esc(a.name||'Sortie')} ${a.stream?'<span class="tag info">détaillée</span>':''}</td>
+    <td class="num">${round(a.dist,1)}</td><td class="num">${Math.round(a.dp)}</td>
+    <td class="num">${hmsFull(a.moving)}</td><td class="num">${paceStr(a.pace)}</td>
+    <td class="num" style="color:var(--mute)">${paceStr(a.gapPace)}</td>
+    <td class="num">${a.hrAvg?Math.round(a.hrAvg):'—'}</td><td class="num">${Math.round(a.rtss)}</td>
+    <td class="num" style="color:${a.hours>1.5?(a.carbH>=a.carbTarget*.85?'var(--ok)':(a.carbH>0?'var(--warn)':'var(--mute2)')):'var(--mute2)'}">${a.carbs?round(a.carbH,0)+' g/h':'—'}</td>
+  </tr>`).join('')}</tbody></table></div>`;
 }
-
 function viewActs(A){
-  return `<div class="row" style="margin-bottom:14px">
-      <div style="flex:2"><label class="f"><span>Rechercher</span><input id="fSearch" placeholder="nom de sortie…"></label></div>
-      <div><label class="f"><span>Période</span><select id="fPeriod">
-        <option value="0">Tout</option><option value="7">7 jours</option><option value="28" selected>28 jours</option>
-        <option value="84">3 mois</option><option value="365">12 mois</option></select></label></div>
-      <div style="flex:0 0 auto"><button class="btn" id="btnCsv">Importer un CSV</button></div>
-      <div style="flex:0 0 auto"><button class="btn" id="btnExport">Exporter</button></div>
+  const per=S.ui.actPeriod??0;
+  const q=(window.__q||'').toLowerCase();
+  const F=A.filter(a=>(!per||daysBetween(a.date,Date.now())<per)&&(!q||(a.name||'').toLowerCase().includes(q)));
+  return `<div class="row" style="margin-bottom:16px;align-items:center">
+      <div style="flex:2;max-width:320px"><input id="fSearch" placeholder="Rechercher une sortie" value="${esc(window.__q||'')}"></div>
+      <div style="flex:0 0 auto" class="seg" id="segAct">${PERIODS.map(p=>`<button data-p="${p.v}" class="${per===p.v?'on':''}">${p.l}</button>`).join('')}</div>
+      <div class="spacer"></div>
+      <div style="flex:0 0 auto"><button class="btn sm" id="btnExport">Exporter</button></div>
     </div>
-    <div class="card" id="actsTable">${A.length? tableActs(A): `<div class="empty"><b>Aucune sortie sur la période</b>Change de filtre, synchronise Strava ou ajoute une sortie.</div>`}</div>`;
+    <div class="card">${F.length?actTable(F):empty('Aucune sortie','Ajuste la recherche ou importe un fichier FIT.')}</div>`;
 }
 
+/* -------------------------------------------------- analyse d'une séance */
+function viewSession(A){
+  const a=A.find(x=>x.id===SEL);
+  if(!a) return empty('Sortie introuvable','Elle a peut-être été supprimée.');
+  const an=a.an||{};
+  const st=STREAM;
+  const zs=zones();
+  const d=new Date(a.date);
+  const eff=an.decoupling;
+  const gd=an.gradeDist;
+  const carbT=a.carbTarget;
+  return `
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap">
+    <button class="btn sm" data-go="acts">← Sorties</button>
+    <div style="flex:1;min-width:200px">
+      <h2 style="font-size:21px">${esc(a.name)}</h2>
+      <div class="sc">${d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} à ${d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}${a.device?` · ${esc(a.device)}`:''}${a.sub?` · ${a.sub}`:''}</div>
+    </div>
+    <button class="btn sm" data-edit="${a.id}">Modifier</button>
+  </div>
+  <div class="grid g4">
+    ${kpi('Distance',round(a.dist,2),'km',`${round(a.ke,1)} km-effort`)}
+    ${kpi('Dénivelé',`+${Math.round(a.dp)}`,'m',`−${Math.round(a.dm)} m · ${Math.round(a.dp/Math.max(a.dist,.1))} m/km`)}
+    ${kpi('Temps',hmsFull(a.moving),'',`${hmsFull(a.elapsed)} au total`)}
+    ${kpi('Allure',paceStr(a.pace),'/km',`GAP ${paceStr(a.gapPace)}/km`)}
+  </div>
+  <div class="grid g4" style="margin-top:16px">
+    ${kpi('FC moyenne',a.hrAvg||'—','bpm',a.hrMax?`max ${Math.round(a.hrMax)} · ${Math.round((a.hrAvg/S.profile.hrMax)*100)} % FCmax`:'')}
+    ${kpi('Charge',Math.round(a.rtss),'pts',`intensité ${round(a.IF,2)} · TRIMP ${Math.round(a.trimp)}`)}
+    ${kpi('Énergie',Math.round(a.kcal).toLocaleString('fr-FR'),'kcal',a.kcalDevice?`${a.kcalDevice} selon la montre`:'estimation Minetti')}
+    ${kpi('VAM',an.climbs?Math.round(an.climbs.vam):'—','m/h',an.climbs?`sur ${hms(an.climbs.t)} de montée`:'pas de montée marquée')}
+  </div>
+
+  <div class="grid ${st&&trackMap(st)?'g-2-1':''}" style="margin-top:16px">
+    <div class="card"><h3>Profil et fréquence cardiaque</h3>
+      <p class="hint">Altitude en vert, fréquence cardiaque en rouge.</p>
+      ${sessionProfile(st)}</div>
+    ${st&&trackMap(st)?`<div class="card"><h3>Tracé</h3><p class="hint">Départ en blanc, arrivée en plein.</p>${trackMap(st)}</div>`:''}
+  </div>
+
+  <div class="grid g-1-2" style="margin-top:16px">
+    <div class="card"><h3>Temps par zone</h3><p class="hint">Mesuré seconde par seconde.</p>
+      ${a.zoneTime&&a.zoneTime.some(v=>v)?`<div style="display:flex;justify-content:center">${zoneDonut(a.zoneTime)}</div>
+        <div style="margin-top:14px">${a.zoneTime.map((v,i)=>`<div class="bar-line"><div class="nm" style="width:auto;flex:0 0 128px">Z${i+1} ${zs[i].nom.split(' ')[0]}</div>
+          <div class="tr"><i style="width:${v/Math.max(...a.zoneTime)*100}%;background:${C.z[i]}"></i></div><div class="vl">${hms(v)}</div></div>`).join('')}</div>`
+        : empty('Pas de fréquence cardiaque','')}
+    </div>
+    <div class="card"><h3>Temps au kilomètre</h3>
+      <p class="hint">GAP = allure ramenée au plat selon le coût de la pente. Sur une montée, elle est plus rapide que l'allure réelle ; en descente, plus lente.</p>
+      ${an.splits&&an.splits.length? splitBars(an.splits) : empty('Pas de découpage disponible','Cette sortie n\'a pas de flux de distance.')}
+    </div>
+  </div>
+
+  <div class="grid g3" style="margin-top:16px">
+    <div class="card"><h3>Meilleurs efforts</h3><p class="hint">Fenêtres glissantes sur la sortie.</p>
+      ${an.best&&an.best.length?`<div class="tw"><table><tbody>${an.best.map(b=>`<tr><td>${b.d<1?b.d*1000+' m':b.d+' km'}</td>
+        <td class="num" style="font-weight:600">${hmsFull(b.t)}</td><td class="num" style="color:var(--mute)">${paceStr(b.pace)}/km</td>
+        <td class="num sc">au km ${round(b.at,1)}</td></tr>`).join('')}</tbody></table></div>`:empty('—','')}
+    </div>
+    <div class="card"><h3>Terrain</h3><p class="hint">Répartition du temps selon la pente.</p>
+      ${gd?['down','flat','up','steep'].map(k=>{
+        const nom={down:'Descente (< −5 %)',flat:'Plat (±5 %)',up:'Montée (5-15 %)',steep:'Raide (> 15 %)'}[k];
+        const t=gd.t[k], tt=Object.values(gd.t).reduce((a,b)=>a+b,0)||1;
+        return `<div class="bar-line"><div class="nm">${nom}</div><div class="tr"><i style="width:${t/tt*100}%"></i></div><div class="vl">${hms(t)}</div></div>`;
+      }).join(''):empty('Pas de données d\'altitude','')}
+      ${a.cadAvg?`<p class="sc" style="margin-top:12px">Cadence moyenne ${a.cadAvg} pas/min${a.pwAvg?` · puissance ${a.pwAvg} W`:''}${a.tempAvg?` · ${a.tempAvg} °C`:''}</p>`:''}
+    </div>
+    <div class="card"><h3>Endurance aérobie</h3><p class="hint">Découplage : perte de rendement entre la première et la seconde moitié, mesurée sur les portions plates uniquement.</p>
+      ${eff!=null?`<div class="val" style="font-family:var(--fd);font-size:32px;font-weight:600;letter-spacing:-.035em">${eff>0?'+':''}${round(eff,1)} %</div>
+        <span class="tag ${eff<5?'ok':(eff<10?'warn':'bad')}">${eff<5?'très bonne durabilité':(eff<10?'durabilité correcte':'fatigue marquée')}</span>
+        <p class="sc" style="margin-top:10px">Référence : sous 5 %, l'allure tient à fréquence cardiaque constante. Au-delà de 10 %, la sortie était trop longue ou trop rapide pour ton niveau d'endurance actuel — ou tu as manqué de carburant.</p>`
+        :empty('Non calculable','Il faut de la FC et de la distance sur une portion plate.')}
+      ${an.hrDrift!=null?`<p class="sc">Dérive cardiaque brute : ${an.hrDrift>0?'+':''}${round(an.hrDrift,1)} bpm entre les deux moitiés.</p>`:''}
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px"><h3>Nutrition de la séance</h3>
+    <p class="hint">Ce que tu as consommé pendant l'effort, converti avec tes produits.</p>
+    ${a.carbs>0?`<div class="grid g4" style="gap:12px">
+        ${kpiSmall('Glucides',round(a.carbH,0)+' g/h', `${Math.round(a.carbs)} g au total · cible ${carbT} g/h`, a.carbH>=carbT*.85?'ok':(a.carbH>=carbT*.5?'warn':'bad'))}
+        ${kpiSmall('Boisson',Math.round(a.fluidH)+' mL/h', `${round(a.fluid/1000,2)} L au total · cible ${S.nutrition.targetFluid} mL/h`, a.fluidH>=S.nutrition.targetFluid*.7?'ok':'warn')}
+        ${kpiSmall('Sodium',Math.round(a.sodiumH)+' mg/h', `${Math.round(a.sodium)} mg au total`, a.sodiumH>=S.nutrition.targetSodium*.7?'ok':'warn')}
+        ${kpiSmall('Déficit glucidique',Math.round(a.kcalDeficit/4)+' g', 'part glucidique de la dépense non couverte', a.kcalDeficit<200?'ok':'warn')}
+      </div>
+      <p class="sc" style="margin-top:14px">Détail : ${round(num(a.nutr.waterL),2)} L d'eau, ${round(num(a.nutr.drinkL),2)} L de boisson, ${num(a.nutr.gels)} gel(s), ${num(a.nutr.bars)} barre(s).</p>`
+    : `<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <div style="flex:1;min-width:220px" class="sc">Rien de saisi pour cette sortie. ${a.hours>1.5?'Sur une sortie de plus de 1 h 30, c\'est la donnée la plus utile à renseigner.':''}</div>
+        <button class="btn pri sm" data-edit="${a.id}">Saisir la nutrition</button></div>`}
+  </div>
+  ${a.notes?`<div class="card" style="margin-top:16px"><h3>Notes</h3><p style="margin:0;font-size:13.5px;color:var(--ink2)">${esc(a.notes)}</p></div>`:''}`;
+}
+function kpiSmall(lab,val,foot,cls){
+  return `<div style="padding:12px 14px;background:var(--surface2);border-radius:10px">
+    <div style="font-size:12px;color:var(--mute)">${lab}</div>
+    <div style="font-family:var(--fd);font-size:21px;font-weight:600;letter-spacing:-.03em;margin:3px 0" class="${cls==='bad'?'':''}">${val}</div>
+    <div class="sc">${foot}</div></div>`;
+}
+
+/* ------------------------------------------------------------ autres vues */
 function viewLoad(A,series){
   const last=series[series.length-1]||{ctl:0,atl:0,tsb:0};
-  const w=[7,28,84].map(d=>({d, km:sum(inWindow(A,d),a=>a.dist), dp:sum(inWindow(A,d),a=>a.dp),
-    t:sum(inWindow(A,d),a=>a.moving), tss:sum(inWindow(A,d),a=>a.rtss), n:inWindow(A,d).length}));
-  const ramp = series.length>7 ? last.ctl - series[series.length-8].ctl : 0;
-  return `
-  <div class="grid g4">
-    ${kpi('Condition','' +round(last.ctl,0),'','charge chronique — le « moteur »')}
-    ${kpi('Progression 7 j', (ramp>0?'+':'')+round(ramp,1),'CTL', ramp>7?'<span class="tag bad">montée trop rapide</span>':(ramp>3?'<span class="tag warn">montée soutenue</span>':'<span class="tag ok">progression maîtrisée</span>'))}
-    ${kpi('Charge 7 j', Math.round(w[0].tss),'pts', `${w[0].n} sorties · ${hms(w[0].t)}`)}
-    ${kpi('Charge 28 j', Math.round(w[1].tss),'pts', `${w[1].n} sorties · ${hms(w[1].t)}`)}
+  const ramp=series.length>7? last.ctl-series[series.length-8].ctl : 0;
+  const ratio=acwr(A);
+  const w=[7,28,84].map(d=>({d,a:inWindow(A,d)}));
+  return `<div class="grid g4">
+    ${kpi('Condition',round(last.ctl,0),'','charge chronique sur '+S.model.ctlDays+' j')}
+    ${kpi('Fatigue',round(last.atl,0),'',S.model.atlDays+' derniers jours')}
+    ${kpi('Progression 7 j',(ramp>0?'+':'')+round(ramp,1),'',ramp>7?'<span class="tag bad">montée trop rapide</span>':(ramp>3?'<span class="tag warn">soutenue</span>':'<span class="tag ok">maîtrisée</span>'))}
+    ${kpi('Aiguë / chronique',ratio?round(ratio,2):'—','',ratio?`<span class="tag ${ratio>1.5?'bad':(ratio<.8?'warn':'ok')}">${ratio>1.5?'risque élevé':(ratio<.8?'sous-charge':'zone sûre')}</span>`:'4 semaines nécessaires')}
   </div>
-  <div class="card" style="margin-top:14px"><h3>Condition · fatigue · forme</h3>
-    <p class="hint">Modèle de Banister : la charge quotidienne (rTSS) alimente deux moyennes exponentielles — ${S.model.ctlDays} j pour la condition, ${S.model.atlDays} j pour la fatigue. Leur écart donne la forme.</p>
-    ${ridgeChart(series)}
-    <div class="legend"><span><i style="background:#54A98C"></i>Condition (CTL)</span><span><i style="background:#E0A040"></i>Fatigue (ATL)</span><span><i style="background:#9A86D6"></i>Forme (TSB, échelle propre)</span></div>
-  </div>
-  <div class="grid g2" style="margin-top:14px">
-    <div class="card"><h3>Volume</h3><p class="hint">16 dernières semaines.</p>${weeklyBars(A)}</div>
-    <div class="card"><h3>Cumuls</h3>
+  <div class="card" style="margin-top:16px"><h3>Condition, fatigue, forme</h3>
+    <p class="hint">Modèle de Banister : chaque sortie alimente deux moyennes exponentielles. Leur écart, la forme, prédit ta fraîcheur du jour.</p>
+    ${fitnessChart(series,400)}
+    <div class="legend"><span><i style="background:${C.acc}"></i>Condition</span><span><i style="background:${C.amber}"></i>Fatigue</span><span><i style="background:${C.violet}"></i>Forme</span></div></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Volume par semaine</h3><p class="hint">26 dernières semaines.</p>${volumeChart(A,26)}</div>
+    <div class="card"><h3>Cumuls</h3><p class="hint">Sur trois fenêtres glissantes.</p>
       <div class="tw"><table><thead><tr><th>Fenêtre</th><th class="num">Sorties</th><th class="num">Km</th><th class="num">Km-effort</th><th class="num">D+</th><th class="num">Temps</th><th class="num">Charge</th></tr></thead><tbody>
-      ${w.map(x=>`<tr><td>${x.d} jours</td><td class="num">${x.n}</td><td class="num">${round(x.km,1)}</td>
-        <td class="num">${round(sum(inWindow(A,x.d),a=>a.ke),1)}</td>
-        <td class="num">${Math.round(x.dp)}</td><td class="num">${hms(x.t)}</td><td class="num">${Math.round(x.tss)}</td></tr>`).join('')}
+      ${w.map(x=>`<tr><td>${x.d} jours</td><td class="num">${x.a.length}</td><td class="num">${round(sum(x.a,a=>a.dist),1)}</td>
+        <td class="num">${round(sum(x.a,a=>a.ke),1)}</td><td class="num">${Math.round(sum(x.a,a=>a.dp)).toLocaleString('fr-FR')}</td>
+        <td class="num">${hms(sum(x.a,a=>a.moving))}</td><td class="num">${Math.round(sum(x.a,a=>a.rtss))}</td></tr>`).join('')}
       </tbody></table></div>
-      <p class="sc" style="margin-top:14px">Le <b>km-effort</b> = distance + D+/${S.model.kmEffortUp} + D−/${S.model.kmEffortDown}. Il permet de comparer une sortie plate et une sortie de montagne sur la même échelle.</p>
-    </div>
+      <p class="sc" style="margin-top:14px">Le km-effort ajoute 1 km par ${S.model.kmEffortUp} m de D+ et par ${S.model.kmEffortDown} m de D−.</p></div>
   </div>`;
 }
 
 function viewZones(A,P){
-  const zs=zones(), p=S.profile;
-  return `
-  <div class="card"><h3>Tes zones</h3>
-    <p class="hint">Calculées depuis FCmax ${p.hrMax}, FC repos ${p.hrRest} et VMA ${round(p.vma,1)} km/h. Modèle actif :
-      <b>${p.zoneModel==='hrr'?'% de la fréquence cardiaque de réserve (Karvonen)':(p.zoneModel==='hrmax'?'% de la FC maximale':'% de la VMA')}</b>.</p>
-    <div class="tw"><table><thead><tr><th></th><th>Zone</th><th class="num">FC</th><th class="num">% FCmax</th><th class="num">Allure plat</th><th class="num">% VMA</th><th>Ce que ça développe</th></tr></thead><tbody>
-    ${zs.map(z=>`<tr>
-      <td><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:var(${z.col})"></span></td>
-      <td><b>Z${z.z}</b> ${z.nom}</td>
-      <td class="num">${z.hr[0]}–${z.hr[1]}</td>
+  const zs=zones(),p=S.profile;
+  const zt=[0,0,0,0,0]; inWindow(A,28).forEach(a=>a.zdist.forEach((s,i)=>zt[i]+=s));
+  const tot=zt.reduce((a,b)=>a+b,0), easy=tot?(zt[0]+zt[1])/tot*100:0;
+  return `<div class="card"><h3>Tes zones</h3>
+    <p class="hint">Calculées depuis FCmax ${p.hrMax}, FC repos ${p.hrRest} et VMA ${round(p.vma,1)} km/h. Modèle : <b>${p.zoneModel==='hrr'?'% de FC de réserve (Karvonen)':(p.zoneModel==='hrmax'?'% de FCmax':'% de VMA')}</b>.</p>
+    <div class="tw"><table><thead><tr><th></th><th>Zone</th><th class="num">FC</th><th class="num">% FCmax</th><th class="num">Allure plat</th><th class="num">% VMA</th><th>Effet recherché</th></tr></thead><tbody>
+    ${zs.map(z=>`<tr><td style="width:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${C.z[z.z-1]}"></span></td>
+      <td><b>Z${z.z}</b> ${z.nom}</td><td class="num">${z.hr[0]}–${z.hr[1]}</td>
       <td class="num">${Math.round(z.hr[0]/p.hrMax*100)}–${Math.round(z.hr[1]/p.hrMax*100)} %</td>
       <td class="num">${paceStr(z.pace[1])}–${paceStr(z.pace[0])}</td>
       <td class="num">${Math.round(z.vma[0]*100)}–${Math.round(z.vma[1]*100)} %</td>
-      <td style="font-size:12px;color:var(--mute)">${z.but}</td></tr>`).join('')}
+      <td style="font-size:12.5px;color:var(--mute)">${z.but}</td></tr>`).join('')}
     </tbody></table></div>
-    <p class="sc" style="margin-top:12px">Seuil estimé : <b>${thresholdHR()} bpm</b> · allure au seuil <b>${paceStr(thresholdPace())}/km</b> (≈ 85,5 % VMA). Ces valeurs servent de référence au calcul de charge.</p>
-  </div>
-  <div class="grid g2" style="margin-top:14px">
-    <div class="card"><h3>Répartition — 28 jours</h3><p class="hint">Temps passé par zone.</p>${zoneStack(P.zt,P.ztot)}</div>
-    <div class="card"><h3>Modèle polarisé</h3>
-      <p class="hint">Seiler : les athlètes d'endurance les plus performants passent 75-85 % du temps sous le premier seuil.</p>
-      ${P.ztot? `
-      <div class="bar-line"><div class="nm">Facile (Z1-Z2)</div><div class="tr"><i style="width:${clamp(P.easyShare,0,100)}%"></i></div><div class="vl">${round(P.easyShare,0)} %</div></div>
-      <div class="bar-line"><div class="nm">Cible</div><div class="tr"><i style="width:80%;opacity:.35"></i></div><div class="vl">80 %</div></div>
-      <div class="bar-line"><div class="nm">Zone grise (Z3)</div><div class="tr"><i style="width:${clamp(P.zt[2]/P.ztot*100,0,100)}%;background:var(--z3)"></i></div><div class="vl">${round(P.zt[2]/P.ztot*100,0)} %</div></div>
-      <div class="bar-line"><div class="nm">Intense (Z4-Z5)</div><div class="tr"><i style="width:${clamp((P.zt[3]+P.zt[4])/P.ztot*100,0,100)}%;background:var(--z5)"></i></div><div class="vl">${round((P.zt[3]+P.zt[4])/P.ztot*100,0)} %</div></div>
-      `: '<div class="empty"><b>Pas de mesure d\'intensité</b>Renseigne la FC moyenne de tes sorties.</div>'}
-      <p class="sc" style="margin-top:14px">Sans flux de fréquence cardiaque, toute la durée d'une sortie est affectée à la zone de sa FC moyenne : la répartition est indicative. Le bouton « Affiner avec les flux Strava » récupère la FC seconde par seconde.</p>
-      <button class="btn sm" id="btnStreams" style="margin-top:8px">Affiner avec les flux Strava</button>
-    </div>
+    <p class="sc" style="margin-top:12px">Seuil estimé : ${thresholdHR()} bpm · allure au seuil ${paceStr(thresholdPace())}/km.</p></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Répartition — 28 jours</h3><p class="hint">Les sorties importées en FIT sont mesurées seconde par seconde.</p>${zoneBar(zt)}</div>
+    <div class="card"><h3>Modèle polarisé</h3><p class="hint">Seiler : les meilleurs coureurs d'endurance passent 75-85 % du temps sous le premier seuil.</p>
+      ${tot?`<div class="bar-line"><div class="nm">Facile (Z1-Z2)</div><div class="tr"><i style="width:${clamp(easy,0,100)}%"></i></div><div class="vl">${round(easy,0)} %</div></div>
+      <div class="bar-line"><div class="nm">Cible</div><div class="tr"><i style="width:80%;opacity:.3"></i></div><div class="vl">80 %</div></div>
+      <div class="bar-line"><div class="nm">Zone grise (Z3)</div><div class="tr"><i style="width:${clamp(zt[2]/tot*100,0,100)}%;background:${C.z[2]}"></i></div><div class="vl">${round(zt[2]/tot*100,0)} %</div></div>
+      <div class="bar-line"><div class="nm">Intense (Z4-Z5)</div><div class="tr"><i style="width:${clamp((zt[3]+zt[4])/tot*100,0,100)}%;background:${C.z[4]}"></i></div><div class="vl">${round((zt[3]+zt[4])/tot*100,0)} %</div></div>`
+      :empty('Pas de mesure d\'intensité','')}
+      <button class="btn sm" id="btnStreams" style="margin-top:14px">Récupérer les flux Strava</button></div>
   </div>`;
 }
 
 function viewProfil(A,P,recs){
   const sorted=[...P.axes].sort((a,b)=>b.score-a.score);
-  return `
-  <div class="grid g-1-2">
-    <div class="card"><h3>Profil de coureur</h3><p class="hint">Neuf axes mesurés sur tes 12 dernières semaines.</p>${radar(P.axes)}</div>
-    <div class="card"><h3>Détail des axes</h3><p class="hint">Chaque barème est explicite : tu peux vérifier le calcul.</p>
-      ${P.axes.map(a=>`<div style="margin-bottom:11px">
-        <div class="bar-line"><div class="nm">${a.nom}</div>
-          <div class="tr"><i style="width:${clamp(a.score,0,100)}%"></i></div>
-          <div class="vl">${Math.round(a.score)}</div></div>
-        <div class="sc" style="margin-left:0">${a.val?round(a.val, a.unit==='h'?2:0):'—'} ${a.unit} — ${a.bar}</div>
-      </div>`).join('')}
-    </div>
+  return `<div class="grid g-1-2">
+    <div class="card"><h3>Profil de coureur</h3><p class="hint">Neuf axes mesurés sur tes 12 dernières semaines.</p>
+      <div style="display:flex;justify-content:center">${radarChart(P.axes)}</div></div>
+    <div class="card"><h3>Détail des axes</h3><p class="hint">Chaque barème est explicite, tu peux vérifier le calcul.</p>
+      ${P.axes.map(a=>`<div style="margin-bottom:13px">
+        <div class="bar-line"><div class="nm">${a.nom}</div><div class="tr"><i style="width:${clamp(a.score,0,100)}%"></i></div><div class="vl">${Math.round(a.score)}</div></div>
+        <div class="sc">${a.val?round(a.val,a.unit==='h'?2:0):'—'} ${a.unit} — ${a.bar}</div></div>`).join('')}</div>
   </div>
-  <div class="grid g2" style="margin-top:14px">
-    <div class="card"><h3>Points forts</h3><p class="hint">À entretenir, pas à sur-travailler.</p>
-      ${sorted.slice(0,3).map(a=>`<div class="rec p3"><div class="pri"></div><div><h4>${a.nom} — ${Math.round(a.score)}/100</h4><p>${round(a.val,1)} ${a.unit}</p></div></div>`).join('')}</div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Points forts</h3><p class="hint">À entretenir.</p>
+      ${sorted.slice(0,3).map(a=>`<div class="rec p3"><div class="ic">✓</div><div><h4>${a.nom} — ${Math.round(a.score)}/100</h4><p>${round(a.val,1)} ${a.unit}</p></div></div>`).join('')}</div>
     <div class="card"><h3>Points faibles</h3><p class="hint">Le meilleur retour sur investissement.</p>
-      ${sorted.slice(-3).reverse().map(a=>`<div class="rec p1"><div class="pri"></div><div><h4>${a.nom} — ${Math.round(a.score)}/100</h4><p>${round(a.val,1)} ${a.unit}</p></div></div>`).join('')}</div>
+      ${sorted.slice(-3).reverse().map(a=>`<div class="rec p1"><div class="ic">!</div><div><h4>${a.nom} — ${Math.round(a.score)}/100</h4><p>${round(a.val,1)} ${a.unit}</p></div></div>`).join('')}</div>
   </div>
-  <div class="card" style="margin-top:14px"><h3>Plan d'action</h3>
-    <p class="hint">Recommandations générées depuis tes données. Rouge = à traiter cette semaine, orange = ce mois-ci, vert = opportunité.</p>
-    ${recs.map(r=>`<div class="rec p${r.p}"><div class="pri"></div><div><h4>${r.t}</h4><p>${r.d}</p><div class="why">${r.w}</div></div></div>`).join('')}
-  </div>
-  <div class="card" style="margin-top:14px"><h3>Progression de l'efficience</h3>
-    <p class="hint">Vitesse équivalente plat rapportée à la fréquence cardiaque : elle monte quand tu deviens plus économique à effort cardiaque égal.</p>
-    ${efficiencyTable(A)}
-  </div>`;
+  <div class="card" style="margin-top:16px"><h3>Plan d'action</h3><p class="hint">Généré depuis tes données, du plus urgent au plus optionnel.</p>
+    ${recs.map(r=>`<div class="rec p${r.p}"><div class="ic">${r.p===1?'!':(r.p===2?'▲':'✓')}</div><div><h4>${r.t}</h4><p>${r.d}</p><div class="why">${r.w}</div></div></div>`).join('')}</div>
+  <div class="card" style="margin-top:16px"><h3>Progression de l'efficience</h3>
+    <p class="hint">Vitesse équivalente plat rapportée à la fréquence cardiaque. Elle monte quand tu deviens plus économique.</p>
+    ${efficiencyTable(A)}</div>`;
 }
 function efficiencyTable(A){
   const blocks=[[0,28],[28,56],[56,84],[84,112]];
-  const rows = blocks.map(([a,b])=>{
-    const set = A.filter(x=>{ const d=daysBetween(x.date,Date.now()); return d>=a && d<b && x.hrAvg>90 && x.dist>3; });
-    if(!set.length) return {lab:`J-${a} à J-${b}`, n:0};
-    const ei = sum(set,x=> x.gapSpd/x.hrAvg*100)/set.length;
-    return {lab:`J-${a} à J-${b}`, n:set.length, ei, hr:sum(set,x=>x.hrAvg)/set.length, spd:sum(set,x=>x.gapSpd)/set.length};
+  const rows=blocks.map(([a,b])=>{
+    const set=A.filter(x=>{const d=daysBetween(x.date,Date.now()); return d>=a&&d<b&&x.hrAvg>90&&x.dist>3;});
+    if(!set.length) return {lab:`J-${a} à J-${b}`,n:0};
+    return {lab:`J-${a} à J-${b}`,n:set.length,ei:sum(set,x=>x.gapSpd/x.hrAvg*100)/set.length,
+      hr:sum(set,x=>x.hrAvg)/set.length, spd:sum(set,x=>x.gapSpd)/set.length};
   });
-  const ok = rows.filter(r=>r.n);
-  if(ok.length<2) return `<div class="empty"><b>Historique insuffisant</b>Il faut des sorties avec fréquence cardiaque sur au moins deux blocs de 4 semaines.</div>`;
-  const base = ok[ok.length-1].ei;
-  return `<div class="tw"><table><thead><tr><th>Bloc de 4 semaines</th><th class="num">Sorties</th><th class="num">FC moy.</th><th class="num">Vitesse GAP</th><th class="num">Indice d'efficience</th><th class="num">Évolution</th></tr></thead><tbody>
-  ${rows.map(r=> r.n? `<tr><td>${r.lab}</td><td class="num">${r.n}</td><td class="num">${Math.round(r.hr)}</td>
-    <td class="num">${round(r.spd,2)} km/h</td><td class="num">${round(r.ei,2)}</td>
-    <td class="num" style="color:${r.ei>=base?'var(--ok)':'var(--bad)'}">${r.ei>=base?'+':''}${round((r.ei/base-1)*100,1)} %</td></tr>`
-    : `<tr><td>${r.lab}</td><td class="num" colspan="5" style="color:var(--mute2)">pas de données</td></tr>`).join('')}
-  </tbody></table></div>`;
+  const ok=rows.filter(r=>r.n);
+  if(ok.length<2) return empty('Historique insuffisant','Il faut des sorties avec FC sur au moins deux blocs de 4 semaines.');
+  const base=ok[ok.length-1].ei;
+  return `<div class="tw"><table><thead><tr><th>Bloc de 4 semaines</th><th class="num">Sorties</th><th class="num">FC moy.</th><th class="num">Vitesse GAP</th><th class="num">Indice</th><th class="num">Évolution</th></tr></thead><tbody>
+  ${rows.map(r=>r.n?`<tr><td>${r.lab}</td><td class="num">${r.n}</td><td class="num">${Math.round(r.hr)}</td><td class="num">${round(r.spd,2)} km/h</td>
+    <td class="num">${round(r.ei,2)}</td><td class="num" style="color:${r.ei>=base?'var(--ok)':'var(--bad)'}">${r.ei>=base?'+':''}${round((r.ei/base-1)*100,1)} %</td></tr>`
+    :`<tr><td>${r.lab}</td><td class="num" colspan="5" style="color:var(--mute2)">pas de données</td></tr>`).join('')}</tbody></table></div>`;
 }
 
 function viewNutri(A,P){
-  const long = A.filter(a=>a.hours>1.5);
-  const filled = long.filter(a=>a.carbs>0);
-  const N=S.nutrition;
-  return `
-  <div class="grid g4">
-    ${kpi('Glucides moyens', P.carbH?round(P.carbH,0):'—','g/h', `cible ${N.targetCarbLong} g/h au-delà de 2 h 30`)}
-    ${kpi('Hydratation', P.fluidH?Math.round(P.fluidH):'—','mL/h', `cible ${N.targetFluid} mL/h`)}
-    ${kpi('Sorties longues renseignées', `${filled.length}/${long.length}`,'', 'sorties de plus de 1 h 30')}
-    ${kpi('Meilleure tolérance', filled.length? round(Math.max(...filled.map(a=>a.carbH)),0):'—','g/h','maximum absorbé sans problème digestif')}
+  const long=A.filter(a=>a.hours>1.5), filled=long.filter(a=>a.carbs>0), N=S.nutrition;
+  return `<div class="grid g4">
+    ${kpi('Glucides moyens',P.carbH?round(P.carbH,0):'—','g/h',`cible ${N.targetCarbLong} g/h au-delà de 2 h 30`)}
+    ${kpi('Hydratation',P.fluidH?Math.round(P.fluidH):'—','mL/h',`cible ${N.targetFluid} mL/h`)}
+    ${kpi('Sorties renseignées',`${filled.length}/${long.length}`,'','sorties de plus de 1 h 30')}
+    ${kpi('Meilleure tolérance',filled.length?round(Math.max(...filled.map(a=>a.carbH)),0):'—','g/h','maximum absorbé sans souci digestif')}
   </div>
-  <div class="card" style="margin-top:14px"><h3>Apport glucidique par sortie</h3>
-    <p class="hint">Chaque point est une sortie. Les bandes montrent les recommandations en vigueur : 30-60 g/h jusqu'à 2 h 30, 60-90 g/h au-delà avec un mélange glucose–fructose (l'absorption intestinale du glucose seul plafonne autour de 60 g/h).</p>
-    ${fuelScatter(A)}
-  </div>
-  <div class="grid g2" style="margin-top:14px">
-    <div class="card"><h3>Détail des sorties longues</h3>
-      ${long.length? `<div class="tw"><table><thead><tr><th>Date</th><th>Sortie</th><th class="num">Durée</th><th class="num">Eau</th><th class="num">Boisson</th><th class="num">Gels</th><th class="num">g/h</th><th class="num">mL/h</th><th class="num">mg Na/h</th><th></th></tr></thead><tbody>
-      ${long.map(a=>`<tr><td class="mono" style="font-size:12px;color:var(--mute2)">${frDate(a.date)}</td><td>${esc(a.name)}</td>
-        <td class="num">${hms(a.moving)}</td><td class="num">${round(num(a.nutr&&a.nutr.waterL),2)}</td>
-        <td class="num">${round(num(a.nutr&&a.nutr.drinkL),2)}</td><td class="num">${num(a.nutr&&a.nutr.gels)}</td>
-        <td class="num" style="color:${a.carbH>=a.carbTarget*0.85?'var(--ok)':(a.carbH>0?'var(--warn)':'var(--mute2)')}">${a.carbs?round(a.carbH,0):'—'}</td>
-        <td class="num">${a.fluid?Math.round(a.fluidH):'—'}</td><td class="num">${a.sodium?Math.round(a.sodiumH):'—'}</td>
-        <td class="num"><button class="btn sm gho" data-edit="${a.id}">Saisir</button></td></tr>`).join('')}
-      </tbody></table></div>`: `<div class="empty"><b>Pas encore de sortie longue</b>Les sorties de plus de 1 h 30 apparaîtront ici pour la saisie nutrition.</div>`}
-    </div>
-    <div class="card"><h3>Plan de course</h3>
-      <p class="hint">Ce que tu devrais emporter, calculé avec tes produits.</p>
-      ${planNutri()}
-    </div>
+  <div class="card" style="margin-top:16px"><h3>Apport par sortie</h3>
+    <p class="hint">Chaque point est une sortie. Les bandes montrent les recommandations : 30-60 g/h jusqu'à 2 h 30, 60-90 g/h au-delà avec un mélange glucose–fructose.</p>
+    ${fuelChart(A)}</div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Sorties longues</h3><p class="hint">Clique pour ouvrir la séance et saisir la nutrition.</p>
+      ${long.length?`<div class="tw"><table><thead><tr><th>Date</th><th>Sortie</th><th class="num">Durée</th><th class="num">Eau</th><th class="num">Boisson</th><th class="num">Gels</th><th class="num">g/h</th><th class="num">mL/h</th></tr></thead><tbody>
+      ${long.map(a=>`<tr class="clk" data-open="${a.id}"><td style="color:var(--mute)">${frDate(a.date)}</td><td>${esc(a.name)}</td>
+        <td class="num">${hms(a.moving)}</td><td class="num">${round(num(a.nutr.waterL),2)}</td><td class="num">${round(num(a.nutr.drinkL),2)}</td>
+        <td class="num">${num(a.nutr.gels)}</td>
+        <td class="num" style="color:${a.carbH>=a.carbTarget*.85?'var(--ok)':(a.carbH>0?'var(--warn)':'var(--mute2)')}">${a.carbs?round(a.carbH,0):'—'}</td>
+        <td class="num">${a.fluid?Math.round(a.fluidH):'—'}</td></tr>`).join('')}</tbody></table></div>`
+      :empty('Pas encore de sortie longue','Les sorties de plus de 1 h 30 apparaîtront ici.')}</div>
+    <div class="card"><h3>Plan de course</h3><p class="hint">Calculé avec tes produits.</p>${planNutri()}</div>
   </div>`;
 }
 function planNutri(){
   const N=S.nutrition;
   const rows=[1,2,3,5,8,12,24].map(h=>{
-    const target = h>2.5? N.targetCarbLong : N.targetCarbShort;
-    const carbs = target*h, fluid=N.targetFluid*h/1000, na=N.targetSodium*h;
-    const drinkL = Math.min(fluid*0.6, carbs/Math.max(N.carbPerLDrink,1));
-    const fromDrink = drinkL*N.carbPerLDrink;
-    const gels = Math.max(0, Math.round((carbs-fromDrink)/Math.max(N.carbPerGel,1)));
-    const naGot = drinkL*N.sodiumPerLDrink + gels*N.sodiumPerGel;
-    const caps = Math.max(0, Math.round((na-naGot)/Math.max(N.sodiumPerCap,1)));
-    return {h, carbs, fluid, drinkL, water:Math.max(0,fluid-drinkL), gels, na, naGot, caps};
+    const target=h>2.5?N.targetCarbLong:N.targetCarbShort;
+    const carbs=target*h, fluid=N.targetFluid*h/1000, na=N.targetSodium*h;
+    const drinkL=Math.min(fluid*.6, carbs/Math.max(N.carbPerLDrink,1));
+    const gels=Math.max(0,Math.round((carbs-drinkL*N.carbPerLDrink)/Math.max(N.carbPerGel,1)));
+    const naGot=drinkL*N.sodiumPerLDrink+gels*N.sodiumPerGel;
+    return {h,carbs,fluid,drinkL,water:Math.max(0,fluid-drinkL),gels,na,naGot,caps:Math.max(0,Math.round((na-naGot)/Math.max(N.sodiumPerCap,1)))};
   });
-  return `<div class="tw"><table><thead><tr><th class="num">Durée</th><th class="num">Glucides</th><th class="num">Boisson</th><th class="num">Eau</th><th class="num">Gels</th><th class="num">Sodium</th><th class="num">Pastilles de sel</th></tr></thead><tbody>
-  ${rows.map(r=>`<tr><td class="num">${r.h} h</td><td class="num">${Math.round(r.carbs)} g</td>
-    <td class="num">${round(r.drinkL,1)} L</td><td class="num">${round(r.water,1)} L</td>
-    <td class="num">${r.gels}</td>
-    <td class="num" style="color:${r.naGot>=r.na*0.8?'var(--ok)':'var(--warn)'}">${Math.round(r.naGot)}/${Math.round(r.na)} mg</td>
-    <td class="num">${r.caps||'—'}</td></tr>`).join('')}
+  return `<div class="tw"><table><thead><tr><th class="num">Durée</th><th class="num">Glucides</th><th class="num">Boisson</th><th class="num">Eau</th><th class="num">Gels</th><th class="num">Sel</th></tr></thead><tbody>
+  ${rows.map(r=>`<tr><td class="num">${r.h} h</td><td class="num">${Math.round(r.carbs)} g</td><td class="num">${round(r.drinkL,1)} L</td>
+    <td class="num">${round(r.water,1)} L</td><td class="num">${r.gels}</td><td class="num">${r.caps||'—'}</td></tr>`).join('')}
   </tbody></table></div>
-  <p class="sc" style="margin-top:12px">Base : ${N.carbPerLDrink} g de glucides et ${N.sodiumPerLDrink} mg de sodium par litre de boisson, ${N.carbPerGel} g et ${N.sodiumPerGel} mg par gel. Modifie ces valeurs dans les paramètres pour coller à tes produits.</p>
-  <p class="sc">La colonne « pastilles » comble l'écart avec la cible sodium (${N.sodiumPerCap} mg par pastille). Monte la cible par temps chaud ou si tu sales beaucoup ; les besoins réels varient d'un facteur trois d'un coureur à l'autre.</p>`;
+  <p class="sc" style="margin-top:12px">Base : ${N.carbPerLDrink} g/L de boisson, ${N.carbPerGel} g par gel, ${N.sodiumPerCap} mg par pastille de sel. La colonne « Sel » comble l'écart avec la cible sodium.</p>`;
 }
 
 function viewProj(A,P){
-  const road = roadProjections(A);
-  const trails = S.races.map(r=>({r, p:trailProjection(r,A,P)})).filter(x=>x.p);
-  return `
-  <div class="card"><h3>Route</h3>
-    <p class="hint">Modèle de Daniels & Gilbert (VDOT) en référence, comparé à l'extrapolation de Riegel depuis ta meilleure performance récente et à ta VMA déclarée. Ces chronos supposent une préparation spécifique à la distance.</p>
-    <div class="tw"><table><thead><tr><th>Distance</th><th class="num">Estimation</th><th class="num">Allure</th><th class="num">Daniels (VDOT ${round(P.vdot,1)})</th><th class="num">Riegel</th><th class="num">Depuis la VMA</th></tr></thead><tbody>
-    ${road.map(r=>`<tr><td><b>${r.nom}</b></td>
-      <td class="num" style="font-size:16px;font-family:var(--f-disp)">${hmsFull(r.best)}</td>
-      <td class="num">${paceStr(r.pace)}/km</td>
-      <td class="num" style="color:var(--mute)">${r.daniels?hmsFull(r.daniels):'—'}</td>
-      <td class="num" style="color:var(--mute)">${r.riegel?hmsFull(r.riegel):'—'}</td>
-      <td class="num" style="color:var(--mute)">${hmsFull(r.vma)}</td></tr>`).join('')}
+  const road=roadProjections(A), trails=S.races.map(r=>({r,p:trailProjection(r,A,P)})).filter(x=>x.p);
+  return `<div class="card"><h3>Route</h3>
+    <p class="hint">Modèle de Daniels & Gilbert (VDOT ${round(P.vdot,1)}), comparé à l'extrapolation de Riegel depuis ta meilleure performance récente. Ces chronos supposent une préparation spécifique à la distance.</p>
+    <div class="tw"><table><thead><tr><th>Distance</th><th class="num">Estimation</th><th class="num">Allure</th><th class="num">Daniels</th><th class="num">Riegel</th><th class="num">Depuis la VMA</th></tr></thead><tbody>
+    ${road.map(r=>`<tr><td><b>${r.nom}</b></td><td class="num" style="font-family:var(--fd);font-size:16px;font-weight:600">${hmsFull(r.best)}</td>
+      <td class="num">${paceStr(r.pace)}/km</td><td class="num" style="color:var(--mute)">${r.daniels?hmsFull(r.daniels):'—'}</td>
+      <td class="num" style="color:var(--mute)">${r.riegel?hmsFull(r.riegel):'—'}</td><td class="num" style="color:var(--mute)">${hmsFull(r.vma)}</td></tr>`).join('')}
     </tbody></table></div>
-    ${P.bestFrom? `<p class="sc" style="margin-top:10px">Performance de référence : « ${esc(P.bestFrom.name)} » du ${frDate(P.bestFrom.date)} — ${round(P.bestFrom.dist,1)} km en ${hmsFull(P.bestFrom.moving)} (${round(P.bestFrom.me,1)} km équivalent plat).</p>`
-      : `<p class="sc" style="margin-top:10px">Aucune sortie assez longue pour servir de référence : les estimations reposent uniquement sur ta VMA.</p>`}
+    ${P.bestFrom?`<p class="sc" style="margin-top:10px">Référence : « ${esc(P.bestFrom.name)} » du ${frDate(P.bestFrom.date)} — ${round(P.bestFrom.dist,1)} km en ${hmsFull(P.bestFrom.moving)}.</p>`:`<p class="sc" style="margin-top:10px">Aucune sortie de référence : estimation basée sur ta VMA seule.</p>`}
     <div style="margin-top:16px">${perfCurve(A)}</div>
-    <p class="sc">Courbe orange : allure soutenable en fonction de la distance. Points bleus : tes sorties, ramenées en distance équivalente plat.</p>
-  </div>
-
-  <div class="card" style="margin-top:14px"><h3>Trail</h3>
-    <p class="hint">Chaîne de calcul : conversion en km-effort → extrapolation Riegel depuis ton 10 km, avec exposant majoré pour l'ultra → technicité du terrain → altitude → adéquation de ta préparation → temps d'arrêt aux ravitaillements.</p>
+    <p class="sc">Courbe : allure soutenable selon la distance (km). Points : tes sorties ramenées en distance équivalente plat.</p></div>
+  <div class="card" style="margin-top:16px"><h3>Trail</h3>
+    <p class="hint">Conversion en km-effort → extrapolation Riegel depuis ton 10 km avec exposant majoré pour l'ultra → technicité → altitude → adéquation de ta préparation → arrêts aux ravitaillements.</p>
     <div class="tw"><table><thead><tr><th>Course</th><th class="num">Profil</th><th class="num">Km-effort</th><th class="num">Estimation</th><th class="num">Fourchette</th><th class="num">Allure</th><th class="num">VAM</th><th></th></tr></thead><tbody>
-    ${trails.map(({r,p})=>`<tr>
-      <td><b>${esc(r.name)}</b><div class="sc">technicité ${r.tech}/5${r.alt?` · ${r.alt} m d'altitude moyenne`:''}</div></td>
-      <td class="num">${r.dist} km<div class="sc">${r.dp} m D+</div></td>
+    ${trails.map(({r,p})=>`<tr><td><b>${esc(r.name)}</b><div class="sc">technicité ${r.tech}/5${r.alt?` · ${r.alt} m` : ''}</div></td>
+      <td class="num">${r.dist} km<div class="sc">${r.dp.toLocaleString('fr-FR')} m D+</div></td>
       <td class="num">${Math.round(p.ke)}</td>
-      <td class="num" style="font-size:17px;font-family:var(--f-disp)">${hmsFull(p.total)}
-        ${p.kPrep>1.03? `<div class="sc" style="color:var(--warn)">dont +${Math.round((p.kPrep-1)*100)} % de préparation manquante</div>`:''}
-        ${p.stops>60? `<div class="sc">dont ${hms(p.stops)} de ravitos</div>`:''}</td>
+      <td class="num" style="font-family:var(--fd);font-size:16px;font-weight:600">${hmsFull(p.total)}
+        ${p.kPrep>1.03?`<div class="sc" style="color:var(--warn)">dont +${Math.round((p.kPrep-1)*100)} % préparation</div>`:''}</td>
       <td class="num" style="color:var(--mute)">${hmsFull(p.low)} – ${hmsFull(p.high)}</td>
-      <td class="num">${paceStr(p.pace)}/km</td>
-      <td class="num">${Math.round(p.vam)} m/h</td>
-      <td class="num"><button class="btn sm gho" data-race="${r.id}">Modifier</button></td></tr>`).join('')}
+      <td class="num">${paceStr(p.pace)}</td><td class="num">${Math.round(p.vam)}</td>
+      <td class="num"><button class="btn gho sm" data-race="${r.id}">Modifier</button></td></tr>`).join('')}
     </tbody></table></div>
-    <div class="row" style="margin-top:14px"><button class="btn sm" id="btnAddRace">Ajouter une course</button>
-      <div class="spacer"></div></div>
-    <p class="sc" style="margin-top:12px">Les coefficients appliqués sont visibles course par course : technicité +2,5 %/niveau, altitude selon la perte de VO2max au-dessus de 1000 m, préparation selon ton D+ hebdomadaire et ta plus longue sortie face aux exigences de la course, arrêts ${S.model.stopPct} % du temps au-delà de 6 h. La fourchette couvre une bonne et une mauvaise journée.</p>
-  </div>`;
+    <div style="margin-top:14px"><button class="btn sm" id="btnAddRace">Ajouter une course</button></div></div>`;
 }
 
-function fld(lab, id, val, type='number', step='any', hint=''){
-  return `<label class="f"><span>${lab}</span><input id="${id}" type="${type}" ${type==='number'?`step="${step}"`:''} value="${esc(val)}">${hint?`<span class="sc" style="text-transform:none;letter-spacing:0;margin-top:4px;display:block">${hint}</span>`:''}</label>`;
+function fld(lab,id,val,type='number',step='any',hint=''){
+  return `<label class="f"><span>${lab}</span><input id="${id}" type="${type}" ${type==='number'?`step="${step}"`:''} value="${esc(val)}">${hint?`<span class="hintf">${hint}</span>`:''}</label>`;
 }
 function viewParams(){
-  const p=S.profile, N=S.nutrition, M=S.model;
-  return `
-  <div class="grid g2">
-    <div class="card"><h3>Profil physiologique</h3>
-      <p class="hint">Ces quatre valeurs pilotent tout le reste : zones, charge, projections.</p>
-      <div class="row">${fld('VMA (km/h)','pVma',p.vma,'number','0.1','Test demi-Cooper, VAMEVAL ou meilleure vitesse tenue 6 min.')}
-      ${fld('Poids (kg)','pWeight',p.weight,'number','0.1','Sert à la dépense énergétique et aux besoins hydriques.')}</div>
-      <div class="row">${fld('FC max (bpm)','pHrMax',p.hrMax,'number','1','Mesurée en côte ou en course, pas 220 − âge.')}
-      ${fld('FC repos (bpm)','pHrRest',p.hrRest,'number','1','Au réveil, allongé, sur plusieurs matins.')}</div>
-      <div class="row">${fld('FC au seuil (bpm, 0 = auto)','pHrThr',p.hrThreshold,'number','1','Moyenne d\'un contre-la-montre de 30 min.')}
+  const p=S.profile,N=S.nutrition,M=S.model;
+  return `<div class="grid g2">
+    <div class="card"><h3>Profil physiologique</h3><p class="hint">Ces valeurs pilotent les zones, la charge et les projections.</p>
+      <div class="row">${fld('VMA (km/h)','pVma',p.vma,'number','0.1','Test demi-Cooper, VAMEVAL, ou meilleure vitesse tenue 6 min.')}
+      ${fld('Poids (kg)','pWeight',p.weight,'number','0.1','Sert à la dépense énergétique.')}</div>
+      <div class="row">${fld('FC max','pHrMax',p.hrMax,'number','1','Mesurée en côte, pas 220 − âge.')}
+      ${fld('FC repos','pHrRest',p.hrRest,'number','1','Au réveil, allongé.')}</div>
+      <div class="row">${fld('FC au seuil (0 = auto)','pHrThr',p.hrThreshold,'number','1','Moyenne d\'un contre-la-montre de 30 min.')}
       ${fld('Âge','pAge',p.age,'number','1')}</div>
       <label class="f"><span>Modèle de zones</span><select id="pZone">
         <option value="hrr" ${p.zoneModel==='hrr'?'selected':''}>% FC de réserve — Karvonen (recommandé)</option>
         <option value="hrmax" ${p.zoneModel==='hrmax'?'selected':''}>% FC maximale</option>
-        <option value="vma" ${p.zoneModel==='vma'?'selected':''}>% VMA (allures, sans cardio)</option>
-      </select></label>
-    </div>
-    <div class="card"><h3>Produits de nutrition</h3>
-      <p class="hint">Lis les valeurs sur tes sachets et tes gels : tout le module nutrition en dépend.</p>
-      <div class="row">${fld('Glucides par litre de boisson (g)','nCarbL',N.carbPerLDrink,'number','1','Dose habituelle de ta poudre, pas la valeur pour 100 g.')}
+        <option value="vma" ${p.zoneModel==='vma'?'selected':''}>% VMA (sans cardio)</option></select></label></div>
+    <div class="card"><h3>Produits de nutrition</h3><p class="hint">Lis les valeurs sur tes sachets et tes gels : tout le module en dépend.</p>
+      <div class="row">${fld('Glucides par litre de boisson (g)','nCarbL',N.carbPerLDrink,'number','1','Ta dose habituelle, pas la valeur pour 100 g.')}
       ${fld('Sodium par litre (mg)','nNaL',N.sodiumPerLDrink,'number','10')}</div>
       <div class="row">${fld('Glucides par gel (g)','nCarbGel',N.carbPerGel,'number','1')}
       ${fld('Sodium par gel (mg)','nNaGel',N.sodiumPerGel,'number','5')}
       ${fld('Caféine par gel (mg)','nCaffGel',N.caffPerGel,'number','5')}</div>
       <div class="row">${fld('Glucides par barre (g)','nCarbBar',N.carbPerBar,'number','1')}
       ${fld('Sodium par barre (mg)','nNaBar',N.sodiumPerBar,'number','5')}
-      ${fld('Sodium par pastille de sel (mg)','nNaCap',N.sodiumPerCap,'number','10')}</div>
+      ${fld('Sodium par pastille (mg)','nNaCap',N.sodiumPerCap,'number','10')}</div>
       <div class="row">${fld('Cible < 2 h 30 (g/h)','nTgS',N.targetCarbShort,'number','5')}
-      ${fld('Cible > 2 h 30 (g/h)','nTgL',N.targetCarbLong,'number','5')}</div>
-      <div class="row">${fld('Cible boisson (mL/h)','nTgF',N.targetFluid,'number','50')}
-      ${fld('Cible sodium (mg/h)','nTgNa',N.targetSodium,'number','50')}</div>
-    </div>
+      ${fld('Cible > 2 h 30 (g/h)','nTgL',N.targetCarbLong,'number','5')}
+      ${fld('Boisson (mL/h)','nTgF',N.targetFluid,'number','50')}
+      ${fld('Sodium (mg/h)','nTgNa',N.targetSodium,'number','50')}</div></div>
   </div>
-  <div class="grid g2" style="margin-top:14px">
-    <div class="card"><h3>Modèles de calcul</h3>
-      <p class="hint">À ne toucher que si tu sais ce que tu changes.</p>
-      <div class="row">${fld('Exposant Riegel route','mRR',M.riegelRoad,'number','0.01','1,06 par défaut (Riegel 1981).')}
-      ${fld('Exposant Riegel trail','mRT',M.riegelTrail,'number','0.01','1,08 : la fatigue augmente plus vite en trail.')}</div>
-      <div class="row">${fld('Km-effort : mètres de D+ par km','mKU',M.kmEffortUp,'number','10','100 = la référence française.')}
-      ${fld('Km-effort : mètres de D− par km','mKD',M.kmEffortDown,'number','10')}</div>
-      <div class="row">${fld('Constante condition (jours)','mCtl',M.ctlDays,'number','1','42 jours par défaut.')}
-      ${fld('Constante fatigue (jours)','mAtl',M.atlDays,'number','1','7 jours par défaut.')}</div>
-      ${fld('Temps d\'arrêt aux ravitos au-delà de 6 h (%)','mStop',M.stopPct,'number','0.5')}
-    </div>
-    <div class="card"><h3>Données</h3>
-      <p class="hint">Tout est stocké sur cet appareil. Rien n'est envoyé ailleurs que chez Strava.</p>
-      <p style="font-size:13px;color:var(--mute)">${ACT.length} sorties enregistrées.</p>
-      <div class="row" style="margin-top:10px">
-        <button class="btn" id="btnExport2">Exporter en JSON</button>
-        <button class="btn" id="btnImport">Importer un JSON</button>
-        <button class="btn" id="btnDemo">Charger un jeu de démonstration</button>
-      </div>
-      <div class="row" style="margin-top:10px">
-        <button class="btn danger" id="btnWipe">Tout effacer</button>
-      </div>
-      <p class="sc" style="margin-top:14px">Format CSV accepté pour l'import de sorties :<br>
-      <span class="code">date,nom,distance_km,temps_s,denivele_positif,denivele_negatif,fc_moy,eau_l,boisson_l,gels</span></p>
-    </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Modèles de calcul</h3><p class="hint">À ne modifier que si tu sais ce que tu changes.</p>
+      <div class="row">${fld('Exposant Riegel route','mRR',M.riegelRoad,'number','0.01','1,06 par défaut.')}
+      ${fld('Exposant Riegel trail','mRT',M.riegelTrail,'number','0.01','1,08 : la fatigue monte plus vite en trail.')}</div>
+      <div class="row">${fld('Km-effort : m de D+ par km','mKU',M.kmEffortUp,'number','10','100 = référence française.')}
+      ${fld('Km-effort : m de D− par km','mKD',M.kmEffortDown,'number','10')}</div>
+      <div class="row">${fld('Constante condition (j)','mCtl',M.ctlDays,'number','1')}
+      ${fld('Constante fatigue (j)','mAtl',M.atlDays,'number','1')}
+      ${fld('Arrêts ravitos au-delà de 6 h (%)','mStop',M.stopPct,'number','0.5')}</div></div>
+    <div class="card"><h3>Données</h3><p class="hint">Tout est stocké dans ce navigateur. Rien n'est envoyé ailleurs que chez Strava.</p>
+      <p style="font-size:13.5px;color:var(--ink2)">${ACT.length} sorties · ${ACT.filter(a=>a.hasStream).length} avec flux détaillé</p>
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="btnExport2">Exporter</button>
+        <button class="btn" id="btnImport">Importer une sauvegarde</button>
+        <button class="btn" id="btnDemo">Jeu de démonstration</button></div>
+      <div class="row" style="margin-top:10px"><button class="btn danger" id="btnWipe">Tout effacer</button></div>
+      <p class="sc" style="margin-top:16px">Format CSV accepté :<span class="code">date,nom,distance_km,temps_s,denivele_positif,denivele_negatif,fc_moy,eau_l,boisson_l,gels</span></p></div>
   </div>
-  <div style="margin-top:14px"><button class="btn pri" id="btnSave">Enregistrer les paramètres</button></div>`;
+  <div style="margin-top:16px"><button class="btn pri" id="btnSave">Enregistrer les paramètres</button></div>`;
 }
 
 function viewStrava(){
-  const c = S.strava, on = !!c.access;
-  const uri = location.origin + location.pathname;
-  const local = location.protocol==='file:';
-  return `
-  <div class="grid g-1-2">
-    <div class="card"><h3>État</h3>
-      <p class="hint">${on? 'Connecté.' : 'Non connecté.'}</p>
-      ${on? `<p style="font-size:14px">Athlète : <b>${esc((c.athlete&&(c.athlete.firstname+' '+c.athlete.lastname))||'compte Strava')}</b></p>
-        <p class="sc">Dernière synchronisation : ${c.lastSync? new Date(c.lastSync).toLocaleString('fr-FR'):'jamais'}</p>
-        <div class="row" style="margin-top:12px"><button class="btn pri" id="btnSync2">Synchroniser maintenant</button>
+  const c=S.strava, on=!!c.access, local=location.protocol==='file:';
+  return `<div class="grid g-1-2">
+    <div class="card"><h3>État</h3><p class="hint">${on?'Connecté.':'Non connecté.'}</p>
+      ${on?`<p style="font-size:14px">Athlète : <b>${esc((c.athlete&&(c.athlete.firstname+' '+c.athlete.lastname))||'compte Strava')}</b></p>
+        <p class="sc">Dernière synchronisation : ${c.lastSync?new Date(c.lastSync).toLocaleString('fr-FR'):'jamais'}</p>
+        <div class="row" style="margin-top:14px"><button class="btn pri" id="btnSync2">Synchroniser</button>
         <button class="btn danger" id="btnLogout">Déconnecter</button></div>`
-      : `<p style="font-size:13px;color:var(--mute)">Crée ta propre application Strava (gratuit, 2 minutes) et colle les identifiants ci-dessous. Ils restent sur cet appareil.</p>
-        ${fld('ID client','sId',c.clientId,'text')}
-        ${fld('Secret client','sSecret',c.clientSecret,'password')}
+      :`<p class="sc" style="margin-bottom:14px">Crée ta propre application Strava (gratuit) et colle les identifiants. Ils restent sur cet appareil.</p>
+        ${fld('ID client','sId',c.clientId,'text')}${fld('Secret client','sSecret',c.clientSecret,'password')}
         <button class="btn pri" id="btnAuth" ${local?'disabled':''}>Autoriser sur Strava</button>
-        ${local? `<p class="sc" style="margin-top:8px;color:var(--warn)">Page ouverte en fichier local : Strava refuse ce type d'adresse. Sers le fichier via <span class="code">python3 -m http.server 8080</span> puis ouvre http://localhost:8080.</p>`:''}
-        <p class="sc" style="margin-top:10px">Ou colle directement un jeton d'accès si tu en as déjà un :</p>
-        <div class="row">${fld('Jeton d\'accès','sTok','','text')}<button class="btn" id="btnTok" style="flex:0 0 auto">Utiliser</button></div>`}
+        ${local?`<p class="sc" style="margin-top:10px;color:var(--warn)">Page ouverte en fichier local : Strava refuse ce type d'adresse. Sers-la via <span class="code">python3 -m http.server 8080</span>.</p>`:''}
+        <p class="sc" style="margin-top:14px">Ou colle un jeton d'accès existant :</p>
+        <div class="row">${fld('Jeton','sTok','','text')}<button class="btn" id="btnTok" style="flex:0 0 auto">Utiliser</button></div>`}
     </div>
-    <div class="card"><h3>Créer l'accès Strava</h3>
-      <p class="hint">À faire une seule fois.</p>
+    <div class="card"><h3>Créer l'accès</h3><p class="hint">Une seule fois, deux minutes.</p>
       <ol class="steps">
-        <li><b>Ouvrir les réglages développeur</b><span>Va sur <a href="https://www.strava.com/settings/api" target="_blank" rel="noopener">strava.com/settings/api</a> avec ton compte.</span></li>
-        <li><b>Créer l'application</b><span>Nom : ce que tu veux. Catégorie : Training. Site web : l'adresse où tu héberges cette page.</span></li>
-        <li><b>Renseigner le domaine de rappel</b><span>Champ « Authorization Callback Domain » — sans http ni chemin :<span class="code">${esc(location.hostname||'localhost')}</span></span></li>
-        <li><b>Copier les identifiants</b><span>« Client ID » et « Client Secret » vont dans les champs à gauche.</span></li>
-        <li><b>Autoriser</b><span>Le bouton t'envoie sur Strava, qui te renvoie ici avec le code. L'adresse de retour utilisée est :<span class="code">${esc(uri)}</span></span></li>
+        <li><b>Réglages développeur</b><span><a href="https://www.strava.com/settings/api" target="_blank" rel="noopener">strava.com/settings/api</a></span></li>
+        <li><b>Créer l'application</b><span>Catégorie « Training », site web = l'adresse de cette page.</span></li>
+        <li><b>Domaine de rappel</b><span>Sans http ni chemin :<span class="code">${esc(location.hostname||'localhost')}</span></span></li>
+        <li><b>Copier les identifiants</b><span>Client ID et Client Secret dans les champs à gauche.</span></li>
+        <li><b>Autoriser</b><span>Retour automatique vers :<span class="code">${esc(location.origin+location.pathname)}</span></span></li>
       </ol>
-      <p class="sc">Portée demandée : <b>read, activity:read_all</b> — lecture seule. Crête n'écrit jamais sur ton compte. Le secret client est conservé dans le stockage local de ce navigateur : n'utilise cette page que sur un appareil personnel, ou passe par la saisie manuelle d'un jeton.</p>
-      <p class="sc">Limites de l'API : 100 requêtes par 15 minutes, 1000 par jour. Une synchronisation lit 200 activités en 2 requêtes.</p>
-    </div>
+      <p class="sc">Portée : lecture seule (read, activity:read_all). Limites : 100 requêtes par 15 min. Pour les sorties importées en FIT, l'analyse détaillée est disponible immédiatement — Strava ne fournit ce niveau de détail qu'en requêtes supplémentaires.</p></div>
   </div>`;
 }
 
-/* ------------------------------------------------------------- éditeurs */
-function modal(html){
-  $('#modalHost').innerHTML = `<div class="modal"><div class="box">${html}</div></div>`;
-  const m = $('#modalHost .modal');
-  m.onclick = e=>{ if(e.target===m) closeModal(); };
-  document.addEventListener('keydown', escClose);
+/* ==========================================================================
+   13. MODALES — import FIT, édition, courses
+   ========================================================================== */
+function modal(html,wide){
+  $('#modalHost').innerHTML=`<div class="modal"><div class="box" ${wide?'style="max-width:760px"':''}>${html}</div></div>`;
+  const m=$('#modalHost .modal');
+  m.onclick=e=>{ if(e.target===m) closeModal(); };
+  document.addEventListener('keydown',escClose);
 }
 function escClose(e){ if(e.key==='Escape') closeModal(); }
-function closeModal(){ $('#modalHost').innerHTML=''; document.removeEventListener('keydown', escClose); }
+function closeModal(){ $('#modalHost').innerHTML=''; document.removeEventListener('keydown',escClose); PENDING=[]; }
 
-function editActivity(id){
-  const a = id? ACT.find(x=>x.id===id) : null;
-  const n = (a&&a.nutr)||{};
-  const d = a? new Date(a.date) : new Date();
-  const iso = new Date(+d - d.getTimezoneOffset()*60000).toISOString().slice(0,16);
-  modal(`<h3>${a?'Modifier la sortie':'Nouvelle sortie'}</h3>
-    <div class="row">
-      <label class="f" style="flex:2"><span>Nom</span><input id="aName" value="${esc(a?a.name:'')}" placeholder="Sortie longue Fontainebleau"></label>
-      <label class="f"><span>Date et heure</span><input id="aDate" type="datetime-local" value="${iso}"></label>
+let PENDING=[];
+function addModal(){
+  modal(`<h3>Ajouter une sortie</h3>
+    <p class="hint" style="margin-bottom:18px">Importe un ou plusieurs fichiers .fit depuis ta montre, ou saisis la sortie à la main.</p>
+    <div class="drop" id="drop">
+      <h4>Dépose tes fichiers .fit ici</h4>
+      <p>ou <button class="btn sm" id="pick" style="margin-top:8px">Choisir des fichiers</button></p>
+      <p class="sc" style="margin-top:10px">Garmin, Suunto, Coros, Polar, Wahoo. Plusieurs fichiers à la fois.</p>
     </div>
-    <div class="row">
-      ${fld('Distance (km)','aDist',a?round(a.dist,2):'','number','0.01')}
-      ${fld('Temps en mouvement (min)','aTime',a?round(a.moving/60,1):'','number','0.1')}
-      ${fld('Temps total (min)','aElap',a?round((a.elapsed||a.moving)/60,1):'','number','0.1')}
-    </div>
-    <div class="row">
-      ${fld('D+ (m)','aDp',a?Math.round(a.dp):0,'number','1')}
-      ${fld('D− (m)','aDm',a?Math.round(a.dm):0,'number','1')}
-      ${fld('FC moyenne','aHr',a?Math.round(a.hrAvg):'','number','1')}
-      ${fld('FC max','aHrM',a?Math.round(a.hrMax):'','number','1')}
-    </div>
-    <h3 style="font-size:15px;margin:18px 0 4px">Nutrition pendant l'effort</h3>
-    <p class="hint">Renseigne ce que tu as réellement consommé, pas ce que tu avais prévu.</p>
-    <div class="row">
-      ${fld('Eau (L)','nW',num(n.waterL),'number','0.05')}
-      ${fld('Boisson d\'effort (L)','nD',num(n.drinkL),'number','0.05')}
-      ${fld('Gels','nG',num(n.gels),'number','1')}
-      ${fld('Barres','nB',num(n.bars),'number','1')}
-    </div>
-    <div class="row">
-      ${fld('Autres glucides (g)','nX',num(n.extraCarb),'number','1')}
-      ${fld('Sodium en plus (mg)','nXn',num(n.extraNa),'number','10')}
-      ${fld('RPE (1-10)','aRpe',a?a.rpe||'':'','number','1')}
-    </div>
-    <label class="f"><span>Ressenti, digestion, météo</span><textarea id="aNotes" rows="2">${esc(a?a.notes:'')}</textarea></label>
-    <div class="row" style="margin-top:8px">
-      <button class="btn pri" id="mSave" style="flex:0 0 auto">${a?'Enregistrer':'Ajouter'}</button>
-      <button class="btn gho" id="mCancel" style="flex:0 0 auto">Annuler</button>
+    <div id="fitList" style="margin-top:16px"></div>
+    <div class="row" style="margin-top:20px">
+      <button class="btn" id="mManual" style="flex:0 0 auto">Saisie manuelle</button>
       <div class="spacer"></div>
-      ${a?`<button class="btn danger gho" id="mDel" style="flex:0 0 auto">Supprimer</button>`:''}
-    </div>`);
-  const v = i=> parseFloat($('#'+i).value)||0;
-  $('#mCancel').onclick = closeModal;
-  if(a) $('#mDel').onclick = async ()=>{ ACT = ACT.filter(x=>x.id!==id); await saveActs(); closeModal(); render(); toast('Sortie supprimée.'); };
-  $('#mSave').onclick = async ()=>{
-    const rec = {
-      id: a? a.id : uid(), source: a? a.source:'manuel', stravaId: a? a.stravaId : null,
-      date: new Date($('#aDate').value||Date.now()).toISOString(),
-      name: $('#aName').value||'Sortie', type:'Run',
-      dist: v('aDist'), moving: v('aTime')*60, elapsed:(v('aElap')||v('aTime'))*60,
-      dp: v('aDp'), dm: v('aDm'), hrAvg:v('aHr'), hrMax:v('aHrM'),
-      rpe: v('aRpe'), notes: $('#aNotes').value,
-      zoneTime: a? a.zoneTime : null,
-      nutr:{waterL:v('nW'), drinkL:v('nD'), gels:v('nG'), bars:v('nB'), extraCarb:v('nX'), extraNa:v('nXn')}
-    };
-    if(a) Object.assign(a, rec); else ACT.push(rec);
-    await saveActs(); closeModal(); render(); toast(a?'Sortie mise à jour.':'Sortie ajoutée.');
+      <button class="btn" id="mCancel" style="flex:0 0 auto">Annuler</button>
+      <button class="btn pri" id="mImport" style="flex:0 0 auto" disabled>Importer</button>
+    </div>`,true);
+  const drop=$('#drop');
+  $('#mCancel').onclick=closeModal;
+  $('#mManual').onclick=()=>{ closeModal(); editActivity(null); };
+  $('#pick').onclick=()=>{
+    const i=document.createElement('input'); i.type='file'; i.accept='.fit'; i.multiple=true;
+    i.onchange=()=>handleFiles([...i.files]); i.click();
+  };
+  ['dragenter','dragover'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('over');}));
+  ['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('over');}));
+  drop.addEventListener('drop',ev=>handleFiles([...ev.dataTransfer.files]));
+  $('#mImport').onclick=doImport;
+}
+async function handleFiles(files){
+  const fits=files.filter(f=>/\.fit$/i.test(f.name));
+  if(!fits.length) return toast('Aucun fichier .fit reconnu.');
+  for(const f of fits){
+    if(PENDING.some(p=>p.file===f.name)) continue;
+    const row={file:f.name, state:'lecture…', act:null, err:null};
+    PENDING.push(row); paintList();
+    try{
+      const buf=await f.arrayBuffer();
+      const a=fitToActivity(decodeFit(buf), f.name);
+      // doublon : déjà dans le carnet, ou déjà présent dans ce même lot
+      const same = x=> Math.abs(new Date(x.date)-new Date(a.date))<120000 && Math.abs(x.dist-a.dist)<0.3;
+      const dup = ACT.some(same) || PENDING.some(p=> p!==row && p.act && !p.dup && same(p.act));
+      row.act=a; row.dup=dup;
+      row.state = dup? 'déjà importée' : 'prête';
+    }catch(e){ row.err=e.message; row.state='illisible'; }
+    paintList();
+  }
+}
+function paintList(){
+  const el=$('#fitList'); if(!el) return;
+  el.innerHTML = PENDING.length? `<div class="card" style="box-shadow:none;border:1px solid var(--line);padding:4px 16px">
+    ${PENDING.map((p,i)=>`<div class="fitrow">
+      <div class="nm"><b>${esc(p.act? p.act.name : p.file)}</b>
+        <div class="sc">${p.act? `${frDate(p.act.date)} · ${round(p.act.dist,2)} km · ${hmsFull(p.act.moving)} · ${Math.round(p.act.dp)} m D+${p.act.hrAvg?` · FC ${p.act.hrAvg}`:''}`
+          : (p.err? esc(p.err) : esc(p.file))}</div></div>
+      <span class="tag ${p.err?'bad':(p.dup?'warn':'ok')}">${p.state}</span>
+      <button class="btn gho sm" data-rm="${i}">Retirer</button></div>`).join('')}</div>` : '';
+  el.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{ PENDING.splice(+b.dataset.rm,1); paintList(); });
+  const ok=PENDING.filter(p=>p.act && !p.dup).length;
+  const btn=$('#mImport');
+  if(btn){ btn.disabled=!ok; btn.textContent = ok? `Importer ${ok} sortie${ok>1?'s':''}` : 'Importer'; }
+}
+async function doImport(){
+  const list=PENDING.filter(p=>p.act && !p.dup).map(p=>p.act);
+  if(!list.length) return;
+  for(const a of list){
+    const an=analyseSession(a);
+    a.zoneTime = an.zoneTime;
+    a.an = {splits:an.splits, best:an.best, decoupling:an.decoupling, gradeDist:an.gradeDist, climbs:an.climbs, hrDrift:an.hrDrift};
+    const stream=a.stream; delete a.stream; a.hasStream=!!stream;
+    ACT.push(a);
+    if(stream) await Store.setStream(a.id, stream);
+  }
+  await saveActs();
+  closeModal();
+  if(list.length===1){ go('session', list[0].id); await loadStream(list[0].id); render(); toast('Sortie importée.'); }
+  else { go('acts'); toast(`${list.length} sorties importées.`); }
+  const longs=list.filter(a=> a.elapsed>5400);
+  if(longs.length) setTimeout(()=>nutriPrompt(longs),500);
+}
+function nutriPrompt(longs){
+  modal(`<h3>Nutrition des sorties longues</h3>
+    <p class="hint">${longs.length} sortie${longs.length>1?'s':''} de plus de 1 h 30 vient${longs.length>1?'nent':''} d'être importée${longs.length>1?'s':''}. Saisir ce que tu as consommé prend dix secondes et alimente toute l'analyse nutritionnelle.</p>
+    ${longs.map((a,i)=>`<div style="padding:14px 0;border-bottom:1px solid var(--line)">
+      <b style="font-family:var(--fd);font-size:14.5px">${esc(a.name)}</b>
+      <div class="sc" style="margin-bottom:10px">${frDate(a.date)} · ${round(a.dist,1)} km · ${hmsFull(a.moving)}</div>
+      <div class="row">
+        <label class="f" style="margin:0"><span>Eau (L)</span><input type="number" step="0.05" id="nw${i}" value="0"></label>
+        <label class="f" style="margin:0"><span>Boisson (L)</span><input type="number" step="0.05" id="nd${i}" value="0"></label>
+        <label class="f" style="margin:0"><span>Gels</span><input type="number" step="1" id="ng${i}" value="0"></label>
+        <label class="f" style="margin:0"><span>Barres</span><input type="number" step="1" id="nb${i}" value="0"></label>
+      </div></div>`).join('')}
+    <div class="row" style="margin-top:18px"><div class="spacer"></div>
+      <button class="btn" id="npSkip" style="flex:0 0 auto">Plus tard</button>
+      <button class="btn pri" id="npSave" style="flex:0 0 auto">Enregistrer</button></div>`,true);
+  $('#npSkip').onclick=closeModal;
+  $('#npSave').onclick=async()=>{
+    longs.forEach((a,i)=>{
+      const g=id=>parseFloat($('#'+id+i).value)||0;
+      a.nutr={waterL:g('nw'),drinkL:g('nd'),gels:g('ng'),bars:g('nb'),extraCarb:0,extraNa:0};
+    });
+    await saveActs(); closeModal(); render(); toast('Nutrition enregistrée.');
   };
 }
 
+function editActivity(id){
+  const a=id?ACT.find(x=>x.id===id):null, n=(a&&a.nutr)||{};
+  const d=a?new Date(a.date):new Date();
+  const iso=new Date(+d-d.getTimezoneOffset()*60000).toISOString().slice(0,16);
+  modal(`<h3>${a?'Modifier la sortie':'Nouvelle sortie'}</h3>
+    <div class="row"><label class="f" style="flex:2"><span>Nom</span><input id="aName" value="${esc(a?a.name:'')}" placeholder="Sortie longue en forêt"></label>
+      <label class="f"><span>Date et heure</span><input id="aDate" type="datetime-local" value="${iso}"></label></div>
+    <div class="row">${fld('Distance (km)','aDist',a?round(a.dist,2):'','number','0.01')}
+      ${fld('Temps en mouvement (min)','aTime',a?round(a.moving/60,1):'','number','0.1')}
+      ${fld('Temps total (min)','aElap',a?round((a.elapsed||a.moving)/60,1):'','number','0.1')}</div>
+    <div class="row">${fld('D+ (m)','aDp',a?Math.round(a.dp):0,'number','1')}${fld('D− (m)','aDm',a?Math.round(a.dm):0,'number','1')}
+      ${fld('FC moyenne','aHr',a?Math.round(a.hrAvg||0)||'':'','number','1')}${fld('FC max','aHrM',a?Math.round(a.hrMax||0)||'':'','number','1')}</div>
+    <h3 style="font-size:15px;margin:20px 0 2px">Nutrition pendant l'effort</h3>
+    <p class="hint">Ce que tu as réellement consommé, pas ce que tu avais prévu.</p>
+    <div class="row">${fld('Eau (L)','nW',num(n.waterL),'number','0.05')}${fld('Boisson (L)','nD',num(n.drinkL),'number','0.05')}
+      ${fld('Gels','nG',num(n.gels),'number','1')}${fld('Barres','nB',num(n.bars),'number','1')}</div>
+    <div class="row">${fld('Autres glucides (g)','nX',num(n.extraCarb),'number','1')}${fld('Sodium en plus (mg)','nXn',num(n.extraNa),'number','10')}
+      ${fld('RPE (1-10)','aRpe',a?a.rpe||'':'','number','1')}</div>
+    <label class="f"><span>Ressenti, digestion, météo</span><textarea id="aNotes" rows="2">${esc(a?a.notes:'')}</textarea></label>
+    <div class="row" style="margin-top:10px">${a?`<button class="btn danger" id="mDel" style="flex:0 0 auto">Supprimer</button>`:''}
+      <div class="spacer"></div><button class="btn" id="mCancel" style="flex:0 0 auto">Annuler</button>
+      <button class="btn pri" id="mSave" style="flex:0 0 auto">${a?'Enregistrer':'Ajouter'}</button></div>`,true);
+  const v=i=>parseFloat($('#'+i).value)||0;
+  $('#mCancel').onclick=closeModal;
+  if(a) $('#mDel').onclick=async()=>{
+    if(!confirm('Supprimer cette sortie ?')) return;
+    ACT=ACT.filter(x=>x.id!==id); await Store.delStream(id); await saveActs(); closeModal(); go('acts'); toast('Sortie supprimée.');
+  };
+  $('#mSave').onclick=async()=>{
+    const rec={id:a?a.id:uid(), source:a?a.source:'manuel', stravaId:a?a.stravaId:null,
+      date:new Date($('#aDate').value||Date.now()).toISOString(), name:$('#aName').value||'Sortie', type:'Run',
+      dist:v('aDist'), moving:v('aTime')*60, elapsed:(v('aElap')||v('aTime'))*60, dp:v('aDp'), dm:v('aDm'),
+      hrAvg:v('aHr'), hrMax:v('aHrM'), rpe:v('aRpe'), notes:$('#aNotes').value,
+      zoneTime:a?a.zoneTime:null, an:a?a.an:null, hasStream:a?a.hasStream:false,
+      device:a?a.device:null, cadAvg:a?a.cadAvg:null, pwAvg:a?a.pwAvg:null, kcalDevice:a?a.kcalDevice:null, tempAvg:a?a.tempAvg:null, sub:a?a.sub:'',
+      nutr:{waterL:v('nW'),drinkL:v('nD'),gels:v('nG'),bars:v('nB'),extraCarb:v('nX'),extraNa:v('nXn')}};
+    if(a) Object.assign(a,rec); else ACT.push(rec);
+    await saveActs(); closeModal(); render(); toast(a?'Sortie mise à jour.':'Sortie ajoutée.');
+  };
+}
 function editRace(id){
-  const r = id? S.races.find(x=>x.id===id) : null;
+  const r=id?S.races.find(x=>x.id===id):null;
   modal(`<h3>${r?'Modifier la course':'Nouvelle course'}</h3>
     <label class="f"><span>Nom</span><input id="rName" value="${esc(r?r.name:'')}" placeholder="Trail des Aiguilles"></label>
-    <div class="row">${fld('Distance (km)','rD',r?r.dist:'','number','0.1')}
-      ${fld('D+ (m)','rDp',r?r.dp:'','number','10')}
-      ${fld('D− (m)','rDm',r?r.dm:'','number','10')}</div>
-    <div class="row">
-      <label class="f"><span>Technicité</span><select id="rT">
-        ${[1,2,3,4,5].map(t=>`<option value="${t}" ${r&&r.tech===t?'selected':''}>${t} — ${['piste roulante','sentier facile','sentier technique','très technique, pierrier','alpin, cordes, nuit'][t-1]}</option>`).join('')}
-      </select></label>
-      ${fld('Altitude moyenne (m)','rA',r?r.alt||0:0,'number','50')}
-    </div>
-    <div class="row"><button class="btn pri" id="rSave" style="flex:0 0 auto">Enregistrer</button>
-      <button class="btn gho" id="rCancel" style="flex:0 0 auto">Annuler</button><div class="spacer"></div>
-      ${r?`<button class="btn danger gho" id="rDel" style="flex:0 0 auto">Supprimer</button>`:''}</div>`);
+    <div class="row">${fld('Distance (km)','rD',r?r.dist:'','number','0.1')}${fld('D+ (m)','rDp',r?r.dp:'','number','10')}${fld('D− (m)','rDm',r?r.dm:'','number','10')}</div>
+    <div class="row"><label class="f"><span>Technicité</span><select id="rT">
+      ${[1,2,3,4,5].map(t=>`<option value="${t}" ${r&&r.tech===t?'selected':''}>${t} — ${['piste roulante','sentier facile','sentier technique','très technique, pierrier','alpin, nuit'][t-1]}</option>`).join('')}
+    </select></label>${fld('Altitude moyenne (m)','rA',r?r.alt||0:0,'number','50')}</div>
+    <div class="row" style="margin-top:10px">${r?`<button class="btn danger" id="rDel" style="flex:0 0 auto">Supprimer</button>`:''}
+      <div class="spacer"></div><button class="btn" id="rCancel" style="flex:0 0 auto">Annuler</button>
+      <button class="btn pri" id="rSave" style="flex:0 0 auto">Enregistrer</button></div>`);
   $('#rCancel').onclick=closeModal;
-  if(r) $('#rDel').onclick = async ()=>{ S.races=S.races.filter(x=>x.id!==id); await save(); closeModal(); render(); };
-  $('#rSave').onclick = async ()=>{
+  if(r) $('#rDel').onclick=async()=>{ S.races=S.races.filter(x=>x.id!==id); await save(); closeModal(); render(); };
+  $('#rSave').onclick=async()=>{
     const rec={id:r?r.id:uid(), name:$('#rName').value||'Course', dist:parseFloat($('#rD').value)||0,
       dp:parseFloat($('#rDp').value)||0, dm:parseFloat($('#rDm').value)||0,
       tech:parseInt($('#rT').value)||1, alt:parseFloat($('#rA').value)||0};
@@ -1494,196 +1936,214 @@ function editRace(id){
   };
 }
 
-/* ------------------------------------------------------------- io / demo */
-function toast(msg, ms=4200){
-  $('#toastHost').innerHTML = `<div class="toast">${msg}</div>`;
-  setTimeout(()=>{ if($('#toastHost').firstChild) $('#toastHost').innerHTML=''; }, ms);
+/* ==========================================================================
+   14. IO
+   ========================================================================== */
+function toast(msg,ms=3600){
+  $('#toastHost').innerHTML=`<div class="toast">${msg}</div>`;
+  setTimeout(()=>{ if($('#toastHost').firstChild) $('#toastHost').innerHTML=''; },ms);
 }
-function download(name, content, type='application/json'){
-  const b = new Blob([content],{type}); const u=URL.createObjectURL(b);
+function download(name,content){
+  const b=new Blob([content],{type:'application/json'}), u=URL.createObjectURL(b);
   const a=document.createElement('a'); a.href=u; a.download=name; a.click(); URL.revokeObjectURL(u);
 }
-function pickFile(accept, cb){
+function pickFile(accept,cb){
   const i=document.createElement('input'); i.type='file'; i.accept=accept;
-  i.onchange=()=>{ const f=i.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>cb(r.result,f.name); r.readAsText(f); };
+  i.onchange=()=>{const f=i.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>cb(r.result,f.name); r.readAsText(f);};
   i.click();
 }
 function importCsv(txt){
-  const lines = txt.split(/\r?\n/).filter(l=>l.trim());
-  const head = lines[0].toLowerCase().split(/[,;]/).map(s=>s.trim());
-  const idx = n=> head.findIndex(h=> h.includes(n));
-  const iD=idx('date'), iN=idx('nom')>=0?idx('nom'):idx('name'), iK=idx('dist'), iT=idx('temps')>=0?idx('temps'):idx('time'),
-        iP=idx('positif')>=0?idx('positif'):idx('d+'), iM=idx('negatif'), iH=idx('fc'),
-        iW=idx('eau'), iB=idx('boisson'), iG=idx('gel');
+  const lines=txt.split(/\r?\n/).filter(l=>l.trim());
+  const head=lines[0].toLowerCase().split(/[,;]/).map(s=>s.trim());
+  const ix=n=>head.findIndex(h=>h.includes(n));
+  const iD=ix('date'),iN=ix('nom')>=0?ix('nom'):ix('name'),iK=ix('dist'),iT=ix('temps')>=0?ix('temps'):ix('time'),
+        iP=ix('positif')>=0?ix('positif'):ix('d+'),iM=ix('negatif'),iH=ix('fc'),iW=ix('eau'),iB=ix('boisson'),iG=ix('gel');
   let n=0;
   lines.slice(1).forEach(l=>{
     const c=l.split(/[,;]/).map(s=>s.trim()); if(!c[iD]) return;
-    let t = parseFloat(c[iT])||0; if(t<600) t*=60;   // minutes tolérées
-    ACT.push({id:uid(), source:'csv', date:new Date(c[iD]).toISOString(), name:c[iN]||'Sortie',
-      dist:parseFloat(c[iK])||0, moving:t, elapsed:t, dp:parseFloat(c[iP])||0, dm:parseFloat(c[iM])||0,
-      hrAvg:parseFloat(c[iH])||0, hrMax:0, rpe:0, notes:'', zoneTime:null,
-      nutr:{waterL:parseFloat(c[iW])||0, drinkL:parseFloat(c[iB])||0, gels:parseFloat(c[iG])||0, bars:0, extraCarb:0, extraNa:0}});
+    let t=parseFloat(c[iT])||0; if(t<600) t*=60;
+    ACT.push({id:uid(),source:'csv',date:new Date(c[iD]).toISOString(),name:c[iN]||'Sortie',
+      dist:parseFloat(c[iK])||0,moving:t,elapsed:t,dp:parseFloat(c[iP])||0,dm:parseFloat(c[iM])||0,
+      hrAvg:parseFloat(c[iH])||0,hrMax:0,rpe:0,notes:'',zoneTime:null,hasStream:false,
+      nutr:{waterL:parseFloat(c[iW])||0,drinkL:parseFloat(c[iB])||0,gels:parseFloat(c[iG])||0,bars:0,extraCarb:0,extraNa:0}});
     n++;
   });
   return n;
 }
 function demoData(){
-  const out=[]; const now=Date.now();
-  const names=['Footing forêt','Sortie longue Fontainebleau','Seuil 2×20','VMA 30/30','Côtes Buttes-Chaumont','Rando-course Vercors','Trail des coteaux','Récup canal'];
-  for(let d=112; d>=0; d--){
-    const dow=(new Date(now-d*864e5)).getDay();
-    if([1,4].includes(dow) && d%7!==0) continue;
-    if(Math.random()<0.18) continue;
-    const long = dow===0, quality = dow===2||dow===5;
-    const dist = long? 18+Math.random()*14 : (quality? 9+Math.random()*4 : 7+Math.random()*5);
-    const hilly = long || Math.random()<0.3;
-    const dp = hilly? dist*(20+Math.random()*45) : dist*(4+Math.random()*8);
-    const base = quality? 4.6 : (long? 5.6:5.4);
-    const pace = (base + (d/112)*0.35 + Math.random()*0.25) * 60 + dp/dist*2.2;
-    const t = dist*pace;
-    const hr = Math.round((quality?168:(long?140:134)) + Math.random()*7);
-    const h=t/3600;
-    out.push({id:uid(), source:'démo', date:new Date(now-d*864e5+9*36e5).toISOString(),
-      name: long?names[1]:(quality? names[2+Math.floor(Math.random()*2)] : names[Math.floor(Math.random()*2)*7]),
-      dist:round(dist,2), moving:Math.round(t), elapsed:Math.round(t*1.03), dp:Math.round(dp), dm:Math.round(dp*0.95),
-      hrAvg:hr, hrMax:hr+14, rpe:quality?7:4, notes:'', zoneTime:null,
-      nutr: h>1.5? {waterL:round(h*0.35,2), drinkL:round(h*0.3,2), gels:Math.round(h*0.9), bars:0, extraCarb:0, extraNa:0}
-                 : {waterL:0,drinkL:0,gels:0,bars:0,extraCarb:0,extraNa:0}});
+  const out=[],now=Date.now();
+  const names=['Footing en forêt','Sortie longue','Seuil 2×20','VMA 30/30','Côtes','Rando-course','Trail des coteaux','Récupération'];
+  for(let d=112;d>=0;d--){
+    const dow=new Date(now-d*864e5).getDay();
+    if([1,4].includes(dow)&&d%7!==0) continue;
+    if(Math.random()<.18) continue;
+    const long=dow===0, quality=dow===2||dow===5;
+    const dist=long?18+Math.random()*14:(quality?9+Math.random()*4:7+Math.random()*5);
+    const hilly=long||Math.random()<.3;
+    const dp=hilly?dist*(20+Math.random()*45):dist*(4+Math.random()*8);
+    const base=quality?4.6:(long?5.6:5.4);
+    const t=dist*((base+(d/112)*.35+Math.random()*.25)*60+dp/dist*2.2);
+    const hr=Math.round((quality?168:(long?140:134))+Math.random()*7), h=t/3600;
+    out.push({id:uid(),source:'démo',date:new Date(now-d*864e5+9*36e5).toISOString(),
+      name:long?names[1]:(quality?names[2+Math.floor(Math.random()*2)]:names[Math.floor(Math.random()*2)*7]),
+      dist:round(dist,2),moving:Math.round(t),elapsed:Math.round(t*1.03),dp:Math.round(dp),dm:Math.round(dp*.95),
+      hrAvg:hr,hrMax:hr+14,rpe:quality?7:4,notes:'',zoneTime:null,hasStream:false,
+      nutr:h>1.5?{waterL:round(h*.35,2),drinkL:round(h*.3,2),gels:Math.round(h*.9),bars:0,extraCarb:0,extraNa:0}
+                :{waterL:0,drinkL:0,gels:0,bars:0,extraCarb:0,extraNa:0}});
   }
   return out;
 }
 
 /* ------------------------------------------------------------ persistance */
-async function save(){ const m = await Store.set('settings', S); $('#storeTxt').textContent = m==='cloud'?'Données synchronisées':(m==='local'?'Données locales':'Session seulement'); }
-async function saveActs(){ await Store.set('activities', ACT); }
-async function load(){
-  const s = await Store.get('settings');
-  if(s) S = {profile:{...DEFAULTS.profile,...s.profile}, nutrition:{...DEFAULTS.nutrition,...s.nutrition},
-             model:{...DEFAULTS.model,...s.model}, races:s.races||DEFAULTS.races, strava:{...DEFAULTS.strava,...s.strava}};
-  const a = await Store.get('activities'); if(Array.isArray(a)) ACT=a;
+async function save(){ await Store.set('settings',S); }
+async function saveActs(){
+  try{ await Store.set('activities',ACT); }
+  catch(e){ toast('Stockage saturé : les flux les plus anciens ont été libérés.'); await Store.trimStreams(ACT); await Store.set('activities',ACT); }
 }
+async function loadAll(){
+  const s=await Store.get('settings');
+  if(s) S={profile:{...DEFAULTS.profile,...s.profile}, nutrition:{...DEFAULTS.nutrition,...s.nutrition},
+           model:{...DEFAULTS.model,...s.model}, races:s.races||DEFAULTS.races,
+           strava:{...DEFAULTS.strava,...s.strava}, ui:{...DEFAULTS.ui,...(s.ui||{})}};
+  const a=await Store.get('activities'); if(Array.isArray(a)) ACT=a;
+}
+let STREAM=null;
+async function loadStream(id){ STREAM = await Store.getStream(id); return STREAM; }
 
-/* ------------------------------------------------------------------ rendu */
+/* ==========================================================================
+   15. RENDU
+   ========================================================================== */
 function render(){
-  const meta = NAV.find(n=>n.k===VIEW)||NAV[0];
-  $('#vTitle').textContent = meta.nom; $('#vSub').textContent = meta.sub;
-  renderNav();
-
-  const A = enrich();
-  const series = loadSeries(A);
-  const P = profileScores(A);
-  const recs = recommendations(A,P,series);
-  const last = series[series.length-1]||{tsb:0,ctl:0};
-  $('#formPill').innerHTML = `forme <b style="color:${last.tsb>5?'var(--ok)':(last.tsb<-25?'var(--bad)':'var(--warn)')}">${last.tsb>0?'+':''}${round(last.tsb,0)}</b> · condition ${round(last.ctl,0)}`;
-  $('#connDot').className = 'dot'+(S.strava.access?' live':'');
-  $('#connTxt').textContent = S.strava.access? 'Strava connecté' : 'Strava non connecté';
-
-  let filtered = A;
-  if(VIEW==='acts'){
-    const per = window.__period ?? 28, q=(window.__q||'').toLowerCase();
-    filtered = A.filter(a=> (!per || daysBetween(a.date,Date.now())<per) && (!q || (a.name||'').toLowerCase().includes(q)));
+  const meta=NAV.find(n=>n.k===VIEW);
+  const A=enrich();
+  const series=loadSeries(A);
+  const P=profileScores(A);
+  const recs=recommendations(A,P,series);
+  if(VIEW==='session'){
+    const a=A.find(x=>x.id===SEL);
+    $('#vTitle').textContent='Analyse de séance';
+    $('#vSub').textContent=a?`${round(a.dist,1)} km · ${hmsFull(a.moving)} · ${Math.round(a.dp)} m D+`:'';
+  }else{
+    $('#vTitle').textContent=meta.nom; $('#vSub').textContent=meta.sub;
   }
-  const V = {
-    dash:()=>viewDash(A,P,series,recs), acts:()=>viewActs(filtered), load:()=>viewLoad(A,series),
-    zones:()=>viewZones(A,P), profil:()=>viewProfil(A,P,recs), nutri:()=>viewNutri(A,P),
-    proj:()=>viewProj(A,P), params:viewParams, strava:viewStrava
-  };
-  $('#views').innerHTML = `<div class="view">${V[VIEW]()}</div>`;
+  $('#topExtra').innerHTML = VIEW==='dash'
+    ? `<div class="seg" id="segPeriod">${PERIODS.map(p=>`<button data-p="${p.v}" class="${S.ui.period===p.v?'on':''}">${p.l}</button>`).join('')}</div>` : '';
+  renderNav();
+  $('#connDot').className='dot'+(S.strava.access?' live':'');
+  $('#connTxt').textContent=S.strava.access?'Strava connecté':'Strava non connecté';
+
+  const V={dash:()=>viewDash(A,P,series,recs), acts:()=>viewActs(A), session:()=>viewSession(A),
+    load:()=>viewLoad(A,series), zones:()=>viewZones(A,P), profil:()=>viewProfil(A,P,recs),
+    nutri:()=>viewNutri(A,P), proj:()=>viewProj(A,P), params:viewParams, strava:viewStrava};
+  $('#views').innerHTML=`<div class="view">${(V[VIEW]||V.dash)()}</div>`;
   wire();
   window.scrollTo({top:0,behavior:'instant'});
 }
-
-function on(sel, ev, fn){ const e=$(sel); if(e) e[ev]=fn; }
+function on(sel,ev,fn){ const e=$(sel); if(e) e[ev]=fn; }
 function wire(){
-  document.querySelectorAll('[data-edit]').forEach(b=> b.onclick=()=>editActivity(b.dataset.edit));
-  document.querySelectorAll('[data-race]').forEach(b=> b.onclick=()=>editRace(b.dataset.race));
-  document.querySelectorAll('[data-go]').forEach(b=> b.onclick=()=>{ VIEW=b.dataset.go; render(); });
+  document.querySelectorAll('[data-open]').forEach(el=> el.onclick=async()=>{
+    const id=el.dataset.open; STREAM=null; go('session',id);
+    const a=ACT.find(x=>x.id===id);
+    if(a&&a.hasStream){ await loadStream(id); render(); }
+  });
+  document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); editActivity(b.dataset.edit); });
+  document.querySelectorAll('[data-race]').forEach(b=>b.onclick=()=>editRace(b.dataset.race));
+  document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  const seg=$('#segPeriod');
+  if(seg) seg.querySelectorAll('button').forEach(b=>b.onclick=async()=>{ S.ui.period=+b.dataset.p; await save(); render(); });
+  const seg2=$('#segAct');
+  if(seg2) seg2.querySelectorAll('button').forEach(b=>b.onclick=async()=>{ S.ui.actPeriod=+b.dataset.p; await save(); render(); });
+  on('#fSearch','oninput',e=>{ window.__q=e.target.value; const p=e.target.selectionStart; render();
+    const f=$('#fSearch'); if(f){ f.focus(); f.setSelectionRange(p,p); } });
   on('#btnAddRace','onclick',()=>editRace(null));
-  on('#fSearch','oninput',e=>{ window.__q=e.target.value; const A=enrich();
-    const per=window.__period??28;
-    const f=A.filter(a=>(!per||daysBetween(a.date,Date.now())<per)&&(!window.__q||(a.name||'').toLowerCase().includes(window.__q.toLowerCase())));
-    $('#actsTable').innerHTML = f.length? tableActs(f):'<div class="empty"><b>Aucun résultat</b>Essaie un autre mot-clé.</div>'; wire(); });
-  on('#fPeriod','onchange',e=>{ window.__period=parseInt(e.target.value); render(); });
-  on('#btnCsv','onclick',()=>pickFile('.csv,text/csv', async txt=>{ const n=importCsv(txt); await saveActs(); render(); toast(`${n} sorties importées.`); }));
-  on('#btnExport','onclick',()=>download('crete-activites.json', JSON.stringify(ACT,null,2)));
-  on('#btnExport2','onclick',()=>download('crete-sauvegarde.json', JSON.stringify({settings:S,activities:ACT},null,2)));
-  on('#btnImport','onclick',()=>pickFile('.json,.csv', async (txt,name)=>{
+  on('#btnExport','onclick',()=>download('crete-sorties.json',JSON.stringify(ACT,null,2)));
+  on('#btnExport2','onclick',()=>download('crete-sauvegarde.json',JSON.stringify({settings:S,activities:ACT},null,2)));
+  on('#btnImport','onclick',()=>pickFile('.json,.csv',async(txt,name)=>{
     try{
       if(/\.csv$/i.test(name)){ const n=importCsv(txt); await saveActs(); render(); return toast(`${n} sorties importées.`); }
       const d=JSON.parse(txt);
-      if(d.settings) S=d.settings; if(d.activities) ACT=d.activities; else if(Array.isArray(d)) ACT=d;
+      if(d.settings) S={...S,...d.settings};
+      if(d.activities) ACT=d.activities; else if(Array.isArray(d)) ACT=d;
       await save(); await saveActs(); render(); toast('Sauvegarde restaurée.');
     }catch(e){ toast('Fichier illisible : '+e.message); }
   }));
-  on('#btnDemo','onclick', async ()=>{ ACT = demoData(); await saveActs(); VIEW='dash'; render(); toast('Jeu de démonstration chargé — 16 semaines simulées.'); });
-  on('#btnWipe','onclick', async ()=>{ if(!confirm('Effacer toutes les sorties et remettre les paramètres par défaut ?')) return;
+  on('#btnDemo','onclick',async()=>{ ACT=demoData(); await saveActs(); go('dash'); toast('16 semaines simulées chargées.'); });
+  on('#btnWipe','onclick',async()=>{ if(!confirm('Effacer toutes les sorties et réinitialiser les paramètres ?')) return;
+    for(const a of ACT) if(a.hasStream) await Store.delStream(a.id);
     ACT=[]; S=JSON.parse(JSON.stringify(DEFAULTS)); await save(); await saveActs(); render(); toast('Tout a été effacé.'); });
-  on('#btnSave','onclick', async ()=>{
+  on('#btnSave','onclick',async()=>{
     const g=i=>parseFloat($('#'+i).value)||0;
-    Object.assign(S.profile,{vma:g('pVma'), weight:g('pWeight'), hrMax:g('pHrMax'), hrRest:g('pHrRest'),
-      hrThreshold:g('pHrThr'), age:g('pAge'), zoneModel:$('#pZone').value});
-    Object.assign(S.nutrition,{carbPerLDrink:g('nCarbL'), sodiumPerLDrink:g('nNaL'), carbPerGel:g('nCarbGel'),
-      sodiumPerGel:g('nNaGel'), caffPerGel:g('nCaffGel'), carbPerBar:g('nCarbBar'), sodiumPerBar:g('nNaBar'),
-      sodiumPerCap:g('nNaCap')||300, targetCarbShort:g('nTgS'), targetCarbLong:g('nTgL'), targetFluid:g('nTgF'), targetSodium:g('nTgNa')});
-    Object.assign(S.model,{riegelRoad:g('mRR'), riegelTrail:g('mRT'), kmEffortUp:g('mKU')||100,
-      kmEffortDown:g('mKD')||400, ctlDays:g('mCtl')||42, atlDays:g('mAtl')||7, stopPct:g('mStop')});
-    await save(); render(); toast('Paramètres enregistrés. Zones, charge et projections recalculées.');
+    Object.assign(S.profile,{vma:g('pVma'),weight:g('pWeight'),hrMax:g('pHrMax'),hrRest:g('pHrRest'),
+      hrThreshold:g('pHrThr'),age:g('pAge'),zoneModel:$('#pZone').value});
+    Object.assign(S.nutrition,{carbPerLDrink:g('nCarbL'),sodiumPerLDrink:g('nNaL'),carbPerGel:g('nCarbGel'),
+      sodiumPerGel:g('nNaGel'),caffPerGel:g('nCaffGel'),carbPerBar:g('nCarbBar'),sodiumPerBar:g('nNaBar'),
+      sodiumPerCap:g('nNaCap')||300,targetCarbShort:g('nTgS'),targetCarbLong:g('nTgL'),targetFluid:g('nTgF'),targetSodium:g('nTgNa')});
+    Object.assign(S.model,{riegelRoad:g('mRR'),riegelTrail:g('mRT'),kmEffortUp:g('mKU')||100,kmEffortDown:g('mKD')||400,
+      ctlDays:g('mCtl')||42,atlDays:g('mAtl')||7,stopPct:g('mStop')});
+    // les zones ayant changé, on recalcule le temps par zone des séances détaillées
+    await recomputeZones();
+    await save(); render(); toast('Paramètres enregistrés, analyses recalculées.');
   });
-  on('#btnAuth','onclick', async ()=>{
+  on('#btnAuth','onclick',async()=>{
     S.strava.clientId=$('#sId').value.trim(); S.strava.clientSecret=$('#sSecret').value.trim();
     if(!S.strava.clientId||!S.strava.clientSecret) return toast('Renseigne l\'ID et le secret client.');
-    await save(); location.href = Strava.authUrl();
+    await save(); location.href=Strava.authUrl();
   });
-  on('#btnTok','onclick', async ()=>{
-    const t=$('#sTok').value.trim(); if(!t) return;
-    S.strava.access=t; S.strava.expires=Date.now()+5*3600e3; await save(); render(); toast('Jeton enregistré. Lance une synchronisation.');
-  });
-  on('#btnLogout','onclick', async ()=>{ S.strava={...DEFAULTS.strava}; await save(); render(); toast('Compte Strava déconnecté.'); });
-  on('#btnSync2','onclick', doSync);
-  on('#btnStreams','onclick', doStreams);
+  on('#btnTok','onclick',async()=>{ const t=$('#sTok').value.trim(); if(!t) return;
+    S.strava.access=t; S.strava.expires=Date.now()+5*3600e3; await save(); render(); toast('Jeton enregistré.'); });
+  on('#btnLogout','onclick',async()=>{ S.strava={...DEFAULTS.strava}; await save(); render(); toast('Compte déconnecté.'); });
+  on('#btnSync2','onclick',doSync);
+  on('#btnStreams','onclick',doStreams);
 }
-
+async function recomputeZones(){
+  for(const a of ACT){
+    if(!a.hasStream) continue;
+    const st=await Store.getStream(a.id); if(!st) continue;
+    const an=analyseSession({...a, stream:st});
+    a.zoneTime=an.zoneTime;
+    a.an={splits:an.splits,best:an.best,decoupling:an.decoupling,gradeDist:an.gradeDist,climbs:an.climbs,hrDrift:an.hrDrift};
+  }
+  await saveActs();
+}
 async function doSync(){
-  if(!S.strava.access){ VIEW='strava'; render(); return toast('Connecte d\'abord ton compte Strava.'); }
-  const b=$('#btnSync'); b.disabled=true; b.textContent='Synchronisation…';
-  try{
-    const {added,updated} = await Strava.sync(2);
-    render(); toast(`${added} nouvelles sorties, ${updated} mises à jour.`);
-  }catch(e){ toast('Synchronisation impossible : '+e.message); }
-  finally{ const x=$('#btnSync'); if(x){x.disabled=false; x.textContent='Synchroniser Strava';} }
+  if(!S.strava.access){ go('strava'); return toast('Connecte d\'abord ton compte Strava.'); }
+  const b=$('#btnSync'); b.disabled=true; b.textContent='Synchro…';
+  try{ const r=await Strava.sync(2); render(); toast(`${r.added} nouvelles sorties, ${r.updated} mises à jour.`); }
+  catch(e){ toast('Synchronisation impossible : '+e.message); }
+  finally{ const x=$('#btnSync'); if(x){x.disabled=false; x.textContent='Strava';} }
 }
 async function doStreams(){
-  if(!S.strava.access) return toast('Connecte Strava pour récupérer les flux de fréquence cardiaque.');
-  const todo = ACT.filter(a=>a.stravaId && !a.zoneTime).slice(0,25);
+  if(!S.strava.access) return toast('Connecte Strava pour récupérer les flux.');
+  const todo=ACT.filter(a=>a.stravaId&&!a.zoneTime).slice(0,25);
   if(!todo.length) return toast('Toutes les sorties Strava sont déjà détaillées.');
   const b=$('#btnStreams'); b.disabled=true;
   let n=0;
   for(const a of todo){
-    try{ const zt = await Strava.streams(a); if(zt){ a.zoneTime=zt; n++; } }catch(e){ break; }
-    b.textContent = `Analyse ${n}/${todo.length}…`;
+    try{ const zt=await Strava.streams(a); if(zt){ a.zoneTime=zt; n++; } }catch(e){ break; }
+    b.textContent=`Analyse ${n}/${todo.length}…`;
   }
-  await saveActs(); render(); toast(`${n} sorties détaillées seconde par seconde.`);
+  await saveActs(); render(); toast(`${n} sorties détaillées.`);
 }
 
 /* -------------------------------------------------------------------- go */
 (async function init(){
-  await load();
-  const params = new URLSearchParams(location.search);
-  const code = params.get('code');
+  await loadAll();
+  const code=new URLSearchParams(location.search).get('code');
   if(code && S.strava.clientId){
-    try{
-      await Strava.exchange(code);
-      history.replaceState({},'',location.pathname);
-      VIEW='strava'; render(); toast('Strava connecté. Lancement de la première synchronisation…');
-      await doSync();
-    }catch(e){ VIEW='strava'; render(); toast('Connexion refusée : '+e.message); }
-  } else {
-    render();
-    if(!ACT.length){ VIEW='dash'; }
-  }
-  $('#btnSync').onclick = doSync;
-  $('#btnAdd').onclick = ()=> editActivity(null);
+    try{ await Strava.exchange(code); history.replaceState({},'',location.pathname);
+      go('strava'); toast('Strava connecté, synchronisation…'); await doSync(); }
+    catch(e){ go('strava'); toast('Connexion refusée : '+e.message); }
+  } else render();
+  $('#btnSync').onclick=doSync;
+  $('#btnAdd').onclick=addModal;
+  window.addEventListener('dragover',e=>e.preventDefault());
+  window.addEventListener('drop',e=>{
+    e.preventDefault();
+    const f=[...e.dataTransfer.files].filter(x=>/\.fit$/i.test(x.name));
+    if(f.length){ addModal(); handleFiles(f); }
+  });
 })();
+
 </script>
 </body>
 </html>
